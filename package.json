@@ -43,5 +43,12 @@
     "tslint": "^5.9.1",
     "typescript": "^2.7.2",
     "webpack": "^3.11.0"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
   }
 }
