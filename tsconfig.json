@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2015",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "jsx": "react",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "skipLibCheck": true,
+        "outDir": "build",
+        "newLine": "LF"
+    },
+    "exclude": [
+        "node_modules",
+        "src/**/__tests__/*",
+        "src/**/__mocks__/*",
+        "test/**/*.ts"
+    ]
+}
