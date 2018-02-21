@@ -97,8 +97,7 @@ export namespace GameStateIntegration {
          */
         timeouts_remaining: number;
         /**
-         * 分からん.
-         * シリーズでの勝利数？.
+         * boX(bo3, bo5) で何試合勝っているか.
          */
         matches_won_this_series: number;
     }
@@ -130,7 +129,7 @@ export namespace GameStateIntegration {
          */
         team_t: TeamState;
         /**
-         * 分からん.
+         * boX(bo3, bo5) で何試合先取すれば勝ちか,
          */
         num_matches_to_win_series: number;
         /**
@@ -138,8 +137,7 @@ export namespace GameStateIntegration {
          */
         current_spectators: number;
         /**
-         * 分からん.
-         * 記念品の数？.
+         * 記念箱のドロップ数.
          */
         souvenirs_total: number;
     }
@@ -194,7 +192,7 @@ export namespace GameStateIntegration {
          */
         round_killhs: number;
         /**
-         * 分からん.
+         * 装備品の合計金額.
          */
         equip_value: number;
     }
