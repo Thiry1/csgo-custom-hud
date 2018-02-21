@@ -3,17 +3,17 @@ import * as http from "http";
 const port = 3000;
 const host = "127.0.0.1";
 
-const server = http.createServer( function(req, res) {
+const server = http.createServer( (req, res) => {
 
     if (req.method == "POST") {
         console.log("Handling POST request...");
         res.writeHead(200, {"Content-Type": "text/html"});
 
         let body = "";
-        req.on("data", function (data) {
+        req.on("data", (data) => {
             body += data;
         });
-        req.on("end", function () {
+        req.on("end", () => {
             console.log("POST payload: " + body);
             res.end( "" );
         });
