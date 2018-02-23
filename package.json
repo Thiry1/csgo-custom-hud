@@ -10,6 +10,7 @@
     "lint-staged": "lint-staged",
     "lint": "npm run tslint",
     "start": "node build/index.js",
+    "start:storybook": "start-storybook -p 3000",
     "prebuild": " npm run clean",
     "build": "npm run prebuild && webpack"
   },
@@ -30,7 +31,13 @@
   "author": "thiry",
   "license": "WTFPL",
   "devDependencies": {
+    "@storybook/addon-knobs": "^3.3.14",
+    "@storybook/addons": "^3.3.14",
+    "@storybook/react": "^3.3.14",
     "@types/node": "^9.4.6",
+    "@types/react": "^16.0.38",
+    "@types/react-dom": "^16.0.4",
+    "@types/storybook__react": "^3.0.7",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -41,6 +48,7 @@
     "rimraf": "^2.6.2",
     "ts-loader": "^3.5.0",
     "tslint": "^5.9.1",
+    "tslint-loader": "^3.5.3",
     "typescript": "^2.7.2",
     "webpack": "^3.11.0"
   },
