@@ -17,7 +17,7 @@ export namespace GameStateIntegration {
         /**
          * バージョン(多分ゲームの).
          */
-        version: number,
+        version: number;
         /**
          * SteamID.
          */

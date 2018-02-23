@@ -5,7 +5,7 @@ const host = "127.0.0.1";
 
 const server = http.createServer( (req, res) => {
 
-    if (req.method == "POST") {
+    if (req.method === "POST") {
         console.log("Handling POST request...");
         res.writeHead(200, {"Content-Type": "text/html"});
 
