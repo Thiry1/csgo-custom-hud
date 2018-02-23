@@ -4,7 +4,7 @@ export interface PlayerProps {
 }
 /**
  * プレイヤーコンポーネント
- * @param  {AnchorProps} props
+ * @param  {PlayerProps} props
  */
 export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps) => {
     return <span>hi</span>;
