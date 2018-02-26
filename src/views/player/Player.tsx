@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Kda, KdaProps} from "../kda/Kda";
+import { Kda, KdaProps } from "../kda/Kda";
 import { GameStateIntegration } from "../../dataTypes";
 import Team = GameStateIntegration.Team;
 const classNames = require("./player.scss");
@@ -142,7 +142,7 @@ const createArmorInfo = (props: PlayerProps): JSX.Element => {
  * プレイヤーコンポーネント
  * @param  {PlayerProps} props
  */
-export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps) => {
+export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps): JSX.Element => {
     return (
         <div
             className={classNames.player}
