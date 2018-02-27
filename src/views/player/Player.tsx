@@ -150,7 +150,11 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
             data-team={props.team}
         >
             <div className={classNames.mainInfo}>
-                <span className={classNames.healthBar} data-team={props.team} />
+                <span
+                    className={classNames.healthBar}
+                    data-team={props.team}
+                    style={{transform: `translate(-${100 - props.health}%, 0)`}} // TODO: animation
+                />
                 <span className={classNames.health}>{props.health}</span>
                 <span className={classNames.name}>{props.name}</span>
                 <span
