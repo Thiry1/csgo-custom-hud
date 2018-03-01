@@ -1,10 +1,10 @@
-export namespace GameStateIntegration {
-    /**
-     * SteamID.
-     * @example "76561198005627722"
-     */
-    export type SteamId = string;
+/**
+ * SteamID.
+ * @example "76561198005627722"
+ */
+export type SteamId = string;
 
+export namespace GameStateIntegration {
     export interface Provider {
         /**
          * ゲーム名.
