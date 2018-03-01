@@ -4,8 +4,8 @@ import { all, fork } from "redux-saga/effects";
 import * as gsi from "./gsi/gsi";
 import * as observed from "./observed/observed";
 export interface State {
-    gsiState: gsi.GsiState,
-    observed: observed.ObservedState,
+    gsiState: gsi.GsiState;
+    observed: observed.ObservedState;
 }
 
 export const reducer = combineReducers({

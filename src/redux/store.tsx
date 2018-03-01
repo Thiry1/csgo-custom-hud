@@ -10,7 +10,7 @@ export const createStore = (...middlewares: Middleware[]): SagaStore => {
         replaceReducer: reduxStore.replaceReducer,
         subscribe: reduxStore.subscribe,
         runSaga: sagaMiddleware.run,
-        close: () => reduxStore.dispatch(END)
+        close: () => reduxStore.dispatch(END),
     };
 };
 
