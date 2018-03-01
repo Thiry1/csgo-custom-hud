@@ -1,7 +1,14 @@
 import * as http from "http";
+import { createStore } from "./redux/store";
+import { rootSaga } from "./redux/modules";
+import {initializeClient, setGsiResponse} from "./redux/modules/actions";
 
 const port = 3000;
 const host = "127.0.0.1";
+
+const store = createStore();
+store.runSaga(rootSaga);
+store.dispatch(initializeClient());
 
 const server = http.createServer( (req, res) => {
 
@@ -15,6 +22,12 @@ const server = http.createServer( (req, res) => {
         });
         req.on("end", () => {
             console.log("POST payload: " + body);
+            try {
+                store.dispatch(setGsiResponse(JSON.parse(body)));
+            } catch (error) {
+                console.error("INVALID GSI RESPONSE.", body, error);
+            }
+
             res.end( "" );
         });
     } else {
