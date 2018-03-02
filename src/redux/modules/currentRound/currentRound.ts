@@ -11,11 +11,9 @@ export const setCurrentRound = createAction<CurrentRoundState>(SET_CURRENT_ROUND
 
 export interface CurrentRoundState {
     phase: GameStateIntegration.RoundPhase;
-    bomb: GameStateIntegration.BombState;
 }
 const initialState: CurrentRoundState = {
     phase: null,
-    bomb: null,
 };
 
 export const reducer = handleActions<CurrentRoundState, any>({
@@ -27,10 +25,12 @@ export function* runSetCurrentRoundState() {
     if (!gsiResponse) {
         return;
     }
-    if (!gsiResponse.round) {
+    if (!gsiResponse.round || !gsiResponse.round.phase) {
         return;
     }
-    yield put(setCurrentRound(gsiResponse.round));
+    yield put(setCurrentRound({
+        phase: gsiResponse.round.phase,
+    }));
 }
 
 export function* rootSaga(): SagaIterator {
