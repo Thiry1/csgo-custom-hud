@@ -65,8 +65,5 @@ const initialState: GsiState = {
 };
 // TODO: 同じステートなら更新しない. RECEIVE_GSI_RESPONSE -> SET_GSI_RESPONSE のフローにする.
 export const reducer = handleActions<GsiState, any>({
-    [SET_GSI_RESPONSE]: (state, action: Action<GameStateIntegrationResponse>) => {
-        console.log("SET GSI");
-        return action.payload;
-    },
+    [SET_GSI_RESPONSE]: (state, action: Action<GameStateIntegrationResponse>) => action.payload,
 }, initialState);
