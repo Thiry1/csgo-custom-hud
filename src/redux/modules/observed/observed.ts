@@ -26,7 +26,7 @@ export const reducer = handleActions<ObservedState, any>({
 }, initialState);
 
 export function* runSetObservedState() {
-    const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsiState);
+    const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
     // データが信用出来ないので過剰にガードを掛けていく
     if (!gsiResponse) {
         return;

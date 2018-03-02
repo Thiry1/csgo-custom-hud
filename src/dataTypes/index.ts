@@ -297,7 +297,7 @@ export interface GameStateIntegrationResponse {
      */
     allplayers: {
         [steamId: string]: GameStateIntegration.Player;
-    }[];
+    };
     /**
      * 現在のフェーズ.
      */
