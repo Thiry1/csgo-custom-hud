@@ -6,21 +6,21 @@ import { all, put, select, takeEvery } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
 
-export const SET_CURRENT_ROUND = "hud/SET_CURRENT_ROUND";
-export const setCurrentRound = createAction<CurrentRoundState>(SET_CURRENT_ROUND);
+export const SET_ROUND_PHASE = "hud/SET_ROUND_PHASE";
+export const setRoundPhase = createAction<RoundPhaseState>(SET_ROUND_PHASE);
 
-export interface CurrentRoundState {
+export interface RoundPhaseState {
     phase: GameStateIntegration.RoundPhase;
 }
-const initialState: CurrentRoundState = {
+const initialState: RoundPhaseState = {
     phase: null,
 };
 
-export const reducer = handleActions<CurrentRoundState, any>({
-    [SET_CURRENT_ROUND]: (state, action: Action<CurrentRoundState>) => action.payload,
+export const reducer = handleActions<RoundPhaseState, any>({
+    [SET_ROUND_PHASE]: (state, action: Action<RoundPhaseState>) => action.payload,
 }, initialState);
 
-export function* runSetCurrentRoundState() {
+export function* runSetRoundPhaseState() {
     const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
     if (!gsiResponse) {
         return;
@@ -28,13 +28,13 @@ export function* runSetCurrentRoundState() {
     if (!gsiResponse.round || !gsiResponse.round.phase) {
         return;
     }
-    yield put(setCurrentRound({
+    yield put(setRoundPhase({
         phase: gsiResponse.round.phase,
     }));
 }
 
 export function* rootSaga(): SagaIterator {
     yield all([
-        takeEvery(SET_GSI_RESPONSE, runSetCurrentRoundState),
+        takeEvery(SET_GSI_RESPONSE, runSetRoundPhaseState),
     ]);
 }
