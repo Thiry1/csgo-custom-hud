@@ -195,6 +195,10 @@ export namespace GameStateIntegration {
          * 装備品の合計金額.
          */
         equip_value: number;
+        /**
+         * 解除キットを持っているか.
+         */
+        defusekit: boolean | null;
     }
     export interface PlayerMatchStats {
         /**

@@ -11,6 +11,7 @@ const props: PlayerProps = {
     health: 100,
     armor: 100,
     hasHelmet: true,
+    hasDefuseKit: true,
     showKda: true,
     kda: {
         ...kdaProps,

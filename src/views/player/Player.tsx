@@ -4,6 +4,7 @@ import { GameStateIntegration } from "../../dataTypes";
 import Team = GameStateIntegration.Team;
 import { WeaponIconResolver } from "../../util/weaponIconResolver";
 import { ArmorIconResolver } from "../../util/armorIconResolver";
+import { MiscIconResolver } from "../../util/miscIconResolver";
 const classNames = require("./player.scss");
 export interface PlayerProps {
     /**
@@ -26,6 +27,10 @@ export interface PlayerProps {
      * ヘルメットを持っているか.
      */
     hasHelmet: boolean;
+    /**
+     * 解除キットを持っているか.
+     */
+    hasDefuseKit: boolean;
     /**
      * KDA を表示するか.
      */
@@ -222,6 +227,16 @@ const createItemInfo = (props: PlayerProps): JSX.Element => {
         </div>
     );
 };
+const createDefuseKitInfo = (props: PlayerProps): JSX.Element => {
+    if (!props.hasDefuseKit) {
+        return null;
+    }
+    return (
+        <span className={classNames.defuseKit}>
+            <img src={MiscIconResolver.resolve("defuseKit")} />
+        </span>
+    );
+};
 /**
  * プレイヤーコンポーネント
  * @param  {PlayerProps} props
@@ -247,6 +262,7 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
                 <div className={classNames.subInfo}>
                     {createArmorInfo(props)}
                     <span className={classNames.money} data-team={props.team}>${props.money}</span>
+                    {createDefuseKitInfo(props)}
                     <span className={classNames.roundKillCount} data-team={props.team}>{props.roundKillCount}</span>
                     {createItemInfo(props)}
                 </div>

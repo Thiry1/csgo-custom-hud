@@ -1,5 +1,4 @@
 import { Action, handleActions } from "redux-actions";
-import { SagaIterator } from "redux-saga";
 import { SET_GSI_RESPONSE } from "../actions";
 import { GameStateIntegrationResponse } from "../../../dataTypes";
 
@@ -48,6 +47,7 @@ const initialState: GsiState = {
             health: NaN,
             armor: NaN,
             helmet: null,
+            defusekit: null,
             flashed: NaN,
             smoked: NaN,
             burning: NaN,

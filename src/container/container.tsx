@@ -29,6 +29,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     health: player.state.health,
                     armor: player.state.armor,
                     hasHelmet: player.state.helmet,
+                    hasDefuseKit: !!player.state.defusekit,
                     showKda: true,
                     kda: {
                         kill: player.matchStats.kills,
@@ -48,6 +49,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                         molotovAmount: player.weapons.molotovAmount,
                         incGrenadeAmount: player.weapons.incGrenadeAmount,
                         decoyAmount: player.weapons.decoyAmount,
+                        hasC4: player.weapons.hasC4,
                     },
                     team: player.team,
                 };

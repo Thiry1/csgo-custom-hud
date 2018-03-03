@@ -160,6 +160,18 @@
   }
 }
 
+.defuse-kit {
+  float: left;
+  width: 30px;
+  height: 100%;
+  > img {
+    height: 75%;
+    width: auto;
+    margin: 2px auto auto 2px;
+    filter: brightness(5%) invert(100%);
+  }
+}
+
 .item-info {
   width: 165px;
   height: 100%;

@@ -42,6 +42,7 @@ export interface Player {
         roundKills: number;
         roundKillHs: number;
         equipValue: number;
+        defusekit: boolean | null;
     };
     weapons: Weapon;
 }

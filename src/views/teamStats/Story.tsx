@@ -2,7 +2,6 @@ import * as React from "react";
 import { storiesOf, Story } from "@storybook/react";
 import { props as kdaProps } from "../kda/Story";
 import { GameStateIntegration } from "../../dataTypes";
-import Team = GameStateIntegration.Team;
 import { TeamStats, TeamStatsProps } from "./TeamStats";
 const playerProps = (team: GameStateIntegration.Team) => ({
     name: "Foo",
@@ -10,6 +9,7 @@ const playerProps = (team: GameStateIntegration.Team) => ({
     health: 100,
     armor: 100,
     hasHelmet: true,
+    hasDefuseKit: team === GameStateIntegration.Team.CT,
     showKda: true,
     kda: {
         ...kdaProps,
