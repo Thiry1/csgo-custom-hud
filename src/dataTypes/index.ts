@@ -68,15 +68,15 @@ export namespace GameStateIntegration {
         /**
          * 武器の種類.
          */
-        type: "Knife" | "Rifle" | "SniperRifle" | "Grenade" | "Pistol" | "Shotgun" | string;
+        type: "Knife" | "Rifle" | "SniperRifle" | "Grenade" | "Pistol" | "Shotgun" | "Machine Gun" | "Submaachine Gun" | "C4" | string;
         /**
          * 現在装填されている弾の数.
          */
-        ammo_clip: number;
+        ammo_clip?: number;
         /**
          * 装填できる弾の最大数.
          */
-        ammo_clip_max: number;
+        ammo_clip_max?: number;
         /**
          * 装填されていない弾の数.
          */
@@ -222,6 +222,10 @@ export namespace GameStateIntegration {
      * 観戦者が観戦中のプレイヤーのステータス.
      */
     export interface SpectatingPlayer {
+        /**
+         * 名前.
+         */
+        name: string;
         /**
          * Steam ID.
          */

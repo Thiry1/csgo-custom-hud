@@ -39,21 +39,25 @@ export interface PlayerProps {
      */
     roundKillCount: number;
     /**
+     * 現在のラウンドでのヘッドショットによるキル数.
+     */
+    roundKillByHeadShotCount: number;
+    /**
      * 所持中の武器.
      */
     weapon: {
         /**
          * アクティブウェポン.
          */
-        activeWeapon?: string;
+        activeWeapon: string | null;
         /**
          * プライマリーウェポン.
          */
-        primary?: string; // TODO 武器名 enum
+        primary: string | null; // TODO 武器名 enum
         /**
          * セカンダリーウェポン.
          */
-        secondary?: string; // TODO 武器名 enum
+        secondary: string | null; // TODO 武器名 enum
         /**
          * FB の保有数.
          */
@@ -79,14 +83,6 @@ export interface PlayerProps {
          */
         decoyAmount: number;
     };
-    // /**
-    //  * 装備に使用した合計金額.
-    //  */
-    // equipmentValue: number;
-    // /**
-    //  * 装備に使用した合計金額を表示するか.
-    //  */
-    // showEquipmentValue: boolean;
     /**
      * チーム.
      */

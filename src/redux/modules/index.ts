@@ -17,7 +17,8 @@ export interface State {
 export const reducer = combineReducers({
     gsi: gsi.reducer,
     observed: observed.reducer,
-    roundPhase: players.reducer,
+    players: players.reducer,
+    roundPhase: roundPhase.reducer,
     currentRound: roundPhase.reducer,
     bomb: bomb.reducer,
 });

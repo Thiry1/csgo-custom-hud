@@ -3,6 +3,8 @@ import * as ReactDOM from "react-dom";
 import { createStore } from "./redux/store";
 import { rootSaga } from "./redux/modules";
 import { initializeClient, setGsiResponse } from "./redux/modules/actions";
+import { Container } from "./container/container";
+import { Provider } from "react-redux";
 declare const window: any;
 const store = createStore();
 store.runSaga(rootSaga);
@@ -16,7 +18,9 @@ window.communication = {
 document.addEventListener("DOMContentLoaded", () => {
     ReactDOM.render(
         (
-            <div style={{ background: "#f00", with: "500px", height: "300px" }}>test</div>
+            <Provider store={store}>
+                <Container />
+            </Provider>
         ),
         document.getElementById("app"),
     );

@@ -13,6 +13,7 @@ const props: PlayerProps = {
     showKda: true,
     kda: kdaProps,
     roundKillCount: 1,
+    roundKillByHeadShotCount: 0,
     weapon: {
         activeWeapon: "weapon_ak47",
         primary: "weapon_ak47",

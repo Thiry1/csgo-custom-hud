@@ -39,6 +39,7 @@ const initialState: GsiState = {
         bomb: null,
     },
     player: {
+        name: null,
         steamid: null,
         observer_slot: null,
         team: null,
