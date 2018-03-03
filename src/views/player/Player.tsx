@@ -71,6 +71,10 @@ export interface PlayerProps {
          */
         molotovAmount: number;
         /**
+         * inc grenade の保有数.
+         */
+        incGrenadeAmount: number;
+        /**
          * decoy の保有数.
          */
         decoyAmount: number;
@@ -93,7 +97,9 @@ const createHighExplosiveAmountInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.highExplosive}>{props.weapon.highExplosiveAmount}</span>
+        <span className={classNames.highExplosive}>
+            <img src={WeaponIconResolver.resolve("hegrenade")} />
+        </span>
     );
 };
 const createSmokeAmountInfo = (props: PlayerProps): JSX.Element => {
@@ -101,7 +107,19 @@ const createSmokeAmountInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.smoke}>{props.weapon.smokeAmount}</span>
+        <span className={classNames.smoke}>
+            <img src={WeaponIconResolver.resolve("smokegrenade")} />
+        </span>
+    );
+};
+const createIncGrenadeAmountAmountInfo = (props: PlayerProps): JSX.Element => {
+    if (props.weapon.incGrenadeAmount === 0) {
+        return null;
+    }
+    return (
+        <span className={classNames.incGrenade}>
+            <img src={WeaponIconResolver.resolve("incgrenade")} />
+        </span>
     );
 };
 const createMolotovAmountInfo = (props: PlayerProps): JSX.Element => {
@@ -109,7 +127,9 @@ const createMolotovAmountInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.molotov}>{props.weapon.molotovAmount}</span>
+        <span className={classNames.molotov}>
+            <img src={WeaponIconResolver.resolve("molotov")} />
+        </span>
     );
 };
 const createDecoyAmountInfo = (props: PlayerProps): JSX.Element => {
@@ -117,7 +137,9 @@ const createDecoyAmountInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.decoy}>{props.weapon.decoyAmount}</span>
+        <span className={classNames.decoy}>
+            <img src={WeaponIconResolver.resolve("decoy")} />
+        </span>
     );
 };
 const createFlashBangAmountInfo = (props: PlayerProps): JSX.Element[] => {
@@ -129,7 +151,7 @@ const createFlashBangAmountInfo = (props: PlayerProps): JSX.Element[] => {
             className={classNames.flashBang}
             key={key}
         >
-            {props.weapon.flashBangAmount}
+            <img src={WeaponIconResolver.resolve("flashbang")} />
         </span>
     ));
 };
@@ -221,6 +243,7 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
                     {createSmokeAmountInfo(props)}
                     {createFlashBangAmountInfo(props)}
                     {createMolotovAmountInfo(props)}
+                    {createIncGrenadeAmountAmountInfo(props)}
                     {createDecoyAmountInfo(props)}
                     {createSecondaryWeaponInfo(props)}
                 </div>

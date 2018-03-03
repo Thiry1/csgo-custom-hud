@@ -17,11 +17,12 @@ const props: PlayerProps = {
         activeWeapon: "weapon_ak47",
         primary: "weapon_ak47",
         secondary: "weapon_hkp2000",
-        flashBangAmount: 1,
+        flashBangAmount: 2,
         smokeAmount: 1,
         highExplosiveAmount: 1,
         decoyAmount: 0,
         molotovAmount: 1,
+        incGrenadeAmount: 1,
     },
     team: Team.T,
 };
