@@ -66,8 +66,11 @@ module.exports = {
                 test: /\.(png|jpg|gif)$/,
                 use: [
                     {
-                        loader: 'file-loader',
-                        options: {}
+                        loader: "file-loader",
+                        options: {
+                            name: "[path][name].[ext]",
+                            publicPath: "http://127.0.0.1:3000/",
+                        }
                     }
                 ],
                 include: [path.join(__dirname, "./src/resources")],
