@@ -289,7 +289,13 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
                         style={{ transform: `translate(-${100 - props.health}%, 0)` }} // TODO: animation
                     />
                     <span className={classNames.health} data-team={props.team}>{props.health}</span>
-                    <span className={classNames.name} data-team={props.team}>{props.name}</span>
+                    <span
+                        className={classNames.name}
+                        data-team={props.team}
+                        data-is-alive={props.health !== 0}
+                    >
+                        {props.name}
+                    </span>
                     {createPrimaryWeaponInfo(props)}
                 </div>
                 <div className={classNames.subInfo}>

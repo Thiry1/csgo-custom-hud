@@ -64,6 +64,9 @@
   z-index: 1;
   width: 120px;
   overflow: hidden;
+  &[data-is-alive=false] {
+    color: rgba(255, 255, 255, 0.3);
+  }
   &[data-team="CT"] {
     float: left;
     margin-left: 15px;
