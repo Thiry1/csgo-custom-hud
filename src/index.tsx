@@ -4,13 +4,14 @@ import { createStore } from "./redux/store";
 import { rootSaga } from "./redux/modules";
 import { initializeClient, setGsiResponse } from "./redux/modules/actions";
 declare const window: any;
-
 const store = createStore();
 store.runSaga(rootSaga);
 store.dispatch(initializeClient());
 
-window.store = store;
-window.setGsiResponse = setGsiResponse;
+window.communication = {
+    store,
+    setGsiResponse,
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     ReactDOM.render(

@@ -72,7 +72,7 @@
     "redux-saga": "^0.16.0"
   },
   "main": "index.html",
-  "node-main": "server/server.js",
+
   "chromium-args": "--disable-gpu --force-cpu-draw",
   "window": {
     "title": "CSGO OBSEVER HUD",

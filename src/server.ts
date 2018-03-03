@@ -1,9 +1,8 @@
 import * as http from "http";
-declare const window: any;
+declare const communication: any;
 const port = 3000;
 const host = "127.0.0.1";
 const server = http.createServer((req, res) => {
-
     if (req.method === "POST") {
         console.log("Handling POST request...");
         res.writeHead(200, { "Content-Type": "text/html" });
@@ -15,7 +14,7 @@ const server = http.createServer((req, res) => {
         req.on("end", () => {
             console.log("POST payload: " + body);
             try {
-                window.store.dispatch(window.setGsiResponse(JSON.parse(body)));
+                communication.store.dispatch(communication.setGsiResponse(JSON.parse(body)));
             } catch (error) {
                 console.error("INVALID GSI RESPONSE.", body, error);
             }
