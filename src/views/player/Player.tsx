@@ -2,6 +2,7 @@ import * as React from "react";
 import { Kda, KdaProps } from "../kda/Kda";
 import { GameStateIntegration } from "../../dataTypes";
 import Team = GameStateIntegration.Team;
+import { WeaponIconResolver } from "../../util/weaponIconResolver";
 const classNames = require("./player.scss");
 export interface PlayerProps {
     /**
@@ -149,38 +150,50 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
             data-is-alive={props.health !== 0}
             data-team={props.team}
         >
-            <div className={classNames.mainInfo}>
-                <span
-                    className={classNames.healthBar}
-                    data-team={props.team}
-                    style={{transform: `translate(-${100 - props.health}%, 0)`}} // TODO: animation
-                />
-                <span className={classNames.health}>{props.health}</span>
-                <span className={classNames.name}>{props.name}</span>
-                <span
-                    className={classNames.primaryWeapon}
-                    data-is-active={props.weapon.activeWeapon === props.weapon.primary}
-                >
-                    {props.weapon.primary}
-                </span>
+            <div className={classNames.wrapper}>
+                <div className={classNames.mainInfo}>
+                    <span
+                        className={classNames.healthBar}
+                        data-team={props.team}
+                        style={{ transform: `translate(-${100 - props.health}%, 0)` }} // TODO: animation
+                    />
+                    <span className={classNames.health} data-team={props.team}>{props.health}</span>
+                    <span className={classNames.name} data-team={props.team}>{props.name}</span>
+                    <span
+                        className={classNames.primaryWeapon}
+                        data-is-active={props.weapon.activeWeapon === props.weapon.primary}
+                        data-team={props.team}
+                    >
+                        {props.weapon.primary &&
+                            <img
+                                className={classNames.primaryWeaponIcon}
+                                src={WeaponIconResolver.resolve(props.weapon.primary)} alt={props.weapon.primary}
+                                data-active={props.weapon.primary === props.weapon.activeWeapon}
+                                data-team={props.team}
+                            />
+                        }
+                    </span>
+                </div>
+                <div className={classNames.subInfo}>
+                    {createArmorInfo(props)}
+                    <span className={classNames.money}>{props.money}</span>
+                    <span className={classNames.roundKillCount}>{props.roundKillCount}</span>
+                    {createHighExplosiveAmountInfo(props)}
+                    {createSmokeAmountInfo(props)}
+                    {createFlashBangAmountInfo(props)}
+                    {createMolotovAmountInfo(props)}
+                    {createDecoyAmountInfo(props)}
+                    <span
+                        className={classNames.secondaryWeapon}
+                        data-is-active={props.weapon.activeWeapon === props.weapon.secondary}
+                    >
+                        {props.weapon.secondary}
+                    </span>
+                </div>
             </div>
-            <div className={classNames.subInfo}>
-                {createArmorInfo(props)}
-                <span className={classNames.money}>{props.money}</span>
-                <span className={classNames.roundKillCount}>{props.roundKillCount}</span>
-                {createHighExplosiveAmountInfo(props)}
-                {createSmokeAmountInfo(props)}
-                {createFlashBangAmountInfo(props)}
-                {createMolotovAmountInfo(props)}
-                {createDecoyAmountInfo(props)}
-                <span
-                    className={classNames.secondaryWeapon}
-                    data-is-active={props.weapon.activeWeapon === props.weapon.secondary}
-                >
-                    {props.weapon.secondary}
-                </span>
+            <div className={classNames.kdaWrapper}>
+                {props.showKda && <Kda {...props.kda} className={classNames.kda} />}
             </div>
-            {props.showKda && <Kda {...props.kda} />}
         </div>
     );
 };

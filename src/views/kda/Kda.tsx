@@ -1,6 +1,9 @@
 import * as React from "react";
+import { GameStateIntegration } from "../../dataTypes";
+import Team = GameStateIntegration.Team;
 const classNames = require("./kda.scss");
 export interface KdaProps {
+    className?: string;
     /**
      * キル数.
      */
@@ -13,6 +16,10 @@ export interface KdaProps {
      * アシスト数.
      */
     assist: number;
+    /**
+     * チーム.
+     */
+    team: Team;
 }
 /**
  * KDAコンポーネント
@@ -20,7 +27,10 @@ export interface KdaProps {
  */
 export const Kda: React.StatelessComponent<KdaProps> = (props: KdaProps) => {
     return (
-        <div className={classNames.kda}>
+        <div
+            className={props.className || classNames.kda}
+            data-team={props.team}
+        >
             <div className={classNames.column}>
                 <div className={classNames.title}>K</div>
                 <div className={classNames.value}>{props.kill}</div>
