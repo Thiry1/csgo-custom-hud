@@ -166,7 +166,7 @@ const createFlashBangAmountInfo = (props: PlayerProps): JSX.Element[] => {
 const createArmorInfo = (props: PlayerProps): JSX.Element => {
     const src = ArmorIconResolver.resolve({ hasHelmet: props.hasHelmet, armor: props.armor });
     if (!src) {
-        return <span className={classNames.armor} />;
+        return <span className={classNames.armor} data-team={props.team} />;
     }
     return (
         <span className={classNames.armor} data-team={props.team}>
