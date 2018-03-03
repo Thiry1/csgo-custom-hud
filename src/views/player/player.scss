@@ -37,7 +37,13 @@
 .sub-info {
   width: 100%;
   height: 27px;
+  &:after {
+    content:" ";
+    display:block;
+    clear:both;
+  }
 }
+
 .health {
   text-shadow: 0 0 10px black;
   position: relative;
@@ -123,11 +129,67 @@
 }
 
 .armor {
-  /*!*/
+  width: 40px;
+  height: 100%;
+  text-align: center;
+  &[data-team="T"] {
+    float: right;
+  }
+  &[data-team="CT"] {
+    float: left;
+  }
 }
 
 .armor-icon {
-  /*!*/
+  height: 75%;
+  width: auto;
+  margin: 2px auto auto 2px;
+}
+
+.money {
+  color: #add28b;
+  text-shadow: 0 0 10px #000;
+  font-weight: bold;
+  height: 100%;
+  width: 60px;
+  &[data-team="T"] {
+    float: right;
+  }
+  &[data-team="CT"] {
+    float: left;
+  }
+}
+
+.item-info {
+  width: 165px;
+  height: 100%;
+  &[data-team="T"] {
+    float: left;
+    > img {
+      transform: scale(-1, 1);
+      float: left;
+      padding-right: 3px;
+      margin: 2px auto auto 2px;
+    }
+  }
+  &[data-team="CT"] {
+    float: right;
+    > img {
+      float: right;
+      padding-left: 3px;
+      margin: 2px 2px auto auto;
+    }
+  }
+  > img {
+    width: auto;
+    height: 75%;
+    &[data-active=true] {
+      filter: invert(100%);
+    }
+    &[data-active=false] {
+      filter: invert(70%);
+    }
+  }
 }
 
 .kda-wrapper {

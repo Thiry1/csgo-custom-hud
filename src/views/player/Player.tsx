@@ -93,9 +93,10 @@ const createHighExplosiveAmountInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.highExplosive}>
-            <img src={WeaponIconResolver.resolve("hegrenade")} />
-        </span>
+        <img
+            src={WeaponIconResolver.resolve("hegrenade")}
+            data-active={"weapon_hegrenade" === props.weapon.activeWeapon}
+        />
     );
 };
 const createSmokeAmountInfo = (props: PlayerProps): JSX.Element => {
@@ -103,9 +104,10 @@ const createSmokeAmountInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.smoke}>
-            <img src={WeaponIconResolver.resolve("smokegrenade")} />
-        </span>
+        <img
+            src={WeaponIconResolver.resolve("smokegrenade")}
+            data-active={"weapon_smokegrenade" === props.weapon.activeWeapon}
+        />
     );
 };
 const createIncGrenadeAmountAmountInfo = (props: PlayerProps): JSX.Element => {
@@ -113,9 +115,10 @@ const createIncGrenadeAmountAmountInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.incGrenade}>
-            <img src={WeaponIconResolver.resolve("incgrenade")} />
-        </span>
+        <img
+            src={WeaponIconResolver.resolve("incgrenade")}
+            data-active={"weapon_incgrenade" === props.weapon.activeWeapon}
+        />
     );
 };
 const createMolotovAmountInfo = (props: PlayerProps): JSX.Element => {
@@ -123,9 +126,10 @@ const createMolotovAmountInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.molotov}>
-            <img src={WeaponIconResolver.resolve("molotov")} />
-        </span>
+        <img
+            src={WeaponIconResolver.resolve("molotov")}
+            data-active={"weapon_molotov" === props.weapon.activeWeapon}
+        />
     );
 };
 const createDecoyAmountInfo = (props: PlayerProps): JSX.Element => {
@@ -133,9 +137,10 @@ const createDecoyAmountInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.decoy}>
-            <img src={WeaponIconResolver.resolve("decoy")} />
-        </span>
+        <img
+            src={WeaponIconResolver.resolve("decoy")}
+            data-active={"weapon_decoy" === props.weapon.activeWeapon}
+        />
     );
 };
 const createFlashBangAmountInfo = (props: PlayerProps): JSX.Element[] => {
@@ -143,12 +148,10 @@ const createFlashBangAmountInfo = (props: PlayerProps): JSX.Element[] => {
         return null;
     }
     return [...Array(props.weapon.flashBangAmount).keys()].map(key => (
-        <span
-            className={classNames.flashBang}
-            key={key}
-        >
-            <img src={WeaponIconResolver.resolve("flashbang")} />
-        </span>
+        <img
+            src={WeaponIconResolver.resolve("flashbang")}
+            data-active={"weapon_flashbang" === props.weapon.activeWeapon}
+        />
     ));
 };
 const createArmorInfo = (props: PlayerProps): JSX.Element => {
@@ -157,7 +160,7 @@ const createArmorInfo = (props: PlayerProps): JSX.Element => {
         return <span className={classNames.armor} />;
     }
     return (
-        <span className={classNames.armor}>
+        <span className={classNames.armor} data-team={props.team}>
             <img
                 className={classNames.armorIcon}
                 src={src}
@@ -198,18 +201,27 @@ const createSecondaryWeaponInfo = (props: PlayerProps): JSX.Element => {
         return null;
     }
     return (
-        <span className={classNames.secondaryWeapon}>
-            <img
-                className={classNames.secondaryWeaponIcon}
-                src={src}
-                alt={props.weapon.secondary}
-                data-active={props.weapon.secondary === props.weapon.activeWeapon}
-                data-team={props.team}
-            />
-        </span>
+        <img
+            className={classNames.secondaryWeaponIcon}
+            src={src}
+            alt={props.weapon.secondary}
+            data-active={props.weapon.secondary === props.weapon.activeWeapon}
+        />
     );
 };
-
+const createItemInfo = (props: PlayerProps): JSX.Element => {
+    return (
+        <div className={classNames.itemInfo} data-team={props.team}>
+            {createSecondaryWeaponInfo(props)}
+            {createHighExplosiveAmountInfo(props)}
+            {createSmokeAmountInfo(props)}
+            {createFlashBangAmountInfo(props)}
+            {createMolotovAmountInfo(props)}
+            {createIncGrenadeAmountAmountInfo(props)}
+            {createDecoyAmountInfo(props)}
+        </div>
+    );
+};
 /**
  * プレイヤーコンポーネント
  * @param  {PlayerProps} props
@@ -234,15 +246,9 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
                 </div>
                 <div className={classNames.subInfo}>
                     {createArmorInfo(props)}
-                    <span className={classNames.money}>{props.money}</span>
-                    <span className={classNames.roundKillCount}>{props.roundKillCount}</span>
-                    {createHighExplosiveAmountInfo(props)}
-                    {createSmokeAmountInfo(props)}
-                    {createFlashBangAmountInfo(props)}
-                    {createMolotovAmountInfo(props)}
-                    {createIncGrenadeAmountAmountInfo(props)}
-                    {createDecoyAmountInfo(props)}
-                    {createSecondaryWeaponInfo(props)}
+                    <span className={classNames.money} data-team={props.team}>${props.money}</span>
+                    <span className={classNames.roundKillCount} data-team={props.team}>{props.roundKillCount}</span>
+                    {createItemInfo(props)}
                 </div>
             </div>
             <div className={classNames.kdaWrapper}>
