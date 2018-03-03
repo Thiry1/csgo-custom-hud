@@ -106,20 +106,19 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
         } else if (isC4(weapon.type)) {
             hasC4 = true;
         }
-
-        return {
-            activeWeapon,
-            primary,
-            secondary,
-            highExplosiveAmount,
-            flashBangAmount,
-            smokeAmount,
-            molotovAmount,
-            incGrenadeAmount,
-            decoyAmount,
-            hasC4,
-        };
     }
+    return {
+        activeWeapon,
+        primary,
+        secondary,
+        highExplosiveAmount,
+        flashBangAmount,
+        smokeAmount,
+        molotovAmount,
+        incGrenadeAmount,
+        decoyAmount,
+        hasC4,
+    };
 };
 export function* runSetPlayersState() {
     const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
