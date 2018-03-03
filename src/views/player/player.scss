@@ -78,11 +78,12 @@
   align-items: center;
   &[data-team="CT"] {
     float: right;
-    justify-content: right;
+    justify-content: flex-end;
   }
   &[data-team="T"] {
     float: left;
-    justify-content: left;
+    text-align: left;
+    justify-content: flex-start;
   }
 }
 .primary-weapon-icon {

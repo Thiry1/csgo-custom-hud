@@ -1,0 +1,18 @@
+@import "../theme/color.scss";
+.team-stats {
+  composes: base from "../theme/common.scss";
+  width: 410px;
+  height: 67 * 5px; // TODO: チームマネー表示時などに高さを変える
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  &[data-team="T"] {
+    bottom: 0;
+    right: 0;
+  }
+  &[data-team="CT"] {
+    bottom: 0;
+    left: 0;
+  }
+}

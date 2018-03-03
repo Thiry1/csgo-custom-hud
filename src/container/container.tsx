@@ -3,7 +3,7 @@ import { compose } from "recompose";
 import { connect } from "react-redux";
 import { State } from "../redux/modules";
 import { Player } from "../redux/modules/players/players";
-import { Template, TemplateProps } from "../views/templates";
+import { Template, TemplateProps } from "../views/template/Template";
 
 export interface ContainerProps {
 
