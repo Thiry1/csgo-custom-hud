@@ -65,7 +65,7 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
         "SniperRifle",
         "Shotgun",
         "Machine Gun",
-        "Submaachine Gun",
+        "Submachine Gun",
     ].indexOf(weaponType) !== -1;
     const isSecoundary = (weaponType: string): boolean => weaponType === "Pistol";
     const isGrenade = (weaponType: string): boolean => weaponType === "Grenade";
