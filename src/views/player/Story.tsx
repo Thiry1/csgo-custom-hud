@@ -29,7 +29,7 @@ const props: PlayerProps = {
         decoyAmount: 0,
         molotovAmount: 0,
         incGrenadeAmount: 0,
-        hasC4: true,
+        hasC4: false,
     },
     team,
 };
