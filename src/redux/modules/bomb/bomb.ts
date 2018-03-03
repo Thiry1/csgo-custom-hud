@@ -31,16 +31,13 @@ export function* runSetBombState() {
     }
     if (!gsiResponse.round) {
         yield put(setBomb(initialState));
-    } console.log({
-        isPlanted: gsiResponse.round.bomb === GameStateIntegration.BombState.planted,
-        isExploded: gsiResponse.round.bomb === GameStateIntegration.BombState.exploded,
-        isDefused: gsiResponse.round.bomb === GameStateIntegration.BombState.defused,
-    });
-    yield put(setBomb({
-        isPlanted: gsiResponse.round.bomb === GameStateIntegration.BombState.planted,
-        isExploded: gsiResponse.round.bomb === GameStateIntegration.BombState.exploded,
-        isDefused: gsiResponse.round.bomb === GameStateIntegration.BombState.defused,
-    }));
+    } else {
+        yield put(setBomb({
+            isPlanted: gsiResponse.round.bomb === GameStateIntegration.BombState.planted,
+            isExploded: gsiResponse.round.bomb === GameStateIntegration.BombState.exploded,
+            isDefused: gsiResponse.round.bomb === GameStateIntegration.BombState.defused,
+        }));
+    }
 }
 
 export function* rootSaga(): SagaIterator {
