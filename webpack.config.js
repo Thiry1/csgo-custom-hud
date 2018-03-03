@@ -3,7 +3,7 @@ const path = require("path");
 
 module.exports = {
     entry: {
-        index: ["babel-polyfill", path.join(__dirname, "src/index.ts")],
+        index: ["babel-polyfill", path.join(__dirname, "src/index.tsx")],
     },
     resolve: {
         extensions: [".js", ".jsx", ".ts", ".tsx", ".scss"],
@@ -16,12 +16,11 @@ module.exports = {
     output: {
         path: path.join(__dirname, "build"),
         filename: "[name].js",
-        libraryTarget: "umd",
     },
     module: {
         rules: [
             {
-                test: /\.ts(x?)$/,
+                test: /(\.ts|\.tsx)$/,
                 exclude: [/__tests__/, /__mocks__/, /node_modules/],
                 use: [
                     {
@@ -75,5 +74,7 @@ module.exports = {
             },
         ],
     },
-    target: "node",
+    externals: {
+        "nw.gui": "nw.gui",
+    }
 };

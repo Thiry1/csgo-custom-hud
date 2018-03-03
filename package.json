@@ -2,17 +2,19 @@
   "name": "csgo-custom-hud",
   "version": "1.0.0",
   "description": "cs:go custom hud",
-  "main": "index.js",
   "scripts": {
+    "install:sdk": "npm i && npm i nw --nwjs_build_type=sdk",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf \"./build/**/*\"",
     "tslint": "tslint -c ./tslint.json -t verbose \"./src/**/*.ts*\"",
     "lint-staged": "lint-staged",
     "lint": "npm run tslint",
-    "start": "node build/index.js",
+    "start": "nw",
     "start:storybook": "start-storybook -s ./src/resources -p 3000",
     "prebuild": " npm run clean",
-    "build": "npm run prebuild && webpack"
+    "build": "npm run build:server && npm run build:client",
+    "build:client": "npm run prebuild && webpack",
+    "build:server": "tsc -p tsconfig.server.json"
   },
   "pre-commit": [
     "lint-staged"
@@ -61,11 +63,25 @@
     "file-loader": "^1.1.11",
     "lodash-humps": "^3.1.2",
     "node-sass": "^4.7.2",
+    "nw": "^0.28.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-saga": "^0.16.0"
+  },
+  "main": "index.html",
+  "node-main": "server/server.js",
+  "chromium-args": "--disable-gpu --force-cpu-draw",
+  "window": {
+    "title": "CSGO OBSEVER HUD",
+    "icon": "logo.png",
+    "toolbar": false,
+    "frame": false,
+    "width": 1920,
+    "height": 1080,
+    "position": "center",
+    "transparent": true
   }
 }

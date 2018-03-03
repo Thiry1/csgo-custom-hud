@@ -2,7 +2,7 @@
 
 # build target
 build/
-
+server/
 
 ### https://raw.github.com/github/gitignore/ead0f8e25c9cc58ca70594d557d0dec8a9c08a1d/Node.gitignore
 
