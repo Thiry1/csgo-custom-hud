@@ -87,6 +87,10 @@ export interface PlayerProps {
          * decoy の保有数.
          */
         decoyAmount: number;
+        /**
+         * C4 を保有しているか.
+         */
+        hasC4: boolean;
     };
     /**
      * チーム.
@@ -214,10 +218,29 @@ const createSecondaryWeaponInfo = (props: PlayerProps): JSX.Element => {
         />
     );
 };
+const createRoundKillCountInfo = (props: PlayerProps): JSX.Element[] => {
+    if (!props.roundKillCount) {
+        return null;
+    }
+    return [
+        <img
+            className={classNames.killIcon}
+            src={MiscIconResolver.resolve("death")}
+            data-team={props.team}
+        />,
+        <span
+            className={classNames.killCount}
+            data-team={props.team}
+        >
+            {props.roundKillCount}
+        </span>,
+    ];
+};
 const createItemInfo = (props: PlayerProps): JSX.Element => {
     return (
         <div className={classNames.itemInfo} data-team={props.team}>
             {createSecondaryWeaponInfo(props)}
+            {createRoundKillCountInfo(props)}
             {createHighExplosiveAmountInfo(props)}
             {createSmokeAmountInfo(props)}
             {createFlashBangAmountInfo(props)}
@@ -234,6 +257,16 @@ const createDefuseKitInfo = (props: PlayerProps): JSX.Element => {
     return (
         <span className={classNames.defuseKit}>
             <img src={MiscIconResolver.resolve("defuseKit")} />
+        </span>
+    );
+};
+const createC4Info = (props: PlayerProps): JSX.Element => {
+    if (!props.weapon.hasC4) {
+        return null;
+    }
+    return (
+        <span className={classNames.c4}>
+            <img src={MiscIconResolver.resolve("c4")} />
         </span>
     );
 };
@@ -263,7 +296,7 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
                     {createArmorInfo(props)}
                     <span className={classNames.money} data-team={props.team}>${props.money}</span>
                     {createDefuseKitInfo(props)}
-                    <span className={classNames.roundKillCount} data-team={props.team}>{props.roundKillCount}</span>
+                    {createC4Info(props)}
                     {createItemInfo(props)}
                 </div>
             </div>

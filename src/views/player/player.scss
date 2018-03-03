@@ -171,7 +171,41 @@
     filter: brightness(5%) invert(100%);
   }
 }
+.c4 {
+  float: right;
+  width: 30px;
+  height: 100%;
+  > img {
+    height: 75%;
+    width: auto;
+    margin: 2px auto auto 2px;
+    filter: brightness(5%) invert(100%);
+  }
+}
+.kill-count {
+  composes: base from "../theme/common.scss";
+  text-shadow: 0 0 10px #000;
+  &[data-team="T"] {
+    float: right;
+  }
+  &[data-team="CT"] {
+    float: left;
+  }
+}
 
+.kill-icon {
+  height: 60%;
+  margin-top: 5px;
+  width: auto;
+  margin-left: 2px;
+  padding-right: 2px;
+  &[data-team="T"] {
+    float: right !important;
+  }
+  &[data-team="CT"] {
+    float: left !important;
+  }
+}
 .item-info {
   width: 165px;
   height: 100%;
