@@ -5,8 +5,8 @@
   height: 63px;
   margin-bottom: 4px;
   display: flex;
-  flex-flow: row-reverse nowrap;
   &[data-team="T"] {
+    flex-flow: row-reverse nowrap;
     [class*=__wrapper__] {
       background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0) 295px);
     }

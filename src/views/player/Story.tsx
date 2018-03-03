@@ -4,6 +4,7 @@ import { storiesOf, Story } from "@storybook/react";
 import { props as kdaProps } from "../kda/Story";
 import { GameStateIntegration } from "../../dataTypes";
 import Team = GameStateIntegration.Team;
+const team = Team.T;
 const props: PlayerProps = {
     name: "Foo",
     money: 16000,
@@ -11,7 +12,10 @@ const props: PlayerProps = {
     armor: 100,
     hasHelmet: true,
     showKda: true,
-    kda: kdaProps,
+    kda: {
+        ...kdaProps,
+        team,
+    },
     roundKillCount: 1,
     roundKillByHeadShotCount: 0,
     weapon: {
@@ -25,7 +29,7 @@ const props: PlayerProps = {
         molotovAmount: 1,
         incGrenadeAmount: 1,
     },
-    team: Team.T,
+    team,
 };
 
 storiesOf("Player", module)

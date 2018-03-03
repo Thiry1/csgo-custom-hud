@@ -209,6 +209,7 @@ const createSecondaryWeaponInfo = (props: PlayerProps): JSX.Element => {
         </span>
     );
 };
+
 /**
  * プレイヤーコンポーネント
  * @param  {PlayerProps} props
