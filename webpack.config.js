@@ -63,6 +63,16 @@ module.exports = {
                 ],
                 include: [path.join(__dirname, "./src/views")],
             },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ],
+                include: [path.join(__dirname, "./src/resources")],
+            },
         ],
     },
     target: "node",

@@ -3,6 +3,7 @@ import { Kda, KdaProps } from "../kda/Kda";
 import { GameStateIntegration } from "../../dataTypes";
 import Team = GameStateIntegration.Team;
 import { WeaponIconResolver } from "../../util/weaponIconResolver";
+import { ArmorIconResolver } from "../../util/armorIconResolver";
 const classNames = require("./player.scss");
 export interface PlayerProps {
     /**
@@ -133,11 +134,62 @@ const createFlashBangAmountInfo = (props: PlayerProps): JSX.Element[] => {
     ));
 };
 const createArmorInfo = (props: PlayerProps): JSX.Element => {
-    if (props.hasHelmet && props.armor > 0) {
-        return <span className={classNames.armorWithHelmet} />;
-    } else if (props.armor > 0) {
+    const src = ArmorIconResolver.resolve({ hasHelmet: props.hasHelmet, armor: props.armor });
+    if (!src) {
         return <span className={classNames.armor} />;
     }
+    return (
+        <span className={classNames.armor}>
+            <img
+                className={classNames.armorIcon}
+                src={src}
+                data-team={props.team}
+            />
+        </span>
+    );
+};
+const createPrimaryWeaponInfo = (props: PlayerProps): JSX.Element => {
+    if (!props.weapon.primary) {
+        return null;
+    }
+    const src = WeaponIconResolver.resolve(props.weapon.primary);
+    if (!src) {
+        return null;
+    }
+    return (
+        <span
+            className={classNames.primaryWeapon}
+            data-team={props.team}
+        >
+            <img
+                className={classNames.primaryWeaponIcon}
+                src={WeaponIconResolver.resolve(props.weapon.primary)}
+                alt={props.weapon.primary}
+                data-active={props.weapon.primary === props.weapon.activeWeapon}
+                data-team={props.team}
+            />
+        </span>
+    );
+};
+const createSecondaryWeaponInfo = (props: PlayerProps): JSX.Element => {
+    if (!props.weapon.secondary) {
+        return null;
+    }
+    const src = WeaponIconResolver.resolve(props.weapon.secondary);
+    if (!src) {
+        return null;
+    }
+    return (
+        <span className={classNames.secondaryWeapon}>
+            <img
+                className={classNames.secondaryWeaponIcon}
+                src={src}
+                alt={props.weapon.secondary}
+                data-active={props.weapon.secondary === props.weapon.activeWeapon}
+                data-team={props.team}
+            />
+        </span>
+    );
 };
 /**
  * プレイヤーコンポーネント
@@ -159,20 +211,7 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
                     />
                     <span className={classNames.health} data-team={props.team}>{props.health}</span>
                     <span className={classNames.name} data-team={props.team}>{props.name}</span>
-                    <span
-                        className={classNames.primaryWeapon}
-                        data-is-active={props.weapon.activeWeapon === props.weapon.primary}
-                        data-team={props.team}
-                    >
-                        {props.weapon.primary &&
-                            <img
-                                className={classNames.primaryWeaponIcon}
-                                src={WeaponIconResolver.resolve(props.weapon.primary)} alt={props.weapon.primary}
-                                data-active={props.weapon.primary === props.weapon.activeWeapon}
-                                data-team={props.team}
-                            />
-                        }
-                    </span>
+                    {createPrimaryWeaponInfo(props)}
                 </div>
                 <div className={classNames.subInfo}>
                     {createArmorInfo(props)}
@@ -183,12 +222,7 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
                     {createFlashBangAmountInfo(props)}
                     {createMolotovAmountInfo(props)}
                     {createDecoyAmountInfo(props)}
-                    <span
-                        className={classNames.secondaryWeapon}
-                        data-is-active={props.weapon.activeWeapon === props.weapon.secondary}
-                    >
-                        {props.weapon.secondary}
-                    </span>
+                    {createSecondaryWeaponInfo(props)}
                 </div>
             </div>
             <div className={classNames.kdaWrapper}>

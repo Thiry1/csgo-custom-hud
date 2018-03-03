@@ -16,7 +16,7 @@ const props: PlayerProps = {
     weapon: {
         activeWeapon: "weapon_ak47",
         primary: "weapon_ak47",
-        secondary: "weapon_p2000",
+        secondary: "weapon_hkp2000",
         flashBangAmount: 1,
         smokeAmount: 1,
         highExplosiveAmount: 1,

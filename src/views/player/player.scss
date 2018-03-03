@@ -102,6 +102,9 @@
     filter: drop-shadow(0.5px 0.5px 1px white) drop-shadow(-0.5px -0.5px 1px white) invert(70%);
   }
 }
+.secondary-weapon {
+  /*!*/
+}
 .health-bar {
   position: absolute;
   z-index: 0;
@@ -116,6 +119,14 @@
   &[data-team="CT"] {
     background: $ct-color;
   }
+}
+
+.armor {
+  /*!*/
+}
+
+.armor-icon {
+  /*!*/
 }
 
 .kda-wrapper {

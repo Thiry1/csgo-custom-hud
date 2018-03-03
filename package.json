@@ -10,7 +10,7 @@
     "lint-staged": "lint-staged",
     "lint": "npm run tslint",
     "start": "node build/index.js",
-    "start:storybook": "start-storybook -p 3000",
+    "start:storybook": "start-storybook -s ./src/resources -p 3000",
     "prebuild": " npm run clean",
     "build": "npm run prebuild && webpack"
   },
@@ -58,6 +58,7 @@
     "webpack": "^3.11.0"
   },
   "dependencies": {
+    "file-loader": "^1.1.11",
     "lodash-humps": "^3.1.2",
     "node-sass": "^4.7.2",
     "react": "^16.2.0",

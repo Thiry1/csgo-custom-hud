@@ -1,15 +1,13 @@
-import * as path from "path";
 export namespace WeaponIconResolver {
     export const resolve = (weaponName: string): string | null => {
         // tslint:disable:max-line-length
         const map: { [weaponName: string]: string } = {
-            hegrenade: path.resolve(__dirname, "../", "resources/weapons/weapon_hegrenade.png"),
-            molotov: path.resolve(__dirname, "../", "resources/weapons/weapon_molotov.png"),
-            flashbang: path.resolve(__dirname, "../", "resources/weapons/weapon_flashbang.png"),
-            decoy: path.resolve(__dirname, "../", "resources/weapons/weapon_decoy.png"),
-            smokegrenade: path.resolve(__dirname, "../", "resources/weapons/weapon_smokegrenade.png"),
-            incgrenade: path.resolve(__dirname, "../", "resources/weapons/weapon_incgrenade.png"),
-
+            hegrenade: require("../resources/weapons/weapon_hegrenade.png"),
+            molotov: require("../resources/weapons/weapon_molotov.png"),
+            flashbang: require("../resources/weapons/weapon_flashbang.png"),
+            decoy: require("../resources/weapons/weapon_decoy.png"),
+            smokegrenade: require("../resources/weapons/weapon_smokegrenade.png"),
+            incgrenade: require("../resources/weapons/weapon_incgrenade.png"),
             cz75a: "http://vignette3.wikia.nocookie.net/cswikia/images/c/cf/C75a_hud_csgo.png/revision/latest/scale-to-width-down/400",
             deagle: "http://vignette2.wikia.nocookie.net/cswikia/images/7/7d/Deagle_hud_go.png/revision/latest/scale-to-width-down/400",
             elite: "http://vignette2.wikia.nocookie.net/cswikia/images/8/82/Elite_hud_csgo.png/revision/latest/scale-to-width-down/400",
