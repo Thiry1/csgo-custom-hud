@@ -42,7 +42,7 @@ export const props = (team: GameStateIntegration.Team): TeamStatsProps => ({
     team,
 });
 
-storiesOf("teamStats", module)
+const stories = storiesOf("teamStats", module)
     .add("チーム毎のプレイヤー情報を表示できる", () => {
         return <TeamStats {...props(GameStateIntegration.Team.CT)} />;
     });

@@ -4,12 +4,15 @@ import { connect } from "react-redux";
 import { State } from "../redux/modules";
 import { Player } from "../redux/modules/players/players";
 import { Template, TemplateProps } from "../views/template/Template";
+import { RoundPhaseState } from "../redux/modules/roundPhase/roundPhase";
+import { GameStateIntegration } from "../dataTypes";
 
 export interface ContainerProps {
 
 }
 interface PropsFromState {
     players: Player[];
+    roundPhase: RoundPhaseState;
 }
 interface Dispatcher {
 
@@ -30,7 +33,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     armor: player.state.armor,
                     hasHelmet: player.state.helmet,
                     hasDefuseKit: !!player.state.defusekit,
-                    showKda: true,
+                    showKda: this.props.roundPhase.phase === GameStateIntegration.RoundPhase.freezetime,
                     kda: {
                         kill: player.matchStats.kills,
                         death: player.matchStats.deaths,
@@ -70,6 +73,7 @@ const mapStateToProps = (state: State): PropsFromState => {
     console.log("state", state);
     return {
         players: state.players.players,
+        roundPhase: state.roundPhase,
     };
 };
 export const Container = compose(

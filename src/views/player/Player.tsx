@@ -306,8 +306,8 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
                     {createItemInfo(props)}
                 </div>
             </div>
-            <div className={classNames.kdaWrapper}>
-                {props.showKda && <Kda {...props.kda} className={classNames.kda} />}
+            <div className={classNames.kdaWrapper} data-show-kda={props.showKda}>
+                <Kda {...props.kda} className={classNames.kda} />
             </div>
         </div>
     );
