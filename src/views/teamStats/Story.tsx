@@ -3,6 +3,7 @@ import { storiesOf, Story } from "@storybook/react";
 import { props as kdaProps } from "../kda/Story";
 import { GameStateIntegration } from "../../dataTypes";
 import { TeamStats, TeamStatsProps } from "./TeamStats";
+import { props as createTeamMoneyProps } from "../teamMoney/Story";
 const playerProps = (team: GameStateIntegration.Team) => ({
     name: "Foo",
     money: 16000,
@@ -40,9 +41,13 @@ export const props = (team: GameStateIntegration.Team): TeamStatsProps => ({
         playerProps(team),
     ],
     team,
+    teamMoney: createTeamMoneyProps(team),
 });
 
-const stories = storiesOf("teamStats", module)
-    .add("チーム毎のプレイヤー情報を表示できる", () => {
+storiesOf("TeamStats", module)
+    .add("CTのチーム毎のプレイヤー情報を表示できる", () => {
         return <TeamStats {...props(GameStateIntegration.Team.CT)} />;
+    })
+    .add("Tのチーム毎のプレイヤー情報を表示できる", () => {
+        return <TeamStats {...props(GameStateIntegration.Team.T)} />;
     });

@@ -2,7 +2,7 @@
 .team-stats {
   composes: base from "../theme/common.scss";
   width: 410px;
-  height: 67 * 5px; // TODO: チームマネー表示時などに高さを変える
+  height: 67 * 5px + 85px;
   position: fixed;
   display: flex;
   flex-wrap: wrap;

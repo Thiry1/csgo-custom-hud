@@ -6,6 +6,7 @@ import { Player } from "../redux/modules/players/players";
 import { Template, TemplateProps } from "../views/template/Template";
 import { RoundPhaseState } from "../redux/modules/roundPhase/roundPhase";
 import { GameStateIntegration } from "../dataTypes";
+import { TeamMoneyState } from "../redux/modules/teamMoney/teamMoney";
 
 export interface ContainerProps {
 
@@ -13,6 +14,7 @@ export interface ContainerProps {
 interface PropsFromState {
     players: Player[];
     roundPhase: RoundPhaseState;
+    teamMoney: TeamMoneyState;
 }
 interface Dispatcher {
 
@@ -57,6 +59,16 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     team: player.team,
                 };
             }),
+            teamMoney: {
+                ct: {
+                    team: GameStateIntegration.Team.CT,
+                    ...this.props.teamMoney.ct,
+                },
+                t: {
+                    team: GameStateIntegration.Team.T,
+                    ...this.props.teamMoney.t,
+                },
+            },
         };
     }
     render() {
@@ -74,6 +86,7 @@ const mapStateToProps = (state: State): PropsFromState => {
     return {
         players: state.players.players,
         roundPhase: state.roundPhase,
+        teamMoney: state.teamMoney,
     };
 };
 export const Container = compose(

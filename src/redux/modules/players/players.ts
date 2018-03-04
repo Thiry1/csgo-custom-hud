@@ -1,13 +1,11 @@
 import { Action, handleActions } from "redux-actions";
 import { all, put, select, takeEvery } from "redux-saga/effects";
-import { SET_GSI_RESPONSE } from "../actions";
+import { SET_GSI_RESPONSE, SET_PLAYERS, setPlayers } from "../actions";
 import { GameStateIntegration, GameStateIntegrationResponse, SteamId } from "../../../dataTypes";
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
-import { createAction } from "../../../util/createAction";
 const humps = require("lodash-humps");
-export const SET_PLAYERS = "hud/SET_PLAYERS";
-export const setPlayers = createAction<Player[]>(SET_PLAYERS);
+
 export interface WeaponInfo {
     name: string;
     ammoClip: number;

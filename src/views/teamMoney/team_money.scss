@@ -1,0 +1,106 @@
+@import "../theme/color.scss";
+.team-money {
+  composes: base from "../theme/common.scss";
+  height: 85px;
+  width: 410px;
+  &[data-team="T"] {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.5) 410px, rgba(0, 0, 0, 0.0) 410px);
+  }
+  &[data-team="CT"] {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.5) 410px, rgba(0, 0, 0, 0.0) 410px);
+  }
+  &[data-show-team-money=true] {
+    transition: all 1s;
+    opacity: 1;
+  }
+  &[data-show-team-money=false] {
+    transition: all 1s;
+    opacity: 0;
+  }
+  &:after {
+    content:" ";
+    display:block;
+    clear:both;
+  }
+}
+
+.team-icon {
+  filter: invert(100%);
+  max-height: 70%;
+  &[data-team="T"] {
+    float: right;
+    margin: 10px 10px 0 0;
+  }
+  &[data-team="CT"] {
+    float:left;
+    margin: 10px 0 0 10px;
+  }
+}
+
+.money-info {
+  width: 130px;
+  color: #add28b;
+  text-shadow: 0 0 8px #000;
+  &[data-team="T"] {
+    float: right;
+    text-align: right;
+  }
+  &[data-team="CT"] {
+    float:left;
+    text-align: left;
+  }
+}
+
+.money-title {
+  height: 35px;
+  width: 130px;
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.total-money {
+  font-weight: 600;
+  height: 60%;
+  font-size: 30px;
+  margin: -10px auto auto auto;
+}
+
+.equipment-icon {
+  filter: invert(100%);
+  max-height: 70%;
+  margin: 10px 0 0 0;
+  &[data-team="T"] {
+    float: right;
+  }
+  &[data-team="CT"] {
+    float: left;
+  }
+}
+
+.equipment-info {
+  width: 130px;
+  color: #f7bf16;
+  text-shadow: 0 0 8px #000;
+  &[data-team="T"] {
+    float: right;
+    text-align: right;
+  }
+  &[data-team="CT"] {
+    float: left;
+    text-align: left;
+  }
+}
+
+.equipment-title {
+  height: 35px;
+  width: 130px;
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.total-equipment {
+  font-weight: 600;
+  height: 60%;
+  font-size: 30px;
+  margin: -10px auto auto auto;
+}
