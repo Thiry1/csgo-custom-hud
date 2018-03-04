@@ -16,7 +16,7 @@ npm run install:sdk
 npm run build
 npm start
 ```
-Now you may press `F10`, then you can use Chrome dev tools.
+Now you may press `F12`, then you can use Chrome dev tools.
 ## how to start storybook
 ```sh
 npm i
