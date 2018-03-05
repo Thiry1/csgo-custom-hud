@@ -168,6 +168,9 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
         );
     };
     render() {
+        if (!this.props.name) {
+            return null;
+        }
         return (
             <div
                 className={classNames.spectatingPlayer}
