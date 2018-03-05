@@ -20,7 +20,7 @@ export const props = (team: GameStateIntegration.Team): SpectatingPlayerProps =>
     incGrenadeAmount: 1,
     decoyAmount: 1,
     health: 70,
-    armor: 70,
+    armor: 100,
     hasHelmet: true,
     kill: 11,
     death: 10,

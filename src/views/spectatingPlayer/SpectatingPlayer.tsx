@@ -139,6 +139,22 @@ const createFlashBangAmountInfo = (props: SpectatingPlayerProps): JSX.Element[] 
  * @param  {SpectatingPlayerProps} props
  */
 export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
+    private createArmorInfo = (): JSX.Element[] => {
+        if (this.props.armor === 0) {
+            return null;
+        }
+        return [
+            <img
+                src={ArmorIconResolver.resolve({
+                    hasHelmet: this.props.hasHelmet,
+                    armor: this.props.armor,
+                })}
+                className={classNames.armorIcon}
+                key="armorIcon"
+            />,
+            <span className={classNames.armor} key="armor">{this.props.armor}</span>,
+        ];
+    };
     render() {
         return (
             <div
@@ -160,11 +176,7 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
                     <div className={classNames.healthArmor}>
                         <img src={MiscIconResolver.resolve("health")} className={classNames.healthIcon} />
                         <span className={classNames.health}>{this.props.health}</span>
-                        <img src={ArmorIconResolver.resolve({
-                            hasHelmet: this.props.hasHelmet,
-                            armor: this.props.armor,
-                        })} className={classNames.armorIcon} />
-                        <span className={classNames.armor}>{this.props.armor}</span>
+                        {this.createArmorInfo()}
                     </div>
                 </div>
                 <div
