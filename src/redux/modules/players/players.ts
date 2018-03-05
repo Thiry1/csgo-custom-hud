@@ -14,7 +14,7 @@ export interface WeaponInfo {
     state: string;
 }
 export interface Weapon {
-    activeWeapon: string | null;
+    activeWeapon: WeaponInfo | null;
     primary: WeaponInfo | null;
     secondary: WeaponInfo | null;
     highExplosiveAmount: number;
@@ -68,7 +68,7 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
     const isSecoundary = (weaponType: string): boolean => weaponType === "Pistol";
     const isGrenade = (weaponType: string): boolean => weaponType === "Grenade";
     const isC4 = (weaponType: string): boolean => weaponType === "C4";
-    let activeWeapon: string = null;
+    let activeWeapon: WeaponInfo = null;
     let primary: WeaponInfo = null;
     let secondary: WeaponInfo = null;
     let highExplosiveAmount = 0;
@@ -81,7 +81,7 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
     for (let slot of Object.keys(weapons)) {
         const weapon = weapons[slot];
         if (weapon.state === "active") {
-            activeWeapon = weapon.name;
+            activeWeapon = humps(weapon);
         }
 
         if (isPrimary(weapon.type)) {

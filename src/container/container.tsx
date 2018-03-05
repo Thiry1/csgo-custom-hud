@@ -15,6 +15,7 @@ interface PropsFromState {
     players: Player[];
     roundPhase: RoundPhaseState;
     teamMoney: TeamMoneyState;
+    spectatingPlayer: Player;
 }
 interface Dispatcher {
 
@@ -45,7 +46,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     roundKillCount: player.state.roundKills,
                     roundKillByHeadShotCount: player.state.roundKillHs,
                     weapon: {
-                        activeWeapon: player.weapons.activeWeapon,
+                        activeWeapon: player.weapons.activeWeapon ? player.weapons.activeWeapon.name : null,
                         primary: player.weapons.primary ? player.weapons.primary.name : null,
                         secondary: player.weapons.secondary ? player.weapons.secondary.name : null,
                         flashBangAmount: player.weapons.flashBangAmount,
@@ -69,6 +70,24 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     ...this.props.teamMoney.t,
                 },
             },
+            spectatingPlayer: { // TODO: Player そのまま渡すで良い.
+                showSpectatingPlayer: this.props.roundPhase.phase !== GameStateIntegration.RoundPhase.freezetime,
+                name: this.props.spectatingPlayer.name,
+                activeWeapon: this.props.spectatingPlayer.weapons.activeWeapon,
+                flashBangAmount: this.props.spectatingPlayer.weapons.flashBangAmount,
+                smokeAmount: this.props.spectatingPlayer.weapons.smokeAmount,
+                highExplosiveAmount: this.props.spectatingPlayer.weapons.highExplosiveAmount,
+                molotovAmount: this.props.spectatingPlayer.weapons.molotovAmount,
+                incGrenadeAmount: this.props.spectatingPlayer.weapons.incGrenadeAmount,
+                decoyAmount: this.props.spectatingPlayer.weapons.decoyAmount,
+                health: this.props.spectatingPlayer.state.health,
+                armor: this.props.spectatingPlayer.state.armor,
+                hasHelmet: this.props.spectatingPlayer.state.helmet,
+                kill: this.props.spectatingPlayer.matchStats.kills,
+                death: this.props.spectatingPlayer.matchStats.deaths,
+                assist: this.props.spectatingPlayer.matchStats.assists,
+                team: this.props.spectatingPlayer.team,
+            },
         };
     }
     render() {
@@ -78,15 +97,13 @@ class ContainerPage extends React.Component<Props, ContainerState> {
     }
 }
 
-// const mapStateToProps = (state: State): PropsFromState => ({
-//     players: state.players.players,
-// });
 const mapStateToProps = (state: State): PropsFromState => {
     console.log("state", state);
     return {
         players: state.players.players,
         roundPhase: state.roundPhase,
         teamMoney: state.teamMoney,
+        spectatingPlayer: state.spectatingPlayer.player,
     };
 };
 export const Container = compose(

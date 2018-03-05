@@ -6,6 +6,7 @@ export namespace MiscIconResolver {
             death: require("../resources/miscs/death.png"),
             equipment: require("../resources/miscs/eq.png"),
             team: require("../resources/miscs/team.png"),
+            health: require("../resources/miscs/hp.png"),
         };
         return map[name] || null;
     };

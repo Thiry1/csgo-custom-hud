@@ -4,12 +4,14 @@ import { PlayerProps } from "../player/Player";
 import { GameStateIntegration } from "../../dataTypes";
 import { TeamStats } from "../teamStats/TeamStats";
 import { TeamMoneyProps } from "../teamMoney/TeamMoney";
+import { SpectatingPlayer, SpectatingPlayerProps } from "../spectatingPlayer/SpectatingPlayer";
 export interface TemplateProps {
     players: PlayerProps[];
     teamMoney: {
         ct: TeamMoneyProps,
         t: TeamMoneyProps,
     };
+    spectatingPlayer: SpectatingPlayerProps;
 }
 export interface TemplateState {
 
@@ -28,6 +30,7 @@ export class Template extends BaseComponent<TemplateProps, TemplateState> {
                     team={GameStateIntegration.Team.T}
                     teamMoney={this.props.teamMoney.t}
                 />
+                <SpectatingPlayer {...this.props.spectatingPlayer} />
             </div>
         );
     }

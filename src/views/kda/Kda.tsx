@@ -49,8 +49,3 @@ export class Kda extends BaseComponent<KdaProps, {}> {
         );
     }
 }
-
-export {
-    Kda as Component,
-    KdaProps as Props,
-};
