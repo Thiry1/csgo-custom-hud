@@ -65,12 +65,30 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
         "Machine Gun",
         "Submachine Gun",
     ].indexOf(weaponType) !== -1;
-    const isSecoundary = (weaponType: string): boolean => weaponType === "Pistol";
+    const isSecondary = (weaponType: string): boolean => weaponType === "Pistol";
     const isGrenade = (weaponType: string): boolean => weaponType === "Grenade";
     const isC4 = (weaponType: string): boolean => weaponType === "C4";
-    let activeWeapon: WeaponInfo = null;
-    let primary: WeaponInfo = null;
-    let secondary: WeaponInfo = null;
+    let activeWeapon: WeaponInfo = {
+        name: null,
+        ammoClip: 0,
+        ammoClipMax: 0,
+        ammoReserve: 0,
+        state: null,
+    };
+    let primary: WeaponInfo = {
+        name: null,
+        ammoClip: 0,
+        ammoClipMax: 0,
+        ammoReserve: 0,
+        state: null,
+    };
+    let secondary: WeaponInfo = {
+        name: null,
+        ammoClip: 0,
+        ammoClipMax: 0,
+        ammoReserve: 0,
+        state: null,
+    };
     let highExplosiveAmount = 0;
     let flashBangAmount = 0;
     let smokeAmount = 0;
@@ -86,7 +104,7 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
 
         if (isPrimary(weapon.type)) {
             primary = humps(weapon);
-        } else if (isSecoundary(weapon.type)) {
+        } else if (isSecondary(weapon.type)) {
             secondary = humps(weapon);
         } else if (isGrenade(weapon.type)) {
             if (weapon.name === "weapon_hegrenade") {

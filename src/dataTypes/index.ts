@@ -259,10 +259,11 @@ export namespace GameStateIntegration {
         match_stats: PlayerMatchStats;
         /**
          * 装備中の武器.
+         * 死亡したプレイヤーの場合は空オブジェクトになる.
          */
         weapons: {
             [slotId: string]: WeaponInfo;
-        };
+        } | {};
         /**
          * プレイヤーの位置.
          * x, y, z 形式.
