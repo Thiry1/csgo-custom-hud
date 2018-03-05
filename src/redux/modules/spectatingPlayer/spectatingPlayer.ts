@@ -91,7 +91,7 @@ export function* runSetSpectatingPlayersState() {
     }
     const spectatingPlayer = players.filter(player => player.steamId === gsiResponse.player.steamid);
     if (!spectatingPlayer || spectatingPlayer.length === 0) {
-        return;
+        return yield put(setSpectatingPlayer(initialState.player));
     }
     yield put(setSpectatingPlayer(spectatingPlayer[0]));
 }
