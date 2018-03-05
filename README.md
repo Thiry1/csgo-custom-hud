@@ -8,7 +8,7 @@ react based cs:go custom hud.
 - `gameConfig/gamestate_integration_observerspectator.cfg` needs to be placed in cfg folder in CS:GO location
 - `gameConfig/observer.cfg` needs to be placed in cfg folder in CS:GO location.
 
-Then execute these command.
+## run app
 ```sh
 npm i
 npm run build
