@@ -4,6 +4,11 @@ csgo-custom-hud
 react based cs:go custom hud.
 
 # How to use
+## before running app.
+- `gameConfig/gamestate_integration_observerspectator.cfg` needs to be placed in cfg folder in CS:GO location
+- `gameConfig/observer.cfg` needs to be placed in cfg folder in CS:GO location.
+
+Then execute these command.
 ```sh
 npm i
 npm run build
