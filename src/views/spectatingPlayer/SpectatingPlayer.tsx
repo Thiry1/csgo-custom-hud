@@ -155,6 +155,18 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
             <span className={classNames.armor} key="armor">{this.props.armor}</span>,
         ];
     };
+    private createAmmoInfo = (): JSX.Element => {
+        const clip = this.props.activeWeapon.type !== "Grenade"
+            ? this.props.activeWeapon.ammoClip
+            : this.props.activeWeapon.ammoReserve; // Grenade の場合は clip が取れない.
+        return (
+            <div className={classNames.ammo}>
+                <span className={classNames.clip}>{clip}</span>
+                <span className={classNames.separator}>/</span>
+                <span className={classNames.reserve}>{this.props.activeWeapon.ammoReserve}</span>
+            </div>
+        );
+    };
     render() {
         return (
             <div
@@ -168,11 +180,7 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
                     >
                         {this.props.name}
                     </p>
-                    <div className={classNames.ammo}>
-                        <span className={classNames.clip}>{this.props.activeWeapon.ammoClip}</span>
-                        <span className={classNames.separator}>/</span>
-                        <span className={classNames.reserve}>{this.props.activeWeapon.ammoReserve}</span>
-                    </div>
+                    {this.createAmmoInfo()}
                     <div className={classNames.healthArmor}>
                         <img src={MiscIconResolver.resolve("health")} className={classNames.healthIcon} />
                         <span className={classNames.health}>{this.props.health}</span>

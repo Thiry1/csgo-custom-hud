@@ -12,6 +12,7 @@ export const props = (team: GameStateIntegration.Team): SpectatingPlayerProps =>
         ammoClipMax: 30,
         ammoReserve: 30,
         state: "active",
+        type: "Rifle",
     },
     flashBangAmount: 1,
     smokeAmount: 1,

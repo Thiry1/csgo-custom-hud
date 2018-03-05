@@ -45,6 +45,7 @@ const initialState: SpectatingPlayerState = {
                 ammoClipMax: 0,
                 ammoReserve: 0,
                 state: null,
+                type: null,
             },
             primary: {
                 name: null,
@@ -52,6 +53,7 @@ const initialState: SpectatingPlayerState = {
                 ammoClipMax: 0,
                 ammoReserve: 0,
                 state: null,
+                type: null,
             },
             secondary: {
                 name: null,
@@ -59,6 +61,7 @@ const initialState: SpectatingPlayerState = {
                 ammoClipMax: 0,
                 ammoReserve: 0,
                 state: null,
+                type: null,
             },
             highExplosiveAmount: 0,
             flashBangAmount: 0,

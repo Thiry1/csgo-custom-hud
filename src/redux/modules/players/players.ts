@@ -8,6 +8,7 @@ const humps = require("lodash-humps");
 
 export interface WeaponInfo {
     name: string;
+    type: "Knife" | "Rifle" | "SniperRifle" | "Grenade" | "Pistol" | "Shotgun" | "Machine Gun" | "Submaachine Gun" | "C4" | string;
     ammoClip: number;
     ammoClipMax: number;
     ammoReserve: number;
@@ -74,6 +75,7 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
         ammoClipMax: 0,
         ammoReserve: 0,
         state: null,
+        type: null,
     };
     let primary: WeaponInfo = {
         name: null,
@@ -81,6 +83,7 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
         ammoClipMax: 0,
         ammoReserve: 0,
         state: null,
+        type: null,
     };
     let secondary: WeaponInfo = {
         name: null,
@@ -88,6 +91,7 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
         ammoClipMax: 0,
         ammoReserve: 0,
         state: null,
+        type: null,
     };
     let highExplosiveAmount = 0;
     let flashBangAmount = 0;
