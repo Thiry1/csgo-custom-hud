@@ -84,6 +84,7 @@
     "width": 1920,
     "height": 1080,
     "position": "center",
-    "transparent": true
+    "transparent": true,
+    "always_on_top": true
   }
 }
