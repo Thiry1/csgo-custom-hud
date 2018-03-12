@@ -8,6 +8,8 @@ import * as roundPhase from "./roundPhase/roundPhase";
 import * as bomb from "./bomb/bomb";
 import * as teamMoney from "./teamMoney/teamMoney";
 import * as spectatingPlayer from "./spectatingPlayer/spectatingPlayer";
+import * as score from "./score/score";
+import * as teamInfo from "./teamInfo/teamInfo";
 
 export interface State {
     gsi: gsi.GsiState;
@@ -17,6 +19,8 @@ export interface State {
     bomb: bomb.BombState;
     teamMoney: teamMoney.TeamMoneyState;
     spectatingPlayer: spectatingPlayer.SpectatingPlayerState;
+    score: score.ScoreState;
+    teamInfo: teamInfo.TeamInfoState;
 }
 
 export const reducer = combineReducers({
@@ -28,6 +32,8 @@ export const reducer = combineReducers({
     bomb: bomb.reducer,
     teamMoney: teamMoney.reducer,
     spectatingPlayer: spectatingPlayer.reducer,
+    score: score.reducer,
+    teamInfo: teamInfo.reducer,
 });
 
 export function* rootSaga(): SagaIterator {
@@ -38,5 +44,7 @@ export function* rootSaga(): SagaIterator {
         fork(bomb.rootSaga),
         fork(teamMoney.rootSaga),
         fork(spectatingPlayer.rootSaga),
+        fork(score.rootSaga),
+        fork(teamInfo.rootSaga),
     ]);
 }

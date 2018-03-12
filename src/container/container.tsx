@@ -7,6 +7,8 @@ import { Template, TemplateProps } from "../views/template/Template";
 import { RoundPhaseState } from "../redux/modules/roundPhase/roundPhase";
 import { GameStateIntegration } from "../dataTypes";
 import { TeamMoneyState } from "../redux/modules/teamMoney/teamMoney";
+import { ScoreState } from "../redux/modules/score/score";
+import { TeamInfoState } from "../redux/modules/teamInfo/teamInfo";
 
 export interface ContainerProps {
 
@@ -16,6 +18,8 @@ interface PropsFromState {
     roundPhase: RoundPhaseState;
     teamMoney: TeamMoneyState;
     spectatingPlayer: Player;
+    score: ScoreState;
+    teamInfo: TeamInfoState;
 }
 interface Dispatcher {
 
@@ -88,6 +92,20 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                 assist: this.props.spectatingPlayer.matchStats.assists,
                 team: this.props.spectatingPlayer.team,
             },
+            topBar: {
+                teamInfo: {
+                    ct: {
+                        score: this.props.score.ct,
+                        name: this.props.teamInfo.ct.name || "COUNTER TERRORIST",
+                        logo: this.props.teamInfo.ct.logo,
+                    },
+                    t: {
+                        score: this.props.score.t,
+                        name: this.props.teamInfo.t.name || "TERRORIST",
+                        logo: this.props.teamInfo.t.logo,
+                    },
+                },
+            },
         };
     }
     render() {
@@ -104,6 +122,8 @@ const mapStateToProps = (state: State): PropsFromState => {
         roundPhase: state.roundPhase,
         teamMoney: state.teamMoney,
         spectatingPlayer: state.spectatingPlayer.player,
+        score: state.score,
+        teamInfo: state.teamInfo,
     };
 };
 export const Container = compose(

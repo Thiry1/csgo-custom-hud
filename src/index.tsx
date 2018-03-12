@@ -5,10 +5,13 @@ import { rootSaga } from "./redux/modules";
 import { initializeClient, setGsiResponse } from "./redux/modules/actions";
 import { Container } from "./container/container";
 import { Provider } from "react-redux";
+import { registerShortcut } from "./shortcut/shortcut";
 declare const window: any;
 const store = createStore();
 store.runSaga(rootSaga);
 store.dispatch(initializeClient());
+
+registerShortcut(store);
 
 window.communication = {
     store,

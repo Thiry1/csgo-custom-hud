@@ -8,7 +8,7 @@ const humps = require("lodash-humps");
 
 export interface WeaponInfo {
     name: string;
-    type: "Knife" | "Rifle" | "SniperRifle" | "Grenade" | "Pistol" | "Shotgun" | "Machine Gun" | "Submaachine Gun" | "C4" | string;
+    type: "Knife" | "Rifle" | "SniperRifle" | "Grenade" | "Pistol" | "Shotgun" | "Machine Gun" | "Submachine Gun" | "C4" | string;
     ammoClip: number;
     ammoClipMax: number;
     ammoReserve: number;

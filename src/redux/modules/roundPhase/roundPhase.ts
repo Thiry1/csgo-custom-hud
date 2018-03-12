@@ -1,13 +1,10 @@
 import { Action, handleActions } from "redux-actions";
-import { SET_GSI_RESPONSE } from "../actions";
+import { SET_GSI_RESPONSE, SET_ROUND_PHASE, setRoundPhase } from "../actions";
 import { GameStateIntegration, GameStateIntegrationResponse } from "../../../dataTypes";
 import { createAction } from "../../../util/createAction";
 import { all, put, select, takeEvery } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
-
-export const SET_ROUND_PHASE = "hud/SET_ROUND_PHASE";
-export const setRoundPhase = createAction<RoundPhaseState>(SET_ROUND_PHASE);
 
 export interface RoundPhaseState {
     phase: GameStateIntegration.RoundPhase;
@@ -28,9 +25,12 @@ export function* runSetRoundPhaseState() {
     if (!gsiResponse.round || !gsiResponse.round.phase) {
         return;
     }
-    yield put(setRoundPhase({
-        phase: gsiResponse.round.phase,
-    }));
+    const currentPhase: GameStateIntegration.RoundPhase = yield select((state: State) => state.roundPhase.phase);
+    if (currentPhase !== gsiResponse.round.phase) {
+        yield put(setRoundPhase({
+            phase: gsiResponse.round.phase,
+        }));
+    }
 }
 
 export function* rootSaga(): SagaIterator {

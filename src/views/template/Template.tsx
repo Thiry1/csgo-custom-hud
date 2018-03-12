@@ -5,6 +5,7 @@ import { GameStateIntegration } from "../../dataTypes";
 import { TeamStats } from "../teamStats/TeamStats";
 import { TeamMoneyProps } from "../teamMoney/TeamMoney";
 import { SpectatingPlayer, SpectatingPlayerProps } from "../spectatingPlayer/SpectatingPlayer";
+import { TopBar, TopBarProps } from "../topBar/topBar";
 export interface TemplateProps {
     players: PlayerProps[];
     teamMoney: {
@@ -12,6 +13,7 @@ export interface TemplateProps {
         t: TeamMoneyProps,
     };
     spectatingPlayer: SpectatingPlayerProps;
+    topBar: TopBarProps;
 }
 export interface TemplateState {
 
@@ -20,6 +22,7 @@ export class Template extends BaseComponent<TemplateProps, TemplateState> {
     render() {
         return (
             <div>
+                <TopBar {...this.props.topBar} />
                 <TeamStats
                     players={this.props.players.filter(player => player.team === GameStateIntegration.Team.CT)}
                     team={GameStateIntegration.Team.CT}

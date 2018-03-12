@@ -14,6 +14,23 @@ npm i
 npm run build
 npm start
 ```
+### team config
+you may edit `/src/config/teamInfo.ts`.
+For example,
+```js
+export const team1: TeamInfo = {
+    name: "NiP",
+    logo: "nip.png", // You need to place the file in `/src/resources/teams`
+};
+
+export const team2: TeamInfo = {
+    name: "fnatic",
+    logo: "fnatic.png", // You need to place the file in `/src/resources/teams`
+};
+```
+### shortcuts
+- `Alt+Left` => swap team information.
+
 # For developer
 ## how to enable Chrome dev tools
 ```sh
