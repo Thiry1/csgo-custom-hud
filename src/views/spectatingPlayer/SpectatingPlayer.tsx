@@ -156,6 +156,10 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
         ];
     };
     private createAmmoInfo = (): JSX.Element => {
+        if (this.props.activeWeapon.type === "Knife") {
+            // TODO: null返す.floatやめたい
+            return <div className={classNames.ammo} />;
+        }
         const clip = this.props.activeWeapon.type !== "Grenade"
             ? this.props.activeWeapon.ammoClip
             : this.props.activeWeapon.ammoReserve; // Grenade の場合は clip が取れない.
