@@ -9,6 +9,7 @@ import { GameStateIntegration } from "../dataTypes";
 import { TeamMoneyState } from "../redux/modules/teamMoney/teamMoney";
 import { ScoreState } from "../redux/modules/score/score";
 import { TeamInfoState } from "../redux/modules/teamInfo/teamInfo";
+import { PlayerInfo } from "../config/playerInfo";
 
 export interface ContainerProps {
 
@@ -17,7 +18,7 @@ interface PropsFromState {
     players: Player[];
     roundPhase: RoundPhaseState;
     teamMoney: TeamMoneyState;
-    spectatingPlayer: Player;
+    spectatingPlayer: Player & PlayerInfo;
     score: ScoreState;
     teamInfo: TeamInfoState;
 }
@@ -77,6 +78,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
             spectatingPlayer: { // TODO: Player そのまま渡すで良い.
                 showSpectatingPlayer: this.props.roundPhase.phase !== GameStateIntegration.RoundPhase.freezetime,
                 name: this.props.spectatingPlayer.name,
+                twitterId: this.props.spectatingPlayer.twitterId,
                 activeWeapon: this.props.spectatingPlayer.weapons.activeWeapon,
                 flashBangAmount: this.props.spectatingPlayer.weapons.flashBangAmount,
                 smokeAmount: this.props.spectatingPlayer.weapons.smokeAmount,

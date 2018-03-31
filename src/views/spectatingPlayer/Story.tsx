@@ -6,6 +6,7 @@ import { SpectatingPlayer, SpectatingPlayerProps } from "./SpectatingPlayer";
 export const props = (team: GameStateIntegration.Team): SpectatingPlayerProps => ({
     showSpectatingPlayer: true,
     name: "FooFooFooFooFooFooFooFooFooFooFooFooFooFooFooFooFooFooFooFooFooFooFoo",
+    twitterId: "@thiry_sk",
     activeWeapon: {
         name: "weapon_ak47",
         ammoClip: 29,

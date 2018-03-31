@@ -28,6 +28,17 @@ export const team2: TeamInfo = {
     logo: "fnatic.png", // You need to place the file in `/src/resources/teams`
 };
 ```
+### player config
+you may edit `/src/config/playerInfo`.
+For example,
+```js
+export const playerInfoList: PlayerInfoList = {
+    // `76561198005627722` is Steam ID.
+    "76561198005627722": {
+        twitterId: "@thiry_sk",
+    },
+};
+```
 ### shortcuts
 - `Alt+Left` => swap team information.
 

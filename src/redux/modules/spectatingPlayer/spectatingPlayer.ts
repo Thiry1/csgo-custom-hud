@@ -6,13 +6,13 @@ import { SagaIterator } from "redux-saga";
 import { State } from "../index";
 import { Player } from "../players/players";
 import { createAction } from "../../../util/createAction";
-
+import { PlayerInfo, playerInfoList } from "../../../config/playerInfo";
 
 export const SET_SPECTATING_PLAYER = "hud/SET_SPECTATING_PLAYER";
-export const setSpectatingPlayer = createAction<Player>(SET_SPECTATING_PLAYER);
+export const setSpectatingPlayer = createAction<Player & PlayerInfo>(SET_SPECTATING_PLAYER);
 
 export interface SpectatingPlayerState {
-    player: Player;
+    player: Player & PlayerInfo;
 }
 const initialState: SpectatingPlayerState = {
     player: {
@@ -71,11 +71,12 @@ const initialState: SpectatingPlayerState = {
             decoyAmount: 0,
             hasC4: false,
         },
+        twitterId: null,
     },
 };
 
 export const reducer = handleActions<SpectatingPlayerState, any>({
-    [SET_SPECTATING_PLAYER]: (state, action: Action<Player>) => ({
+    [SET_SPECTATING_PLAYER]: (state, action: Action<Player & PlayerInfo>) => ({
         player: action.payload,
     }),
 }, initialState);
@@ -93,7 +94,13 @@ export function* runSetSpectatingPlayersState() {
     if (!spectatingPlayer || spectatingPlayer.length === 0) {
         return yield put(setSpectatingPlayer(initialState.player));
     }
-    yield put(setSpectatingPlayer(spectatingPlayer[0]));
+
+    const playerInfo: PlayerInfo = playerInfoList[spectatingPlayer[0].steamId] || {};
+
+    yield put(setSpectatingPlayer({
+        ...spectatingPlayer[0],
+        ...playerInfo,
+    }));
 }
 
 export function* rootSaga(): SagaIterator {

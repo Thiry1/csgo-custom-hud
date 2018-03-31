@@ -17,6 +17,10 @@ export interface SpectatingPlayerProps {
      */
     name: string;
     /**
+     * Twitter ID.
+     */
+    twitterId?: string;
+    /**
      * アクティブ武器.
      */
     activeWeapon: WeaponInfo;
@@ -171,6 +175,16 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
             </div>
         );
     };
+
+    private createPlayerInfo = (): JSX.Element => {
+        if (!this.props.twitterId) {
+            return <p className={classNames.twitterId} />;
+        }
+        return (
+            <p className={classNames.twitterId}>{this.props.twitterId}</p>
+        );
+    };
+
     render() {
         if (!this.props.name) {
             return null;
@@ -198,6 +212,7 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
                     className={classNames.subInfo}
                     data-team={this.props.team}
                 >
+                    {this.createPlayerInfo()}
                     <div className={classNames.kda}>
                         <span className={classNames.kill}>{this.props.kill} K</span>
                         <span className={classNames.kdaSeparator}>/</span>
