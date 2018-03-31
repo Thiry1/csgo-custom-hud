@@ -3,7 +3,7 @@ import { storiesOf, Story } from "@storybook/react";
 import { Timer, TimerProps } from "./Timer";
 
 export const props: TimerProps = {
-    time: 90,
+    time: 61,
 };
 
 storiesOf("Timer", module)

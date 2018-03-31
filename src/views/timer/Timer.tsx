@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BaseComponent } from "../util/baseComponent";
 const convertSeconds = require("convert-seconds");
+const leftPad = require("left-pad");
 const classNames = require("./timer.scss");
 
 export interface TimerProps {
@@ -29,7 +30,7 @@ export class Timer extends BaseComponent<TimerProps, {}> {
             <div className={this.props.className || classNames.timer}>
                 <span className={classNames.minutes}>{time.minutes}</span>
                 <span className={classNames.separator}>:</span>
-                <span className={classNames.seconds}>{time.seconds}</span>
+                <span className={classNames.seconds}>{leftPad(time.seconds, 2, "0")}</span>
             </div>
         );
     }
