@@ -1,8 +1,11 @@
 import * as React from "react";
 import { storiesOf, Story } from "@storybook/react";
-import { TopBar, TopBarProps } from "./topBar";
-
-export const props: TopBarProps = {
+import { TopBar, TopBarProps } from "./TopBar";
+import { props as roundTimerProps } from "../timer/Story";
+import { props as roundCounterProps } from "../roundCounter/Story";
+import { GameStateIntegration } from "../../dataTypes";
+import CurrentPhase = GameStateIntegration.CurrentPhase;
+export const props = (currentPhase: CurrentPhase = CurrentPhase.live): TopBarProps => ({
     teamInfo: {
         ct: {
             score: 15,
@@ -15,9 +18,12 @@ export const props: TopBarProps = {
             logo: "magixgod.png",
         },
     },
-};
+    currentPhase,
+    roundTimer: roundTimerProps,
+    roundCounter: roundCounterProps,
+});
 
 storiesOf("TopBar", module)
-    .add("TopBar情報を表示できる", () => {
-        return <TopBar {...props} />;
+    .add("ラウンドがliveの時のTopBar情報を表示できる", () => {
+        return <TopBar {...props(CurrentPhase.live)} />;
     });

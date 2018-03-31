@@ -16,7 +16,7 @@ const props: TemplateProps = {
         t: createTeamMoneyProps(GameStateIntegration.Team.T),
     },
     spectatingPlayer: createSpectatingPlayerProps(GameStateIntegration.Team.CT),
-    topBar: topBarProps,
+    topBar: topBarProps(),
 };
 storiesOf("テンプレート", module)
     .add("テンプレートを表示できる", () => {

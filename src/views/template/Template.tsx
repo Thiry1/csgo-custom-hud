@@ -5,7 +5,7 @@ import { GameStateIntegration } from "../../dataTypes";
 import { TeamStats } from "../teamStats/TeamStats";
 import { TeamMoneyProps } from "../teamMoney/TeamMoney";
 import { SpectatingPlayer, SpectatingPlayerProps } from "../spectatingPlayer/SpectatingPlayer";
-import { TopBar, TopBarProps } from "../topBar/topBar";
+import { TopBar, TopBarProps } from "../topBar/TopBar";
 export interface TemplateProps {
     players: PlayerProps[];
     teamMoney: {

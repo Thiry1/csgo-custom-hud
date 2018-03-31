@@ -310,7 +310,7 @@ export interface GameStateIntegrationResponse {
     /**
      * 現在のフェーズ.
      */
-    phase_countdowns: GameStateIntegration.PhaseCountDowns;
+    phase_countdowns?: GameStateIntegration.PhaseCountDowns;
     /**
      * 一つ前の状態を表しているはずだが、色々入ってくるので型定義を諦めた.
      * 使うことないはず...

@@ -41,7 +41,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     armor: player.state.armor,
                     hasHelmet: player.state.helmet,
                     hasDefuseKit: !!player.state.defusekit,
-                    showKda: this.props.roundPhase.phase === GameStateIntegration.RoundPhase.freezetime,
+                    showKda: this.props.roundPhase.phase === GameStateIntegration.CurrentPhase.freezetime,
                     kda: {
                         kill: player.matchStats.kills,
                         death: player.matchStats.deaths,
@@ -76,7 +76,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                 },
             },
             spectatingPlayer: { // TODO: Player そのまま渡すで良い.
-                showSpectatingPlayer: this.props.roundPhase.phase !== GameStateIntegration.RoundPhase.freezetime,
+                showSpectatingPlayer: this.props.roundPhase.phase !== GameStateIntegration.CurrentPhase.freezetime,
                 name: this.props.spectatingPlayer.name,
                 twitterId: this.props.spectatingPlayer.twitterId,
                 activeWeapon: this.props.spectatingPlayer.weapons.activeWeapon,
@@ -107,6 +107,14 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                         logo: this.props.teamInfo.t.logo,
                     },
                 },
+                roundCounter: {
+                    currentRound: this.props.score.ct + this.props.score.t + 1,
+                    maxRound: 30,
+                },
+                roundTimer: {
+                    time: this.props.roundPhase.time,
+                },
+                currentPhase: this.props.roundPhase.phase,
             },
         };
     }

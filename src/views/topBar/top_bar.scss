@@ -79,3 +79,20 @@
     text-align: left;
   }
 }
+
+.round-info {
+  float: left;
+  width: 10%;
+}
+
+.round-counter {
+  composes: round-counter from "../roundCounter/round_counter.scss";
+  height: 25px;
+  text-align: center;
+}
+
+.timer {
+  composes: timer from "../timer/timer.scss";
+  composes: base from "../theme/common.scss";
+  height: 30px;
+}
