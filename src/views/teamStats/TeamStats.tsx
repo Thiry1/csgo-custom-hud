@@ -16,7 +16,7 @@ export class TeamStats extends BaseComponent<TeamStatsProps, {}> {
         return (
             <div className={classNames.teamStats} data-team={this.props.team}>
                 <TeamMoney {...this.props.teamMoney} team={this.props.team} />
-                {this.props.players.map(player => <Player key={player.name} {...player} />)}
+                {this.props.players.map(player => <Player {...player} />)}
             </div>
         );
     }
