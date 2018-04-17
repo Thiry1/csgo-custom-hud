@@ -4,7 +4,6 @@ import { all, fork } from "redux-saga/effects";
 import * as gsi from "./gsi/gsi";
 import * as players from "./players/players";
 import * as roundPhase from "./roundPhase/roundPhase";
-import * as bomb from "./bomb/bomb";
 import * as teamMoney from "./teamMoney/teamMoney";
 import * as spectatingPlayer from "./spectatingPlayer/spectatingPlayer";
 import * as score from "./score/score";
@@ -14,7 +13,6 @@ export interface State {
     gsi: gsi.GsiState;
     players: players.PlayersState;
     roundPhase: roundPhase.RoundPhaseState;
-    bomb: bomb.BombState;
     teamMoney: teamMoney.TeamMoneyState;
     spectatingPlayer: spectatingPlayer.SpectatingPlayerState;
     score: score.ScoreState;
@@ -26,7 +24,6 @@ export const reducer = combineReducers({
     players: players.reducer,
     roundPhase: roundPhase.reducer,
     currentRound: roundPhase.reducer,
-    bomb: bomb.reducer,
     teamMoney: teamMoney.reducer,
     spectatingPlayer: spectatingPlayer.reducer,
     score: score.reducer,
@@ -37,7 +34,6 @@ export function* rootSaga(): SagaIterator {
     yield all([
         fork(players.rootSaga),
         fork(roundPhase.rootSaga),
-        fork(bomb.rootSaga),
         fork(teamMoney.rootSaga),
         fork(spectatingPlayer.rootSaga),
         fork(score.rootSaga),

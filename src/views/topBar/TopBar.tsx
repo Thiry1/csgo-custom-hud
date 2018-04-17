@@ -1,10 +1,11 @@
 import * as React from "react";
 import { BaseComponent } from "../util/baseComponent";
 import { TeamLogoResolver } from "../../util/teamLogoResolver";
-import {RoundCounter, RoundCounterProps} from "../roundCounter/RoundCounter";
-import {Timer, TimerProps} from "../timer/Timer";
-import {GameStateIntegration} from "../../dataTypes";
+import { RoundCounter, RoundCounterProps } from "../roundCounter/RoundCounter";
+import { Timer, TimerProps } from "../timer/Timer";
+import { GameStateIntegration } from "../../dataTypes";
 import CurrentPhase = GameStateIntegration.CurrentPhase;
+import { PercentageTimer, PercentageTimerProps } from "../percentageTimer/PercentageTimer";
 const classNames = require("./top_bar.scss");
 export interface TeamInfo {
     /**
@@ -40,6 +41,10 @@ export interface TopBarProps {
      * ラウンド数のカウンター.
      */
     roundCounter: RoundCounterProps;
+    /**
+     * C4のカウントダウンタイマー.
+     */
+    c4Timer: PercentageTimerProps;
 }
 /**
  * TopBarコンポーネント
@@ -48,16 +53,34 @@ export interface TopBarProps {
 export class TopBar extends BaseComponent<TopBarProps, {}> {
 
     private createRoundInfo = (): JSX.Element => {
-        // 設置中、解除中は表示しない.
-        if (this.props.currentPhase === CurrentPhase.bomb
-            || this.props.currentPhase === CurrentPhase.defuse) {
-            return null;
-        }
-
+        const timer = ((): JSX.Element | null => {
+            if (this.props.currentPhase === CurrentPhase.bomb) {
+                const props: PercentageTimerProps = {
+                    ...this.props.c4Timer,
+                    icon: this.props.c4Timer.icon ? {
+                        ...this.props.c4Timer.icon,
+                        className: classNames.c4Timer,
+                    } : null,
+                };
+                return <PercentageTimer {...props} />;
+            } else if (this.props.currentPhase === CurrentPhase.defuse) {
+                return null;
+            } else {
+                return <Timer {...this.props.roundTimer} className={classNames.timer} />;
+            }
+        })();
+        const roundCounter = (() => {
+            if (this.props.currentPhase === CurrentPhase.bomb
+                || this.props.currentPhase === CurrentPhase.defuse) {
+                return null;
+            } else {
+                return <RoundCounter {...this.props.roundCounter} className={classNames.roundCounter} />;
+            }
+        })();
         return (
             <div className={classNames.roundInfo}>
-                <Timer {...this.props.roundTimer} className={classNames.timer} />
-                <RoundCounter {...this.props.roundCounter} className={classNames.roundCounter} />
+                {timer}
+                {roundCounter}
             </div>
         );
     };

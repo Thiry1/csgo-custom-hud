@@ -1,0 +1,13 @@
+@keyframes blink {
+  0% {
+    filter: brightness(1%) invert(100%);
+  }
+  100% {
+    filter: brightness(10%) invert(100%);
+  }
+}
+.c4 {
+  animation-name: blink;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}

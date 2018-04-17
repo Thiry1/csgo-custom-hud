@@ -1,11 +1,13 @@
 import * as React from "react";
-import { storiesOf, Story } from "@storybook/react";
+import { storiesOf } from "@storybook/react";
 import { TopBar, TopBarProps } from "./TopBar";
-import { props as roundTimerProps } from "../timer/Story";
 import { props as roundCounterProps } from "../roundCounter/Story";
 import { GameStateIntegration } from "../../dataTypes";
 import CurrentPhase = GameStateIntegration.CurrentPhase;
-export const props = (currentPhase: CurrentPhase = CurrentPhase.live): TopBarProps => ({
+import { BlinkingC4Icon } from "../blinkingC4Icon/BlinkingC4Icon";
+import { BaseComponent } from "../util/baseComponent";
+
+export const props = (currentPhase: CurrentPhase, roundTimer: number): TopBarProps => ({
     teamInfo: {
         ct: {
             score: 15,
@@ -19,11 +21,44 @@ export const props = (currentPhase: CurrentPhase = CurrentPhase.live): TopBarPro
         },
     },
     currentPhase,
-    roundTimer: roundTimerProps,
+    roundTimer: {
+        time: roundTimer,
+    },
+    c4Timer: currentPhase === CurrentPhase.bomb ? {
+        value: roundTimer,
+        max: 35,
+        icon: {
+            component: BlinkingC4Icon,
+            props: {
+                visible: true,
+            },
+        },
+    } : null,
     roundCounter: roundCounterProps,
 });
+interface Props {
+    phase: CurrentPhase;
+}
+interface State {
+    roundTimer: number;
+}
+class TopBarWrapper extends BaseComponent<Props, State> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            roundTimer: this.props.phase === CurrentPhase.bomb ? 35 : 100,
+        };
+        setInterval(() => this.setState({ roundTimer: this.state.roundTimer - 0.1 }), 100);
+    }
+    render() {
+        return <TopBar {...props(this.props.phase, this.state.roundTimer)} />;
+    }
+}
 
 storiesOf("TopBar", module)
     .add("ラウンドがliveの時のTopBar情報を表示できる", () => {
-        return <TopBar {...props(CurrentPhase.live)} />;
+        return <TopBarWrapper phase={CurrentPhase.live} />;
+    })
+    .add("ラウンドがC4設置中の時のTopBar情報を表示できる", () => {
+        return <TopBarWrapper phase={CurrentPhase.bomb} />;
     });

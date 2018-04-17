@@ -83,6 +83,7 @@
 .round-info {
   float: left;
   width: 10%;
+  height: 55px;
 }
 
 .round-counter {
@@ -95,4 +96,15 @@
   composes: timer from "../timer/timer.scss";
   composes: base from "../theme/common.scss";
   height: 30px;
+}
+
+.c4-timer {
+  composes: c4 from "../blinkingC4Icon/blinking_c4_icon.scss";
+  position: relative;
+  z-index: 1;
+  width: 30px;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

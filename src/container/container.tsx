@@ -10,6 +10,9 @@ import { TeamMoneyState } from "../redux/modules/teamMoney/teamMoney";
 import { ScoreState } from "../redux/modules/score/score";
 import { TeamInfoState } from "../redux/modules/teamInfo/teamInfo";
 import { PlayerInfo } from "../config/playerInfo";
+import RoundPhase = GameStateIntegration.RoundPhase;
+import CurrentPhase = GameStateIntegration.CurrentPhase;
+import { BlinkingC4Icon } from "../views/blinkingC4Icon/BlinkingC4Icon";
 
 export interface ContainerProps {
 
@@ -111,6 +114,16 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     currentRound: this.props.score.ct + this.props.score.t + 1,
                     maxRound: 30,
                 },
+                c4Timer: this.props.roundPhase.phase === CurrentPhase.bomb ? {
+                    value: this.props.roundPhase.time,
+                    max: 40, // C4 が爆発するまでの時間
+                    icon: {
+                        component: BlinkingC4Icon,
+                        props: {
+                            visible: true,
+                        },
+                    },
+                } : null,
                 roundTimer: {
                     time: this.props.roundPhase.time,
                 },
