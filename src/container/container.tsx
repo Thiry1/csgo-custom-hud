@@ -116,20 +116,21 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     currentRound: this.props.score.ct + this.props.score.t + 1,
                     maxRound: 30,
                 },
-                c4Timer: this.props.roundPhase.phase === CurrentPhase.bomb ? {
-                    value: this.props.roundPhase.time,
-                    max: 40, // C4 が爆発するまでの時間
-                    icon: {
-                        component: BlinkingC4Icon,
-                        props: {
-                            visible: true,
+                c4Timer: this.props.roundPhase.phase === CurrentPhase.bomb
+                    || this.props.roundPhase.phase === CurrentPhase.defuse ? {
+                        value: this.props.roundPhase.c4Timer,
+                        max: 40, // C4 が爆発するまでの時間
+                        icon: {
+                            component: BlinkingC4Icon,
+                            props: {
+                                visible: true,
+                            },
                         },
-                    },
-                    progressBarType: {
-                        axis: ProgressBarAxis.Vertical,
-                        direction: ProgressBarDirection.Fill,
-                    },
-                } : null,
+                        progressBarType: {
+                            axis: ProgressBarAxis.Vertical,
+                            direction: ProgressBarDirection.Fill,
+                        },
+                    } : null,
                 defuseTimer: this.props.defuseType !== DefuseType.None ? {
                     value: this.props.roundPhase.time,
                     max: this.props.defuseType === DefuseType.DefuseWithDefuseKit
