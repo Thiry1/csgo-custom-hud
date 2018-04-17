@@ -8,6 +8,7 @@ import * as teamMoney from "./teamMoney/teamMoney";
 import * as spectatingPlayer from "./spectatingPlayer/spectatingPlayer";
 import * as score from "./score/score";
 import * as teamInfo from "./teamInfo/teamInfo";
+import * as defuseType from "./defuseType/defuseType";
 
 export interface State {
     gsi: gsi.GsiState;
@@ -17,6 +18,7 @@ export interface State {
     spectatingPlayer: spectatingPlayer.SpectatingPlayerState;
     score: score.ScoreState;
     teamInfo: teamInfo.TeamInfoState;
+    defuseType: defuseType.DefuseTypeState;
 }
 
 export const reducer = combineReducers({
@@ -28,6 +30,7 @@ export const reducer = combineReducers({
     spectatingPlayer: spectatingPlayer.reducer,
     score: score.reducer,
     teamInfo: teamInfo.reducer,
+    defuseType: defuseType.reducer,
 });
 
 export function* rootSaga(): SagaIterator {
@@ -38,5 +41,6 @@ export function* rootSaga(): SagaIterator {
         fork(spectatingPlayer.rootSaga),
         fork(score.rootSaga),
         fork(teamInfo.rootSaga),
+        fork(defuseType.rootSaga),
     ]);
 }

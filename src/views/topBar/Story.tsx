@@ -6,8 +6,9 @@ import { GameStateIntegration } from "../../dataTypes";
 import CurrentPhase = GameStateIntegration.CurrentPhase;
 import { BlinkingC4Icon } from "../blinkingC4Icon/BlinkingC4Icon";
 import { BaseComponent } from "../util/baseComponent";
+import { ProgressBarAxis, ProgressBarDirection } from "../percentageTimer/PercentageTimer";
 
-export const props = (currentPhase: CurrentPhase, roundTimer: number): TopBarProps => ({
+export const props = (currentPhase: CurrentPhase, roundTimer: number, defuseTimer: number): TopBarProps => ({
     teamInfo: {
         ct: {
             score: 15,
@@ -33,6 +34,18 @@ export const props = (currentPhase: CurrentPhase, roundTimer: number): TopBarPro
                 visible: true,
             },
         },
+        progressBarType: {
+            axis: ProgressBarAxis.Vertical,
+            direction: ProgressBarDirection.Fill,
+        },
+    },
+    defuseTimer: {
+        value: defuseTimer,
+        max: 10,
+        progressBarType: {
+            axis: ProgressBarAxis.Horizontal,
+            direction: ProgressBarDirection.Empty,
+        },
     },
     roundCounter: roundCounterProps,
 });
@@ -41,6 +54,7 @@ interface Props {
 }
 interface State {
     roundTimer: number;
+    defuseTimer: number;
 }
 class TopBarWrapper extends BaseComponent<Props, State> {
     constructor(props: any) {
@@ -48,11 +62,15 @@ class TopBarWrapper extends BaseComponent<Props, State> {
         this.state = {
             roundTimer: this.props.phase === CurrentPhase.bomb ||
                 this.props.phase === CurrentPhase.defuse ? 35 : 100,
+            defuseTimer: 10,
         };
-        setInterval(() => this.setState({ roundTimer: this.state.roundTimer - 0.1 }), 100);
+        setInterval(() => this.setState({
+            roundTimer: this.state.roundTimer - 0.1,
+            defuseTimer: this.state.defuseTimer - 0.1,
+        }), 100);
     }
     render() {
-        return <TopBar {...props(this.props.phase, this.state.roundTimer)} />;
+        return <TopBar {...props(this.props.phase, this.state.roundTimer, this.state.defuseTimer)} />;
     }
 }
 

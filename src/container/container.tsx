@@ -10,9 +10,10 @@ import { TeamMoneyState } from "../redux/modules/teamMoney/teamMoney";
 import { ScoreState } from "../redux/modules/score/score";
 import { TeamInfoState } from "../redux/modules/teamInfo/teamInfo";
 import { PlayerInfo } from "../config/playerInfo";
-import RoundPhase = GameStateIntegration.RoundPhase;
 import CurrentPhase = GameStateIntegration.CurrentPhase;
 import { BlinkingC4Icon } from "../views/blinkingC4Icon/BlinkingC4Icon";
+import { ProgressBarAxis, ProgressBarDirection } from "../views/percentageTimer/PercentageTimer";
+import { DefuseType } from "../redux/modules/defuseType/defuseType";
 
 export interface ContainerProps {
 
@@ -24,6 +25,7 @@ interface PropsFromState {
     spectatingPlayer: Player & PlayerInfo;
     score: ScoreState;
     teamInfo: TeamInfoState;
+    defuseType: DefuseType;
 }
 interface Dispatcher {
 
@@ -123,6 +125,20 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                             visible: true,
                         },
                     },
+                    progressBarType: {
+                        axis: ProgressBarAxis.Vertical,
+                        direction: ProgressBarDirection.Fill,
+                    },
+                } : null,
+                defuseTimer: this.props.defuseType !== DefuseType.None ? {
+                    value: this.props.roundPhase.time,
+                    max: this.props.defuseType === DefuseType.DefuseWithDefuseKit
+                        ? 5
+                        : 10,
+                    progressBarType: {
+                        axis: ProgressBarAxis.Horizontal,
+                        direction: ProgressBarDirection.Empty,
+                    },
                 } : null,
                 roundTimer: {
                     time: this.props.roundPhase.time,
@@ -147,6 +163,7 @@ const mapStateToProps = (state: State): PropsFromState => {
         spectatingPlayer: state.spectatingPlayer.player,
         score: state.score,
         teamInfo: state.teamInfo,
+        defuseType: state.defuseType.defuseType,
     };
 };
 export const Container = compose(

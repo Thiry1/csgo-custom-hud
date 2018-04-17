@@ -2,7 +2,35 @@ import * as React from "react";
 import { BaseComponent } from "../util/baseComponent";
 const classNames = require("./percentage_timer.scss");
 
+/**
+ * プログレスバーの方向.
+ */
+export enum ProgressBarAxis {
+    /**
+     * 横軸.
+     */
+    Horizontal = "Horizontal",
+    /**
+     * 縦軸.
+     */
+    Vertical = "Vertical",
+}
+
+/**
+ * バーの進む方向.
+ */
+export enum ProgressBarDirection {
+    /**
+     * プログレスバーをゲージで埋める方向,
+     */
+    Fill = "Fill",
+    /**
+     * プログレスバーからゲージを減らす方向.
+     */
+    Empty = "Empty",
+}
 export interface PercentageTimerProps {
+    className?: string;
     /**
      * タイマーの数値.
      */
@@ -19,6 +47,13 @@ export interface PercentageTimerProps {
         props: any;
         className?: string;
     };
+    /**
+     * プログレスバーの種類.
+     */
+    progressBarType: {
+        axis: ProgressBarAxis;
+        direction: ProgressBarDirection;
+    };
 }
 
 /**
@@ -26,8 +61,28 @@ export interface PercentageTimerProps {
  * @param {PercentageTimerProps} props
  */
 export class PercentageTimer extends BaseComponent<PercentageTimerProps, {}> {
-    render() {
+    private createStyle = (): Object => {
         const percentage = 100 * (this.props.value / this.props.max);
+        const step = (() => {
+            switch (this.props.progressBarType.direction) {
+                case ProgressBarDirection.Empty:
+                    return `-${percentage > 0 ? 100 - percentage : 0}`;
+                case ProgressBarDirection.Fill:
+                    return `${percentage > 0 ? percentage : 0}`;
+            }
+        })();
+        switch (this.props.progressBarType.axis) {
+            case ProgressBarAxis.Vertical:
+                return {
+                    transform: `translate(0, ${step}%)`,
+                };
+            case ProgressBarAxis.Horizontal:
+                return {
+                    transform: `translate(${step}%, 0)`,
+                };
+        }
+    };
+    render() {
         const icon = ((): JSX.Element | null => {
             if (!this.props.icon) {
                 return null;
@@ -36,9 +91,13 @@ export class PercentageTimer extends BaseComponent<PercentageTimerProps, {}> {
             return <Component {...this.props.icon.props} className={this.props.icon.className} />;
         })();
         return (
-            <div className={classNames.percentageTimer}>
+            <div
+                className={this.props.className || classNames.percentageTimer}
+                data-axis={this.props.progressBarType.axis}
+                data-direction={this.props.progressBarType.direction}
+            >
                 {icon}
-                <span className={classNames.percentageBar} style={{ transform: `translate(0, ${percentage > 0 ? percentage : 0}%)` }} />
+                <span className={classNames.percentageBar} style={this.createStyle()} />
             </div>
         );
     }

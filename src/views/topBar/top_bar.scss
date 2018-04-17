@@ -84,6 +84,7 @@
   float: left;
   width: 10%;
   height: 55px;
+  position: relative;
 }
 
 .round-counter {
@@ -107,4 +108,26 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.defuse-timer-wrapper {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  width: 177px;
+  height: 48px;
+  bottom: -48px;
+  left: -35%;
+  padding: 0 3px 3px 3px;
+  box-sizing: border-box;
+}
+.defuse-timer-label {
+  color: #4dadea;
+  margin: 0;
+}
+.defuse-timer {
+  composes: percentage-timer from "../percentageTimer/percentage_timer.scss";
+  background: #1d3d49;
+  height: 20px;
+  > [class*=__percentage-bar__] {
+    background: #4dadea;
+  }
 }
