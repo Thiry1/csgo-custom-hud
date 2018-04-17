@@ -24,7 +24,7 @@ export const props = (currentPhase: CurrentPhase, roundTimer: number): TopBarPro
     roundTimer: {
         time: roundTimer,
     },
-    c4Timer: currentPhase === CurrentPhase.bomb ? {
+    c4Timer: {
         value: roundTimer,
         max: 35,
         icon: {
@@ -33,7 +33,7 @@ export const props = (currentPhase: CurrentPhase, roundTimer: number): TopBarPro
                 visible: true,
             },
         },
-    } : null,
+    },
     roundCounter: roundCounterProps,
 });
 interface Props {
@@ -46,7 +46,8 @@ class TopBarWrapper extends BaseComponent<Props, State> {
     constructor(props: any) {
         super(props);
         this.state = {
-            roundTimer: this.props.phase === CurrentPhase.bomb ? 35 : 100,
+            roundTimer: this.props.phase === CurrentPhase.bomb ||
+                this.props.phase === CurrentPhase.defuse ? 35 : 100,
         };
         setInterval(() => this.setState({ roundTimer: this.state.roundTimer - 0.1 }), 100);
     }
@@ -61,4 +62,7 @@ storiesOf("TopBar", module)
     })
     .add("ラウンドがC4設置中の時のTopBar情報を表示できる", () => {
         return <TopBarWrapper phase={CurrentPhase.bomb} />;
+    })
+    .add("ラウンドがC4解除中の時のTopBar情報を表示できる", () => {
+        return <TopBarWrapper phase={CurrentPhase.defuse} />;
     });

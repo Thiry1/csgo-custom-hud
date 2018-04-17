@@ -54,7 +54,12 @@ export class TopBar extends BaseComponent<TopBarProps, {}> {
 
     private createRoundInfo = (): JSX.Element => {
         const timer = ((): JSX.Element | null => {
-            if (this.props.currentPhase === CurrentPhase.bomb) {
+            if (this.props.currentPhase === CurrentPhase.bomb
+                || this.props.currentPhase === CurrentPhase.defuse) {
+                if (!this.props.c4Timer) {
+                    return null;
+                }
+
                 const props: PercentageTimerProps = {
                     ...this.props.c4Timer,
                     icon: this.props.c4Timer.icon ? {
@@ -63,8 +68,6 @@ export class TopBar extends BaseComponent<TopBarProps, {}> {
                     } : null,
                 };
                 return <PercentageTimer {...props} />;
-            } else if (this.props.currentPhase === CurrentPhase.defuse) {
-                return null;
             } else {
                 return <Timer {...this.props.roundTimer} className={classNames.timer} />;
             }
