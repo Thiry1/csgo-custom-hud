@@ -1,0 +1,45 @@
+@keyframes scaling {
+  from {
+    transform: translate(-50%, 0) scale(0);
+  }
+  to {
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+.winner-team-announce {
+  composes: base from "../theme/common.scss";
+  position: absolute;
+  width: 800px;
+  top: 100px;
+  left: 50%;
+  height: 57px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  font-size: 36px;
+  text-align: center;
+  animation: scaling 1s;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.team-name {
+  font-weight: bold;
+  padding-right: 10px;
+  display: inline-block;
+  width: 200px;
+  height: 57px;
+  text-align: right;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  &[data-team="CT"] {
+    color: #73afd6;
+  }
+  &[data-team="T"] {
+    color: #f7bf16;
+  }
+}
+
+.label {
+  width: 228px;
+  height: 57px;
+  display: inline-block;
+  overflow: hidden;
+}

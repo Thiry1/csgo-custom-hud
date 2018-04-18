@@ -14,6 +14,7 @@ import CurrentPhase = GameStateIntegration.CurrentPhase;
 import { BlinkingC4Icon } from "../views/blinkingC4Icon/BlinkingC4Icon";
 import { ProgressBarAxis, ProgressBarDirection } from "../views/percentageTimer/PercentageTimer";
 import { DefuseType } from "../redux/modules/defuseType/defuseType";
+import { RoundWinnerState } from "../redux/modules/roundWinner/roundWinner";
 
 export interface ContainerProps {
 
@@ -26,6 +27,7 @@ interface PropsFromState {
     score: ScoreState;
     teamInfo: TeamInfoState;
     defuseType: DefuseType;
+    roundWinner: RoundWinnerState;
 }
 interface Dispatcher {
 
@@ -146,6 +148,10 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                 },
                 currentPhase: this.props.roundPhase.phase,
             },
+            winnerTeamAnnounce: this.props.roundWinner.team !== null ? {
+                team: this.props.roundWinner.team,
+                teamName: this.props.roundWinner.teamName,
+            } : null,
         };
     }
     render() {
@@ -165,6 +171,7 @@ const mapStateToProps = (state: State): PropsFromState => {
         score: state.score,
         teamInfo: state.teamInfo,
         defuseType: state.defuseType.defuseType,
+        roundWinner: state.roundWinner,
     };
 };
 export const Container = compose(

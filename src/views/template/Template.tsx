@@ -6,6 +6,7 @@ import { TeamStats } from "../teamStats/TeamStats";
 import { TeamMoneyProps } from "../teamMoney/TeamMoney";
 import { SpectatingPlayer, SpectatingPlayerProps } from "../spectatingPlayer/SpectatingPlayer";
 import { TopBar, TopBarProps } from "../topBar/TopBar";
+import { WinnerTeamAnnounce, WinnerTeamAnnounceProps } from "../winnerTeamAnnounce/WinnerTeamAnnounce";
 export interface TemplateProps {
     players: PlayerProps[];
     teamMoney: {
@@ -14,6 +15,7 @@ export interface TemplateProps {
     };
     spectatingPlayer: SpectatingPlayerProps;
     topBar: TopBarProps;
+    winnerTeamAnnounce?: WinnerTeamAnnounceProps;
 }
 export interface TemplateState {
 
@@ -23,6 +25,7 @@ export class Template extends BaseComponent<TemplateProps, TemplateState> {
         return (
             <div>
                 <TopBar {...this.props.topBar} />
+                {this.props.winnerTeamAnnounce && <WinnerTeamAnnounce {...this.props.winnerTeamAnnounce} />}
                 <TeamStats
                     players={this.props.players.filter(player => player.team === GameStateIntegration.Team.CT)}
                     team={GameStateIntegration.Team.CT}

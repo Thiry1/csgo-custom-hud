@@ -1,11 +1,12 @@
 import * as React from "react";
-import { storiesOf, Story } from "@storybook/react";
+import { storiesOf } from "@storybook/react";
 import { GameStateIntegration } from "../../dataTypes";
 import { Template, TemplateProps } from "./Template";
 import { props as createPlayerProps } from "../teamStats/Story";
 import { props as createTeamMoneyProps } from "../teamMoney/Story";
 import { props as createSpectatingPlayerProps } from "../spectatingPlayer/Story";
 import { props as topBarProps } from "../topBar/Story";
+import { props as createWinnerTeamAnnounceProps } from "../winnerTeamAnnounce/Story";
 import CurrentPhase = GameStateIntegration.CurrentPhase;
 const props: TemplateProps = {
     players: [
@@ -18,6 +19,7 @@ const props: TemplateProps = {
     },
     spectatingPlayer: createSpectatingPlayerProps(GameStateIntegration.Team.CT),
     topBar: topBarProps(CurrentPhase.live, 91, 4),
+    winnerTeamAnnounce: createWinnerTeamAnnounceProps(GameStateIntegration.Team.CT),
 };
 storiesOf("テンプレート", module)
     .add("テンプレートを表示できる", () => {
