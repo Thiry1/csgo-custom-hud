@@ -5,7 +5,7 @@ import { GameStateIntegration } from "../../dataTypes";
 import Team = GameStateIntegration.Team;
 
 export const props = (team: Team): WinnerTeamAnnounceProps => ({
-    teamName: "G2 Esports",
+    teamName: "foofoofoofoofoofoofoofoofoofoofoofoofoo",
     team,
 });
 

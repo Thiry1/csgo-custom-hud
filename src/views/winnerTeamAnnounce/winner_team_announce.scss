@@ -9,7 +9,7 @@
 .winner-team-announce {
   composes: base from "../theme/common.scss";
   position: absolute;
-  width: 800px;
+  width: 1050px;
   top: 100px;
   left: 50%;
   height: 57px;
@@ -24,11 +24,12 @@
   font-weight: bold;
   padding-right: 10px;
   display: inline-block;
-  width: 200px;
+  width: 400px;
   height: 57px;
   text-align: right;
   text-overflow: ellipsis;
   overflow: hidden;
+  word-break: break-all;
   &[data-team="CT"] {
     color: #73afd6;
   }
