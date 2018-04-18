@@ -44,7 +44,7 @@ export function* runSetRoundPhaseState() {
         return;
     }
     const previousRoundPhase: RoundPhaseState = yield select((state: State) => state.roundPhase);
-    const currentTime = Math.round(parseFloat(gsiResponse.phase_countdowns.phase_ends_in));
+    const currentTime = parseFloat(gsiResponse.phase_countdowns.phase_ends_in);
     const currentPhase = gsiResponse.phase_countdowns.phase;
     if (previousRoundPhase.phase !== gsiResponse.phase_countdowns.phase || previousRoundPhase.time !== currentTime) {
         let c4Timer;
