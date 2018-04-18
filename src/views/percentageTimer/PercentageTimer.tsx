@@ -66,7 +66,7 @@ export class PercentageTimer extends BaseComponent<PercentageTimerProps, {}> {
         const step = (() => {
             switch (this.props.progressBarType.direction) {
                 case ProgressBarDirection.Empty:
-                    return `-${percentage > 0 ? 100 - percentage : 0}`;
+                    return `-${percentage > 0 ? 100 - percentage : 100}`;
                 case ProgressBarDirection.Fill:
                     return `${percentage > 0 ? percentage : 0}`;
             }
