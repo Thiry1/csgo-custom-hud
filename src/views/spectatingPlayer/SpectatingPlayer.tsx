@@ -160,7 +160,8 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
         ];
     };
     private createAmmoInfo = (): JSX.Element => {
-        if (this.props.activeWeapon.type === "Knife") {
+        if (this.props.activeWeapon.type === "Knife"
+            || this.props.activeWeapon.type === "C4") {
             // TODO: null返す.floatやめたい
             return <div className={classNames.ammo} />;
         }
