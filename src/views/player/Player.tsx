@@ -270,6 +270,22 @@ const createC4Info = (props: PlayerProps): JSX.Element => {
         </span>
     );
 };
+const createHealthBar = (props: PlayerProps): JSX.Element => {
+    if (props.team === "T") {
+        return <span
+            className={classNames.healthBar}
+            data-team={props.team}
+            style={{ transform: `translate(${100 - props.health}%, 0)` }} // TODO: animation
+        />;
+    }
+    return (
+        <span
+            className={classNames.healthBar}
+            data-team={props.team}
+            style={{ transform: `translate(-${100 - props.health}%, 0)` }} // TODO: animation
+        />
+    );
+};
 /**
  * プレイヤーコンポーネント
  * @param  {PlayerProps} props
@@ -283,11 +299,7 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
         >
             <div className={classNames.wrapper}>
                 <div className={classNames.mainInfo}>
-                    <span
-                        className={classNames.healthBar}
-                        data-team={props.team}
-                        style={{ transform: `translate(-${100 - props.health}%, 0)` }} // TODO: animation
-                    />
+                    {createHealthBar(props)}
                     <span className={classNames.health} data-team={props.team}>{props.health}</span>
                     <span
                         className={classNames.name}
