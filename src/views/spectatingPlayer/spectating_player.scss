@@ -1,4 +1,5 @@
 @import "../theme/color.scss";
+$sub-info-height: 25px;
 .spectating-player {
   composes: base from "../theme/common.scss";
   width: 920px;
@@ -15,11 +16,30 @@
     transition: all 1s;
     opacity: 0;
   }
+  &[data-has-player-image=true] {
+    width: 920px + 120px;
+    height: 120px;
+    &:after {
+      content:" ";
+      display:block;
+      clear:both;
+    }
+    > .main-info {
+      position: absolute;
+      bottom: $sub-info-height;
+      left: 120px;
+    }
+    > .sub-info {
+      position: absolute;
+      bottom: 0;
+      left: 120px;
+    }
+  }
 }
 
 .main-info {
   height: 63px;
-  width: 100%;
+  width: 920px;
   padding: 0 0 0 15px;
   box-sizing: border-box;
   background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
@@ -117,7 +137,8 @@
   padding-left: 45px;
 }
 .sub-info {
-  height: 25px;
+  width: 920px;
+  height: $sub-info-height;
   padding-left: 15px;
   box-sizing: border-box;
   position: relative;
@@ -168,4 +189,16 @@
   width: 250px;
   float: left;
   padding-left: 36px;
+}
+
+.player-image {
+  width: 120px;
+  height: 120px;
+  box-sizing: border-box;
+  &[data-team="T"] {
+    border: 3px #c19511 solid;
+  }
+  &[data-team="CT"] {
+    border: 3px #5788a8 solid;
+  }
 }

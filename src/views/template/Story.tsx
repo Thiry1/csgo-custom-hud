@@ -17,7 +17,7 @@ const props: TemplateProps = {
         ct: createTeamMoneyProps(GameStateIntegration.Team.CT),
         t: createTeamMoneyProps(GameStateIntegration.Team.T),
     },
-    spectatingPlayer: createSpectatingPlayerProps(GameStateIntegration.Team.CT),
+    spectatingPlayer: createSpectatingPlayerProps(GameStateIntegration.Team.CT, true),
     topBar: topBarProps(CurrentPhase.live, 91, 4),
     winnerTeamAnnounce: createWinnerTeamAnnounceProps(GameStateIntegration.Team.CT),
 };

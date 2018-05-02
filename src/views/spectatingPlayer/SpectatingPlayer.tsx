@@ -6,6 +6,7 @@ import { WeaponInfo } from "../../redux/modules/players/players";
 import { MiscIconResolver } from "../../util/miscIconResolver";
 import { ArmorIconResolver } from "../../util/armorIconResolver";
 import { WeaponIconResolver } from "../../util/weaponIconResolver";
+import { PlayerNameResolver } from "../../util/playerImageResolver";
 const classNames = require("./spectating_player.scss");
 export interface SpectatingPlayerProps {
     /**
@@ -20,6 +21,10 @@ export interface SpectatingPlayerProps {
      * Twitter ID.
      */
     twitterId?: string;
+    /**
+     * player の画像.
+     */
+    image?: string;
     /**
      * アクティブ武器.
      */
@@ -189,11 +194,20 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
         if (!this.props.name) {
             return null;
         }
+        const playerImage = PlayerNameResolver.resolve(this.props.image);
         return (
             <div
                 className={classNames.spectatingPlayer}
                 data-show-spectating-player={this.props.showSpectatingPlayer}
+                data-has-player-image={playerImage !== null}
             >
+                {this.props.image &&
+                    <img
+                        src={playerImage}
+                        className={classNames.playerImage}
+                        data-team={this.props.team}
+                    />
+                }
                 <div className={classNames.mainInfo}>
                     <p
                         className={classNames.name}

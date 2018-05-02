@@ -86,6 +86,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                 showSpectatingPlayer: this.props.roundPhase.phase !== GameStateIntegration.CurrentPhase.freezetime,
                 name: this.props.spectatingPlayer.name,
                 twitterId: this.props.spectatingPlayer.twitterId,
+                image: this.props.spectatingPlayer.image,
                 activeWeapon: this.props.spectatingPlayer.weapons.activeWeapon,
                 flashBangAmount: this.props.spectatingPlayer.weapons.flashBangAmount,
                 smokeAmount: this.props.spectatingPlayer.weapons.smokeAmount,
