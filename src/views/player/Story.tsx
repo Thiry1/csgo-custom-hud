@@ -5,7 +5,7 @@ import { props as kdaProps } from "../kda/Story";
 import { GameStateIntegration } from "../../dataTypes";
 import Team = GameStateIntegration.Team;
 const team = Team.T;
-const props: PlayerProps = {
+export const props = (primaryWeapon: string = "weapon_ak47", secondaryWeapon: string = "weapon_hkp2000"): PlayerProps => ({
     name: "Foo",
     money: 16000,
     health: 100,
@@ -20,9 +20,9 @@ const props: PlayerProps = {
     roundKillCount: 1,
     roundKillByHeadShotCount: 0,
     weapon: {
-        activeWeapon: "weapon_ak47",
-        primary: "weapon_ak47",
-        secondary: "weapon_hkp2000",
+        activeWeapon: primaryWeapon,
+        primary: primaryWeapon,
+        secondary: secondaryWeapon,
         flashBangAmount: 2,
         smokeAmount: 0,
         highExplosiveAmount: 1,
@@ -32,9 +32,12 @@ const props: PlayerProps = {
         hasC4: false,
     },
     team,
-};
+});
 
 storiesOf("Player", module)
     .add("プレイヤー情報を表示できる", () => {
-        return <Player {...props} />;
+        return <Player {...props()} />;
+    })
+    .add("Player-Revolver", () => {
+        return <Player {...props("weapon_m4a1", "weapon_revolver")} />;
     });
