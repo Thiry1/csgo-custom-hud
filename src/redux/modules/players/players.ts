@@ -4,6 +4,7 @@ import { SET_GSI_RESPONSE, SET_PLAYERS, setPlayers } from "../actions";
 import { GameStateIntegration, GameStateIntegrationResponse, SteamId } from "../../../dataTypes";
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
+import { playerInfoList } from "../../../config/playerInfo";
 const humps = require("lodash-humps");
 
 export interface WeaponInfo {
@@ -141,6 +142,20 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
         hasC4,
     };
 };
+
+/**
+ * Retrieve the playerName for the given player.
+ * Will return the fixed configured name in `playerInfo.ts` first, or the
+ * name returned from the GSI event.
+ */
+const findPlayerName = (player: GameStateIntegration.Player): string => {
+    if (player.steamid in playerInfoList && playerInfoList[player.steamid].name) {
+        return playerInfoList[player.steamid].name;
+    } else {
+        return player.name;
+    }
+};
+
 export function* runSetPlayersState() {
     const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
     if (!gsiResponse) {
@@ -154,7 +169,7 @@ export function* runSetPlayersState() {
         const player = gsiResponse.allplayers[steamId];
         players.push({
             steamId,
-            name: player.name,
+            name: findPlayerName(player),
             matchStats: player.match_stats,
             weapons: findWeapon(player.weapons),
             state: humps(player.state),
