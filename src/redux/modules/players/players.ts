@@ -148,11 +148,11 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
  * Will return the fixed configured name in `playerInfo.ts` first, or the
  * name returned from the GSI event.
  */
-const findPlayerName = (player: GameStateIntegration.Player): string => {
-    if (player.steamid in playerInfoList && playerInfoList[player.steamid].name) {
-        return playerInfoList[player.steamid].name;
+const findPlayerName = (steamId: string): string => {
+    if (steamId in playerInfoList && playerInfoList[steamId].name) {
+        return playerInfoList[steamId].name;
     } else {
-        return player.name;
+        return null;
     }
 };
 
@@ -169,7 +169,7 @@ export function* runSetPlayersState() {
         const player = gsiResponse.allplayers[steamId];
         players.push({
             steamId,
-            name: findPlayerName(player),
+            name: findPlayerName(steamId) || player.name,
             matchStats: player.match_stats,
             weapons: findWeapon(player.weapons),
             state: humps(player.state),
