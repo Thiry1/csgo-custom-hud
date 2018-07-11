@@ -87,6 +87,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                 name: this.props.spectatingPlayer.name,
                 twitterId: this.props.spectatingPlayer.twitterId,
                 image: this.props.spectatingPlayer.image,
+                imageInline: this.props.spectatingPlayer.imageInline,
                 activeWeapon: this.props.spectatingPlayer.weapons.activeWeapon,
                 flashBangAmount: this.props.spectatingPlayer.weapons.flashBangAmount,
                 smokeAmount: this.props.spectatingPlayer.weapons.smokeAmount,
