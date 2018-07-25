@@ -26,6 +26,10 @@ export interface SpectatingPlayerProps {
      */
     image?: string;
     /**
+     * image_inline: Display the image inline or above the bar
+     */
+    imageInline?: boolean;
+    /**
      * アクティブ武器.
      */
     activeWeapon: WeaponInfo;
@@ -200,11 +204,12 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
                 className={classNames.spectatingPlayer}
                 data-show-spectating-player={this.props.showSpectatingPlayer}
                 data-has-player-image={playerImage !== null}
+                data-image-inline={this.props.imageInline}
             >
                 {this.props.image &&
                     <img
                         src={playerImage}
-                        className={classNames.playerImage}
+                        className={this.props.imageInline ? classNames.playerImage : classNames.spectatingPlayerImage}
                         data-team={this.props.team}
                     />
                 }

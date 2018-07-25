@@ -73,6 +73,7 @@ const initialState: SpectatingPlayerState = {
         },
         twitterId: null,
         image: null,
+        imageInline: null,
     },
 };
 
