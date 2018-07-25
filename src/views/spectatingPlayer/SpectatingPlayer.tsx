@@ -6,7 +6,7 @@ import { WeaponInfo } from "../../redux/modules/players/players";
 import { MiscIconResolver } from "../../util/miscIconResolver";
 import { ArmorIconResolver } from "../../util/armorIconResolver";
 import { WeaponIconResolver } from "../../util/weaponIconResolver";
-import { PlayerNameResolver } from "../../util/playerImageResolver";
+import { PlayerImageResolver } from "../../util/playerImageResolver";
 const classNames = require("./spectating_player.scss");
 export interface SpectatingPlayerProps {
     /**
@@ -194,7 +194,7 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
         if (!this.props.name) {
             return null;
         }
-        const playerImage = PlayerNameResolver.resolve(this.props.image);
+        const playerImage = PlayerImageResolver.resolve(this.props.image);
         return (
             <div
                 className={classNames.spectatingPlayer}
