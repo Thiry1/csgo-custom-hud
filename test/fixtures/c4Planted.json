@@ -1,0 +1,117 @@
+{
+  "provider": {
+    "name": "Counter-Strike: Global Offensive",
+    "appid": 730,
+    "version": 13627,
+    "steamid": "76561198005627722",
+    "timestamp": 1519147295
+  },
+  "map": {
+    "mode": "competitive",
+    "name": "de_dust2",
+    "phase": "live",
+    "round": 6,
+    "team_ct": {
+      "score": 1,
+      "timeouts_remaining": 1,
+      "matches_won_this_series": 0
+    },
+    "team_t": {
+      "score": 5,
+      "timeouts_remaining": 1,
+      "matches_won_this_series": 0
+    },
+    "num_matches_to_win_series": 0,
+    "current_spectators": 0,
+    "souvenirs_total": 0
+  },
+  "round": {
+    "phase": "live",
+    "bomb": "planted"
+  },
+  "player": {
+    "steamid": "76561197960265738",
+    "name": "Neil",
+    "observer_slot": 1,
+    "team": "CT",
+    "activity": "playing",
+    "state": {
+      "health": 100,
+      "armor": 100,
+      "helmet": true,
+      "flashed": 0,
+      "smoked": 0,
+      "burning": 0,
+      "money": 1100,
+      "round_kills": 0,
+      "round_killhs": 0,
+      "equip_value": 2400
+    }
+  },
+  "allplayers": {
+    "76561197960265738": {
+      "name": "Neil",
+      "observer_slot": 1,
+      "team": "CT",
+      "state": {
+        "health": 100,
+        "armor": 100,
+        "helmet": true,
+        "flashed": 0,
+        "burning": 0,
+        "money": 1100,
+        "round_kills": 0,
+        "round_killhs": 0,
+        "equip_value": 2400
+      },
+      "match_stats": {
+        "kills": 1,
+        "assists": 0,
+        "deaths": 3,
+        "mvps": 1,
+        "score": 2
+      },
+      "weapons": {
+        "weapon_0": {
+          "name": "weapon_knife",
+          "paintkit": "default",
+          "type": "Knife",
+          "state": "holstered"
+        },
+        "weapon_1": {
+          "name": "weapon_hkp2000",
+          "paintkit": "default",
+          "type": "Pistol",
+          "ammo_clip": 13,
+          "ammo_clip_max": 13,
+          "ammo_reserve": 52,
+          "state": "holstered"
+        },
+        "weapon_2": {
+          "name": "weapon_nova",
+          "paintkit": "default",
+          "type": "Shotgun",
+          "ammo_clip": 8,
+          "ammo_clip_max": 8,
+          "ammo_reserve": 32,
+          "state": "active"
+        }
+      },
+      "position": "-1478.08, 2743.98, 11.24"
+    }
+  },
+  "phase_countdowns": {
+    "phase": "bomb",
+    "phase_ends_in": "14.7"
+  },
+  "previously": {
+    "allplayers": {
+      "76561197960265738": {
+        "position": "-1497.75, 2741.69, 8.88"
+      }
+    },
+    "phase_countdowns": {
+      "phase_ends_in": "14.9"
+    }
+  }
+}

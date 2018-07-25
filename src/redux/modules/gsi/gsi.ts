@@ -5,7 +5,7 @@ import { GameStateIntegrationPayload } from "../../../dataTypes";
 export interface GsiState extends GameStateIntegrationPayload {
 
 }
-const initialState: GsiState = {
+export const initialState: GsiState = {
     provider: {
         name: null,
         appid: null,

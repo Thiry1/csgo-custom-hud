@@ -4,7 +4,7 @@
   "description": "cs:go custom hud",
   "scripts": {
     "install:sdk": "npm i && npm i nw --nwjs_build_type=sdk",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test jest --config ./jestconfig.json --no-cache --coverage",
     "clean": "rimraf \"./build/**/*\"",
     "tslint": "tslint -c ./tslint.json -t verbose \"./src/**/*.ts*\"",
     "lint-staged": "lint-staged",
@@ -36,6 +36,7 @@
     "@storybook/addon-knobs": "^3.3.14",
     "@storybook/addons": "^3.3.14",
     "@storybook/react": "^3.3.14",
+    "@types/jest": "^23.3.0",
     "@types/node": "^9.4.6",
     "@types/react": "^16.0.38",
     "@types/react-dom": "^16.0.4",
