@@ -1,6 +1,6 @@
 import { Action, handleActions } from "redux-actions";
-import { SET_GSI_RESPONSE } from "../actions";
-import { GameStateIntegration, GameStateIntegrationResponse } from "../../../dataTypes";
+import { SET_GSI_PAYLOAD } from "../actions";
+import { GameStateIntegration, GameStateIntegrationPayload } from "../../../dataTypes";
 import { all, put, select, takeEvery } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
@@ -28,21 +28,21 @@ export const reducer = handleActions<RoundWinnerState, any>({
 }, initialState);
 
 export function* runSetRoundWinnerState() {
-    const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
-    if (!gsiResponse) {
+    const gsiPayload: GameStateIntegrationPayload = yield select((state: State) => state.gsi);
+    if (!gsiPayload) {
         return;
     }
-    if (!gsiResponse.round) {
+    if (!gsiPayload.round) {
         return yield put(setRoundWinner(initialState));
     }
     const previousPhase = yield select((state: State) => state.roundWinner.phase);
-    if (previousPhase === gsiResponse.round.phase) {
+    if (previousPhase === gsiPayload.round.phase) {
         return;
     }
-    if (gsiResponse.round.phase === RoundPhase.over) {
+    if (gsiPayload.round.phase === RoundPhase.over) {
         const teamInfo: TeamInfoState = yield select((state: State) => state.teamInfo);
         const teamName = (() => {
-            switch (gsiResponse.round.win_team) {
+            switch (gsiPayload.round.win_team) {
                 case Team.CT:
                     return teamInfo.ct.name || "COUNTER TERRORIST";
                 case Team.T:
@@ -50,21 +50,21 @@ export function* runSetRoundWinnerState() {
             }
         })();
         yield put(setRoundWinner({
-            team: gsiResponse.round.win_team,
+            team: gsiPayload.round.win_team,
             teamName,
-            phase: gsiResponse.round.phase,
+            phase: gsiPayload.round.phase,
         }));
     } else {
         yield put(setRoundWinner({
             team: null,
             teamName: null,
-            phase: gsiResponse.round.phase,
+            phase: gsiPayload.round.phase,
         }));
     }
 }
 
 export function* rootSaga(): SagaIterator {
     yield all([
-        takeEvery(SET_GSI_RESPONSE, runSetRoundWinnerState),
+        takeEvery(SET_GSI_PAYLOAD, runSetRoundWinnerState),
     ]);
 }

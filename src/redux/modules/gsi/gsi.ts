@@ -1,8 +1,8 @@
 import { Action, handleActions } from "redux-actions";
-import { SET_GSI_RESPONSE } from "../actions";
-import { GameStateIntegrationResponse } from "../../../dataTypes";
+import { SET_GSI_PAYLOAD } from "../actions";
+import { GameStateIntegrationPayload } from "../../../dataTypes";
 
-export interface GsiState extends GameStateIntegrationResponse {
+export interface GsiState extends GameStateIntegrationPayload {
 
 }
 const initialState: GsiState = {
@@ -64,9 +64,9 @@ const initialState: GsiState = {
     },
     previously: null,
 };
-// TODO: 同じステートなら更新しない. RECEIVE_GSI_RESPONSE -> SET_GSI_RESPONSE のフローにする.
+// TODO: 同じステートなら更新しない. RECEIVE_GSI_PAYLOAD -> SET_GSI_PAYLOAD のフローにする.
 export const reducer = handleActions<GsiState, any>({
-    [SET_GSI_RESPONSE]: (state, action: Action<GameStateIntegrationResponse>) => {
+    [SET_GSI_PAYLOAD]: (state, action: Action<GameStateIntegrationPayload>) => {
         console.log("GSI", action.payload);
         return action.payload;
     },

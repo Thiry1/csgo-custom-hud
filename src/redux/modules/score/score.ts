@@ -1,6 +1,6 @@
 import { Action, handleActions } from "redux-actions";
-import { SET_GSI_RESPONSE } from "../actions";
-import { GameStateIntegrationResponse } from "../../../dataTypes";
+import { SET_GSI_PAYLOAD } from "../actions";
+import { GameStateIntegrationPayload } from "../../../dataTypes";
 import { createAction } from "../../../util/createAction";
 import { all, put, select, takeEvery } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
@@ -29,15 +29,15 @@ export const reducer = handleActions<ScoreState, any>({
 }, initialState);
 
 export function* runSetScoreState() {
-    const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
-    if (!gsiResponse) {
+    const gsiPayload: GameStateIntegrationPayload = yield select((state: State) => state.gsi);
+    if (!gsiPayload) {
         return;
     }
-    if (!gsiResponse.map || !gsiResponse.map.team_ct || !gsiResponse.map.team_t) {
+    if (!gsiPayload.map || !gsiPayload.map.team_ct || !gsiPayload.map.team_t) {
         return;
     }
-    const scoreOfT = gsiResponse.map.team_t.score;
-    const scoreOfCT = gsiResponse.map.team_ct.score;
+    const scoreOfT = gsiPayload.map.team_t.score;
+    const scoreOfCT = gsiPayload.map.team_ct.score;
     yield put(setScore({
         t: scoreOfT || 0,
         ct: scoreOfCT || 0,
@@ -46,6 +46,6 @@ export function* runSetScoreState() {
 
 export function* rootSaga(): SagaIterator {
     yield all([
-        takeEvery(SET_GSI_RESPONSE, runSetScoreState),
+        takeEvery(SET_GSI_PAYLOAD, runSetScoreState),
     ]);
 }

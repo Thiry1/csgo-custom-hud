@@ -1,7 +1,7 @@
 import { Action, handleActions } from "redux-actions";
 import { all, put, select, takeEvery } from "redux-saga/effects";
 import { SET_PLAYERS } from "../actions";
-import { GameStateIntegrationResponse } from "../../../dataTypes";
+import { GameStateIntegrationPayload } from "../../../dataTypes";
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
 import { Player } from "../players/players";
@@ -84,15 +84,15 @@ export const reducer = handleActions<SpectatingPlayerState, any>({
 }, initialState);
 
 export function* runSetSpectatingPlayersState() {
-    const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
+    const gsiPayload: GameStateIntegrationPayload = yield select((state: State) => state.gsi);
     const players: Player[] = yield select((state: State) => state.players.players);
     if (!players) {
         return;
     }
-    if (!gsiResponse.player || !gsiResponse.player.steamid) {
+    if (!gsiPayload.player || !gsiPayload.player.steamid) {
         return;
     }
-    const spectatingPlayer = players.filter(player => player.steamId === gsiResponse.player.steamid);
+    const spectatingPlayer = players.filter(player => player.steamId === gsiPayload.player.steamid);
     if (!spectatingPlayer || spectatingPlayer.length === 0) {
         return yield put(setSpectatingPlayer(initialState.player));
     }

@@ -1,7 +1,7 @@
 import { Action, handleActions } from "redux-actions";
 import { all, put, select, takeEvery } from "redux-saga/effects";
-import { SET_GSI_RESPONSE, SET_PLAYERS, setPlayers } from "../actions";
-import { GameStateIntegration, GameStateIntegrationResponse, SteamId } from "../../../dataTypes";
+import { SET_GSI_PAYLOAD, SET_PLAYERS, setPlayers } from "../actions";
+import { GameStateIntegration, GameStateIntegrationPayload, SteamId } from "../../../dataTypes";
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
 import { playerInfoList } from "../../../config/playerInfo";
@@ -157,16 +157,16 @@ const findPlayerName = (steamId: string): string => {
 };
 
 export function* runSetPlayersState() {
-    const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
-    if (!gsiResponse) {
+    const gsiPayload: GameStateIntegrationPayload = yield select((state: State) => state.gsi);
+    if (!gsiPayload) {
         return;
     }
-    if (!gsiResponse.allplayers) {
+    if (!gsiPayload.allplayers) {
         return;
     }
     const players: Player[] = [];
-    for (let steamId of Object.keys(gsiResponse.allplayers)) {
-        const player = gsiResponse.allplayers[steamId];
+    for (let steamId of Object.keys(gsiPayload.allplayers)) {
+        const player = gsiPayload.allplayers[steamId];
         players.push({
             steamId,
             name: findPlayerName(steamId) || player.name,
@@ -181,6 +181,6 @@ export function* runSetPlayersState() {
 
 export function* rootSaga(): SagaIterator {
     yield all([
-        takeEvery(SET_GSI_RESPONSE, runSetPlayersState),
+        takeEvery(SET_GSI_PAYLOAD, runSetPlayersState),
     ]);
 }

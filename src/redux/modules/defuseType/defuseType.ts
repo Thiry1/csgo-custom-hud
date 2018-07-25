@@ -1,6 +1,6 @@
 import { Action, handleActions } from "redux-actions";
-import { SET_GSI_RESPONSE } from "../actions";
-import { GameStateIntegration, GameStateIntegrationResponse } from "../../../dataTypes";
+import { SET_GSI_PAYLOAD } from "../actions";
+import { GameStateIntegration, GameStateIntegrationPayload } from "../../../dataTypes";
 import { all, put, select, takeEvery } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
@@ -40,23 +40,23 @@ export const reducer = handleActions<DefuseTypeState, any>({
 }, initialState);
 
 export function* runSetDefuseWithDefuseKitState() {
-    const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
-    if (!gsiResponse) {
+    const gsiPayload: GameStateIntegrationPayload = yield select((state: State) => state.gsi);
+    if (!gsiPayload) {
         return;
     }
-    if (!gsiResponse.phase_countdowns || !gsiResponse.phase_countdowns.phase) {
+    if (!gsiPayload.phase_countdowns || !gsiPayload.phase_countdowns.phase) {
         return;
     }
 
     const currentPhase = yield select((state: State) => state.defuseType.currentPhase);
-    const phase = gsiResponse.phase_countdowns.phase;
+    const phase = gsiPayload.phase_countdowns.phase;
     // phase が変わっていない場合は何もしない
     if (currentPhase === phase) {
         return;
     }
 
     if (phase === CurrentPhase.defuse) {
-        const remainingTime = Math.round(parseFloat(gsiResponse.phase_countdowns.phase_ends_in));
+        const remainingTime = Math.round(parseFloat(gsiPayload.phase_countdowns.phase_ends_in));
         // phase が defuse になった瞬間に解除までの残り時間が5秒以下なら解除キットを持っていると判断する.
         if (remainingTime <= 5) {
             yield put(setDefuseType({
@@ -79,6 +79,6 @@ export function* runSetDefuseWithDefuseKitState() {
 
 export function* rootSaga(): SagaIterator {
     yield all([
-        takeEvery(SET_GSI_RESPONSE, runSetDefuseWithDefuseKitState),
+        takeEvery(SET_GSI_PAYLOAD, runSetDefuseWithDefuseKitState),
     ]);
 }

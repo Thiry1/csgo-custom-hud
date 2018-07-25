@@ -1,6 +1,6 @@
 import { Action, handleActions } from "redux-actions";
-import { INITIALIZE_CLIENT, SET_GSI_RESPONSE, SET_ROUND_PHASE, setRoundPhase } from "../actions";
-import { GameStateIntegration, GameStateIntegrationResponse } from "../../../dataTypes";
+import { INITIALIZE_CLIENT, SET_GSI_PAYLOAD, SET_ROUND_PHASE, setRoundPhase } from "../actions";
+import { GameStateIntegration, GameStateIntegrationPayload } from "../../../dataTypes";
 import { all, call, put, select, take, takeEvery, takeLatest } from "redux-saga/effects";
 import { delay, SagaIterator } from "redux-saga";
 import { State } from "../index";
@@ -36,17 +36,17 @@ function* runRefreshC4Timer() {
     }
 }
 export function* runSetRoundPhaseState() {
-    const gsiResponse: GameStateIntegrationResponse = yield select((state: State) => state.gsi);
-    if (!gsiResponse) {
+    const gsiPayload: GameStateIntegrationPayload = yield select((state: State) => state.gsi);
+    if (!gsiPayload) {
         return;
     }
-    if (!gsiResponse.phase_countdowns || !gsiResponse.phase_countdowns.phase) {
+    if (!gsiPayload.phase_countdowns || !gsiPayload.phase_countdowns.phase) {
         return;
     }
     const previousRoundPhase: RoundPhaseState = yield select((state: State) => state.roundPhase);
-    const currentTime = parseFloat(gsiResponse.phase_countdowns.phase_ends_in);
-    const currentPhase = gsiResponse.phase_countdowns.phase;
-    if (previousRoundPhase.phase !== gsiResponse.phase_countdowns.phase || previousRoundPhase.time !== currentTime) {
+    const currentTime = parseFloat(gsiPayload.phase_countdowns.phase_ends_in);
+    const currentPhase = gsiPayload.phase_countdowns.phase;
+    if (previousRoundPhase.phase !== gsiPayload.phase_countdowns.phase || previousRoundPhase.time !== currentTime) {
         let c4Timer;
         let shouldCountDownC4Timer = false;
         if (currentPhase === GameStateIntegration.CurrentPhase.bomb) {
@@ -75,7 +75,7 @@ export function* runSetRoundPhaseState() {
 
 export function* rootSaga(): SagaIterator {
     yield all([
-        takeEvery(SET_GSI_RESPONSE, runSetRoundPhaseState),
+        takeEvery(SET_GSI_PAYLOAD, runSetRoundPhaseState),
         takeLatest(INITIALIZE_CLIENT, runRefreshC4Timer),
     ]);
 }

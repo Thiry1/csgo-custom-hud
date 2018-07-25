@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { createStore } from "./redux/store";
 import { rootSaga } from "./redux/modules";
-import { initializeClient, setGsiResponse } from "./redux/modules/actions";
+import { initializeClient, setGsiPayload } from "./redux/modules/actions";
 import { Container } from "./container/container";
 import { Provider } from "react-redux";
 import { registerShortcut } from "./shortcut/shortcut";
@@ -15,7 +15,7 @@ registerShortcut(store);
 
 window.communication = {
     store,
-    setGsiResponse,
+    setGsiPayload,
 };
 
 document.addEventListener("DOMContentLoaded", () => {

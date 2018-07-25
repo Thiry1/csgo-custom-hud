@@ -283,7 +283,7 @@ export namespace GameStateIntegration {
         phase_ends_in: string;
     }
 }
-export interface GameStateIntegrationResponse {
+export interface GameStateIntegrationPayload {
     /**
      * プロバイダー.
      * GSI でデータを送信している人の情報.

@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
         req.on("end", () => {
             console.log("POST payload: " + body);
             try {
-                communication.store.dispatch(communication.setGsiResponse(JSON.parse(body)));
+                communication.store.dispatch(communication.setGsiPayload(JSON.parse(body)));
             } catch (error) {
                 console.error("INVALID GSI RESPONSE.", body, error);
             }
