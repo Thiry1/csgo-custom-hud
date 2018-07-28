@@ -17,3 +17,9 @@ export const setRoundPhase = createAction<RoundPhaseState>(SET_ROUND_PHASE);
 
 export const SWAP_TEAM_INFO = "hud/SWAP_TEAM_INFO";
 export const swapTeamInfo = createAction<void>(SWAP_TEAM_INFO);
+
+export const SET_HUD_VISIBILITY = "hud/SET_HUD_VISIBILITY";
+export const setHudVisibility = createAction<boolean>(SET_HUD_VISIBILITY);
+
+export const TOGGLE_HUD = "hud/TOGGLE_HUD";
+export const toggleHud = createAction<void>(TOGGLE_HUD);

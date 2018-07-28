@@ -28,6 +28,7 @@ interface PropsFromState {
     teamInfo: TeamInfoState;
     defuseType: DefuseType;
     roundWinner: RoundWinnerState;
+    isHudVisible: boolean;
 }
 interface Dispatcher {
 
@@ -40,6 +41,7 @@ interface ContainerState {
 class ContainerPage extends React.Component<Props, ContainerState> {
     private createTemplateProps(): TemplateProps {
         return {
+            visible: this.props.isHudVisible,
             players: this.props.players.map(player => {
                 return {
                     name: player.name,
@@ -174,6 +176,7 @@ const mapStateToProps = (state: State): PropsFromState => {
         teamInfo: state.teamInfo,
         defuseType: state.defuseType.defuseType,
         roundWinner: state.roundWinner,
+        isHudVisible: state.hudVisibility.visible,
     };
 };
 export const Container = compose(

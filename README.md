@@ -42,6 +42,7 @@ export const playerInfoList: PlayerInfoList = {
 ```
 ### shortcuts
 - `Alt+Left` => swap team information.
+- `Alt+Up` => Toggle show/hide HUD.
 
 # For developer
 ## how to enable Chrome dev tools

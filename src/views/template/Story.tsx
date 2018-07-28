@@ -9,6 +9,7 @@ import { props as topBarProps } from "../topBar/Story";
 import { props as createWinnerTeamAnnounceProps } from "../winnerTeamAnnounce/Story";
 import CurrentPhase = GameStateIntegration.CurrentPhase;
 const props: TemplateProps = {
+    visible: true,
     players: [
         ...createPlayerProps(GameStateIntegration.Team.CT).players,
         ...createPlayerProps(GameStateIntegration.Team.T).players,
