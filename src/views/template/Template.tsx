@@ -8,6 +8,7 @@ import { SpectatingPlayer, SpectatingPlayerProps } from "../spectatingPlayer/Spe
 import { TopBar, TopBarProps } from "../topBar/TopBar";
 import { WinnerTeamAnnounce, WinnerTeamAnnounceProps } from "../winnerTeamAnnounce/WinnerTeamAnnounce";
 export interface TemplateProps {
+    visible: boolean;
     players: PlayerProps[];
     teamMoney: {
         ct: TeamMoneyProps,
@@ -22,6 +23,9 @@ export interface TemplateState {
 }
 export class Template extends BaseComponent<TemplateProps, TemplateState> {
     render() {
+        if (!this.props.visible) {
+            return null;
+        }
         return (
             <div>
                 <TopBar {...this.props.topBar} />
