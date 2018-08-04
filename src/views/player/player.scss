@@ -155,7 +155,7 @@
   text-shadow: 0 0 10px #000;
   font-weight: bold;
   height: 100%;
-  width: 60px;
+  width: 50px;
   &[data-team="T"] {
     float: right;
   }
@@ -252,5 +252,18 @@
   &[data-show-kda=false] {
     transition: all 1s;
     opacity: 0;
+  }
+}
+
+.observer-slot {
+  color: #fff;
+  font-size: 50%;
+  &[data-team="T"] {
+    float: right !important;
+    margin: 5px 5px 0 0;
+  }
+  &[data-team="CT"] {
+    float: left !important;
+    margin: 5px 0 0 5px;
   }
 }

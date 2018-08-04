@@ -4,7 +4,7 @@ import { props as kdaProps } from "../kda/Story";
 import { GameStateIntegration } from "../../dataTypes";
 import { TeamStats, TeamStatsProps } from "./TeamStats";
 import { props as createTeamMoneyProps } from "../teamMoney/Story";
-const playerProps = (team: GameStateIntegration.Team) => ({
+const playerProps = (team: GameStateIntegration.Team, observerSlot: number) => ({
     name: "Foo",
     money: 16000,
     health: 100,
@@ -31,23 +31,27 @@ const playerProps = (team: GameStateIntegration.Team) => ({
         hasC4: team === GameStateIntegration.Team.T,
     },
     team,
+    observerSlot,
 });
-export const props = (team: GameStateIntegration.Team): TeamStatsProps => ({
-    players: [
-        playerProps(team),
-        playerProps(team),
-        playerProps(team),
-        playerProps(team),
-        playerProps(team),
-    ],
-    team,
-    teamMoney: createTeamMoneyProps(team),
-});
+export const props = (team: GameStateIntegration.Team, initialObserverSlot: number): TeamStatsProps => {
+    let slot = initialObserverSlot;
+    return {
+        players: [
+            playerProps(team, slot),
+            playerProps(team, ++slot),
+            playerProps(team, ++slot),
+            playerProps(team, ++slot),
+            playerProps(team, ++slot === 10 ? 0 : slot),
+        ],
+        team,
+        teamMoney: createTeamMoneyProps(team),
+    };
+};
 
 storiesOf("TeamStats", module)
     .add("CTのチーム毎のプレイヤー情報を表示できる", () => {
-        return <TeamStats {...props(GameStateIntegration.Team.CT)} />;
+        return <TeamStats {...props(GameStateIntegration.Team.CT, 1)} />;
     })
     .add("Tのチーム毎のプレイヤー情報を表示できる", () => {
-        return <TeamStats {...props(GameStateIntegration.Team.T)} />;
+        return <TeamStats {...props(GameStateIntegration.Team.T, 6)} />;
     });

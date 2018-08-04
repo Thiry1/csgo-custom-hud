@@ -72,6 +72,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                         hasC4: player.weapons.hasC4,
                     },
                     team: player.team,
+                    observerSlot: player.observerSlot,
                 };
             }),
             teamMoney: {

@@ -45,6 +45,7 @@ export interface Player {
         defusekit: boolean | null;
     };
     weapons: Weapon;
+    observerSlot: number;
 }
 
 export interface PlayersState {
@@ -174,6 +175,7 @@ export function* runSetPlayersState() {
             weapons: findWeapon(player.weapons),
             state: humps(player.state),
             team: player.team,
+            observerSlot: player.observer_slot,
         });
     }
     yield put(setPlayers(players));

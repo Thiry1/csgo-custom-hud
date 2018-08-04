@@ -24,7 +24,7 @@ export const props = (primaryWeapon: string = "weapon_ak47", secondaryWeapon: st
         primary: primaryWeapon,
         secondary: secondaryWeapon,
         flashBangAmount: 2,
-        smokeAmount: 0,
+        smokeAmount: 1,
         highExplosiveAmount: 1,
         decoyAmount: 0,
         molotovAmount: 0,
@@ -32,6 +32,7 @@ export const props = (primaryWeapon: string = "weapon_ak47", secondaryWeapon: st
         hasC4: false,
     },
     team,
+    observerSlot: 1,
 });
 
 storiesOf("Player", module)
