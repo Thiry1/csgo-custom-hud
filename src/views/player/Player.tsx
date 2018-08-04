@@ -96,6 +96,10 @@ export interface PlayerProps {
      * チーム.
      */
     team: Team;
+    /**
+     * observer slot.
+     */
+    observerSlot: number;
 }
 const createHighExplosiveAmountInfo = (props: PlayerProps): JSX.Element => {
     if (props.weapon.highExplosiveAmount === 0) {
@@ -305,6 +309,7 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
                     {createPrimaryWeaponInfo(props)}
                 </div>
                 <div className={classNames.subInfo}>
+                    <span className={classNames.observerSlot} data-team={props.team}>{props.observerSlot}</span>
                     {createArmorInfo(props)}
                     <span className={classNames.money} data-team={props.team}>${props.money}</span>
                     {createDefuseKitInfo(props)}

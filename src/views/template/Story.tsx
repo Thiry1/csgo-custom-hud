@@ -11,8 +11,8 @@ import CurrentPhase = GameStateIntegration.CurrentPhase;
 const props: TemplateProps = {
     visible: true,
     players: [
-        ...createPlayerProps(GameStateIntegration.Team.CT).players,
-        ...createPlayerProps(GameStateIntegration.Team.T).players,
+        ...createPlayerProps(GameStateIntegration.Team.CT, 1).players,
+        ...createPlayerProps(GameStateIntegration.Team.T, 6).players,
     ],
     teamMoney: {
         ct: createTeamMoneyProps(GameStateIntegration.Team.CT),
