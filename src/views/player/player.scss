@@ -132,7 +132,7 @@
 }
 
 .armor {
-  width: 40px;
+  width: 30px;
   height: 100%;
   text-align: center;
   display: block;
@@ -257,7 +257,8 @@
 
 .observer-slot {
   color: #fff;
-  font-size: 50%;
+  font-size: 40%;
+  width: 6px;
   &[data-team="T"] {
     float: right !important;
     margin: 5px 5px 0 0;
