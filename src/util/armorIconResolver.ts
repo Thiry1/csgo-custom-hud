@@ -5,7 +5,7 @@ export namespace ArmorIconResolver {
         } else if (info.armor > 0) {
             return require("../resources/armors/armor.png");
         } else {
-            return null;
+            return require("../resources/armors/armor.png");
         }
     };
 }

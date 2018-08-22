@@ -1,193 +1,130 @@
 @import "../theme/color.scss";
-$sub-info-height: 25px;
-$bottom-padding: 100px;
-$spectating-box-height: 70px;
-
-.spectating-player-image {
-  width: auto;
-  height: 180px;
-  position: fixed;
-  bottom: $spectating-box-height;
-  left: 50%;
-  transform: translateX(-420px);
-}
 
 .spectating-player {
   composes: base from "../theme/common.scss";
-  width: 920px;
-  height: $spectating-box-height;
   position: fixed;
-  bottom: $bottom-padding;
   left: 50%;
+  bottom: 100px;
   transform: translateX(-50%);
-  &[data-show-spectating-player=true] {
-      transition: all 1s;
-      opacity: 1;
-  }
-  &[data-show-spectating-player=false] {
-      transition: all 1s;
-      opacity: 0;
-  }
-  &[data-has-player-image=true][data-image-inline=true]{
-    width: 920px + 120px;
-    height: 120px;
-    &:after {
-      content:" ";
-      display:block;
-      clear:both;
-    }
-    > .main-info {
-      position: absolute;
-      bottom: $sub-info-height;
-      left: 120px;
-    }
-    > .sub-info {
-      position: absolute;
-      bottom: 0;
-      left: 120px;
-    }
-  }
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-info {
-  height: 63px;
-  width: 920px;
-  padding: 0 0 0 15px;
-  box-sizing: border-box;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-  &:after {
-    content:" ";
-    display:block;
-    clear:both;
+  background: rgba(0, 0, 0, 0.7);
+  height: 80px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-end;
+  > img {
+    width: 150px;
+    height: 150px;
   }
 }
+.playerNames {
+  width: 360px;
+  padding-left: 10px;
+}
+
 .name {
   composes: base from "../theme/common.scss";
-  width: 400px;
-  height: 63px;
-  margin: 0;
+  height: 55px;
+  line-height: 50px;
   font-weight: 600;
-  font-size: 40px;
-  display: inline-block;
+  font-size: 28px;
   white-space: nowrap;
-  padding-left: 36px;
   overflow: hidden;
+  margin: 0;
   &[data-team="T"] {
-    color: #c19511;
+    color: #C18B32;
   }
   &[data-team="CT"] {
-    color: #5788a8;
+    color: #4BA5D4;
   }
 }
-
-.ammo {
+.twitter-id {
   composes: base from "../theme/common.scss";
-  height: 63px;
-  width: 20%;
-  float: right;
-}
-
-.clip {
-  display: inline-block;
-  font-size: 40px;
-  font-weight: 900;
-  width: 65px;
-  text-align: center;
-}
-
-.separator {
-  display: inline-block;
-  font-size: 40px;
-  font-weight: 900;
-  width: 30px;
-  text-align: center;
-}
-
-.reserve {
-  display: inline-block;
-  font-size: 35px;
-  font-weight: 900;
-  width: 65px;
-}
-
-.health-armor {
-  composes: base from "../theme/common.scss";
-  height: 63px;
-  width: 230px;
-  float: right;
-  position: relative;
-}
-
-.health-icon {
-  width: 28px;
-  height: auto;
-  display: inline-block;
-  position: absolute;
-  top: 18px;
-  left: 0;
-}
-.health {
-  display: inline-block;
-  font-size: 40px;
-  font-weight: 900;
-  width: 65px;
-  padding-left: 40px;
-}
-.armor-icon {
-  width: 25px;
-  height: auto;
-  display: inline-block;
-  position: absolute;
-  top: 13px;
-  right: 25 + 65px;
-}
-.armor {
-  display: inline-block;
-  font-size: 40px;
-  font-weight: 900;
-  width: 65px;
-  padding-left: 45px;
-}
-.sub-info {
-  width: 920px;
-  height: $sub-info-height;
-  padding-left: 15px;
-  box-sizing: border-box;
-  position: relative;
+  height: 25px;
+  line-height: 15px;
+  font-weight: 600;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
   &[data-team="T"] {
-    background: linear-gradient(to left, rgba(193,149,17,0), rgba(193,149,17,1));
+    color: #C18B32;
   }
   &[data-team="CT"] {
-    background: linear-gradient(to left, rgba(87,136,168,0), rgba(87,136,168,1));
+    color: #4BA5D4;
   }
 }
 
 .kda {
   composes: base from "../theme/common.scss";
   width: 200px;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  text-shadow: 2px 2px 8px #000;
+  height: 80px;
+  line-height: 85px;
+  font-size: 24px;
   text-align: center;
 }
 .kda-separator {
   padding: 0 5px;
+  &[data-team="T"] {
+    color: #C18B32;
+  }
+  &[data-team="CT"] {
+    color: #4BA5D4;
+  }
+}
+
+
+.sub-info {
+  background: rgba(0, 0, 0, 0.55);
+  height: 45px;
+  text-align: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.health-armor {
+  composes: base from "../theme/common.scss";
+  width: 180px;
+  height: 45px;
+  padding-left: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.health-icon {
+  width: auto;
+  height: 21px;
+
+}
+.health {
+  width: 42px;
+  font-size: 24px;
+}
+.armor-icon {
+  width: auto;
+  height: 21px;
+}
+.armor {
+  width: 42px;
+  font-size: 24px;
 }
 
 .grenades-info {
-  width: 230px;
-  height: 25px;
-  float: right;
-  &:after {
-    content:" ";
-    display: block;
-    clear: both;
-  }
+  width: 400px;
+  height: 30px;
   > img {
     transform: scale(-1, 1);
-    float: left;
+    float: right;
     padding-right: 3px;
     margin: 2px auto auto 2px;
     width: auto;
@@ -196,21 +133,34 @@ $spectating-box-height: 70px;
   }
 }
 
-.twitter-id {
-  margin: 0;
-  width: 250px;
-  float: left;
-  padding-left: 36px;
-}
-
-.player-image {
+.ammo {
+  composes: base from "../theme/common.scss";
   width: 120px;
-  height: 120px;
-  box-sizing: border-box;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+.clip {
+  font-size: 24px;
+}
+.separator {
+  font-size: 15px;
+  width: 15px;
   &[data-team="T"] {
-    border: 3px #c19511 solid;
+    color: #C18B32;
   }
   &[data-team="CT"] {
-    border: 3px #5788a8 solid;
+    color: #4BA5D4;
+  }
+}
+.reserve {
+  font-size: 15px;
+  padding-right: 20px;
+  &[data-team="T"] {
+    color: #C18B32;
+  }
+  &[data-team="CT"] {
+    color: #4BA5D4;
   }
 }
