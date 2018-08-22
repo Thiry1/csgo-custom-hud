@@ -2,7 +2,7 @@
 .top-bar {
   composes: base from "../theme/common.scss";
   position: fixed;
-  top: 23px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
 }
