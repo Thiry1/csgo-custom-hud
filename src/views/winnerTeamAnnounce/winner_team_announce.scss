@@ -27,24 +27,6 @@
   }
 }
 
-.team-name {
-  font-weight: bold;
-  padding-right: 10px;
-  display: inline-block;
-  max-width: 400px;
-  height: 57px;
-  text-align: right;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  word-break: break-all;
-  &[data-team="CT"] {
-    color: #4BA5D4;
-  }
-  &[data-team="T"] {
-    color: #C18B32;
-  }
-}
-
 .label {
   overflow: hidden;
   &[data-team="CT"]{

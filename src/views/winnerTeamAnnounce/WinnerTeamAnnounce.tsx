@@ -27,9 +27,6 @@ export class WinnerTeamAnnounce extends BaseComponent<WinnerTeamAnnounceProps, {
     render() {
         return (
             <div className={classNames.winnerTeamAnnounce} data-team={this.props.team}>
-                {/*<span className={classNames.teamName} data-team={this.props.team}>
-                    {this.props.teamName}
-                </span>*/}
                 <span className={classNames.label} data-team={this.props.team}>WINS THE ROUND!</span>
             </div>
         );
