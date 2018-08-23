@@ -124,10 +124,10 @@
   bottom: 0;
   left: 0;
   &[data-team="T"] {
-    background: $t-color;
+    background: linear-gradient(90deg,#DA8A31 , #7B5C2A);
   }
   &[data-team="CT"] {
-    background: $ct-color;
+    background: linear-gradient(90deg,#445B6A , #0092C9);
   }
 }
 
