@@ -1,5 +1,6 @@
 .kda {
   composes: base from "../theme/common.scss";
+  background: rgba(0, 0, 0, 0.55);
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
@@ -7,10 +8,14 @@
   height: 100%;
   width: 115px;
   &[data-team="CT"] {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.5));
+    [class*=__title__] {
+      color: #4BA5D4;
+    }
   }
   &[data-team="T"] {
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.5));
+    [class*=__title__] {
+      color: #C18B32;
+    }
   }
 }
 

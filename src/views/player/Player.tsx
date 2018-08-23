@@ -275,12 +275,12 @@ const createC4Info = (props: PlayerProps): JSX.Element => {
     );
 };
 const createHealthBar = (props: PlayerProps): JSX.Element => {
-    const direction = props.team === Team.CT ? "-" : "";
+    const direction = props.team === Team.CT ? `0px ${100 - props.health}% 0px 0px` : `0px 0px 0px ${100 - props.health}%`;
     return (
         <span
             className={classNames.healthBar}
             data-team={props.team}
-            style={{ transform: `translate(${direction}${100 - props.health}%, 0)` }} // TODO: animation
+            style={{ clipPath: `inset(${direction})` }} // TODO: animation
         />
     );
 };
