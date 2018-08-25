@@ -24,7 +24,7 @@ export interface SpectatingPlayerProps {
     /**
      * player の画像.
      */
-    image?: string;
+    image: string;
     /**
      * image_inline: Display the image inline or above the bar
      */
@@ -188,14 +188,15 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
                 className={classNames.spectatingPlayer}
                 data-show-spectating-player={this.props.showSpectatingPlayer}
                 data-has-player-image={playerImage !== null}
-                data-image-inline={this.props.imageInline}
+                data-display-inline={this.props.imageInline}
             >
                 <div className={classNames.mainInfo}>
-                    {this.props.image &&
+                    {playerImage &&
                         <img
                             src={playerImage}
-                            className={this.props.imageInline ? classNames.playerImage : classNames.spectatingPlayerImage}
+                            className={classNames.playerImage}
                             data-team={this.props.team}
+                            data-display-inline={this.props.imageInline}
                         />
                     }
                     <div className={classNames.playerNames}>

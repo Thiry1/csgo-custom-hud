@@ -1,5 +1,6 @@
 @import "../theme/color.scss";
-
+$main-info-height: 80px;
+$spectating-player-width: 720px;
 .spectating-player {
   composes: base from "../theme/common.scss";
   position: fixed;
@@ -10,15 +11,26 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  width: $spectating-player-width;
+  &[data-display-inline=false] {
+    > [class*="__main-info__"] {
+      > [class*="__player-names__"] {
+        padding-left: 0;
+        width: 460px;
+      }
+    }
+  }
 }
 
 .main-info {
   background: rgba(0, 0, 0, 0.7);
-  height: 80px;
+  height: $main-info-height;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: flex-end;
+  position: relative;
+  width: $spectating-player-width;
   > img {
     width: 150px;
     height: 150px;
@@ -89,6 +101,7 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  width: $spectating-player-width;
 }
 
 .health-armor {
@@ -162,5 +175,14 @@
   }
   &[data-team="CT"] {
     color: #4BA5D4;
+  }
+}
+
+.player-image {
+  &[data-display-inline=false] {
+    display: block;
+    position: absolute;
+    bottom: $main-info-height;
+    left: 0;
   }
 }
