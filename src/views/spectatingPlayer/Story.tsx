@@ -1,5 +1,5 @@
 import * as React from "react";
-import { storiesOf, Story } from "@storybook/react";
+import { storiesOf } from "@storybook/react";
 import { GameStateIntegration } from "../../dataTypes";
 import { SpectatingPlayer, SpectatingPlayerProps } from "./SpectatingPlayer";
 
