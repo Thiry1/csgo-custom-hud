@@ -1,13 +1,14 @@
 @import "../theme/color.scss";
+$width: 465px;
 .team-money {
   composes: base from "../theme/common.scss";
   height: 85px;
-  width: 410px;
+  width: $width;
   &[data-team="T"] {
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.5) 410px, rgba(0, 0, 0, 0.0) 410px);
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.5) $width, rgba(0, 0, 0, 0.0) $width);
   }
   &[data-team="CT"] {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.5) 410px, rgba(0, 0, 0, 0.0) 410px);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.5) $width, rgba(0, 0, 0, 0.0) $width);
   }
   &[data-show-team-money=true] {
     transition: all 1s;
@@ -38,7 +39,7 @@
 }
 
 .money-info {
-  width: 130px;
+  width: 170px;
   color: #add28b;
   text-shadow: 0 0 8px #000;
   &[data-team="T"] {
@@ -53,7 +54,7 @@
 
 .money-title {
   height: 35px;
-  width: 130px;
+  width: 170px;
   display: table-cell;
   vertical-align: bottom;
 }
