@@ -6,6 +6,7 @@ import { all, put, select, takeEvery } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
 import { Player } from "../players/players";
+import { hudSettings } from "../../../config/hudSettings";
 import RoundPhase = GameStateIntegration.RoundPhase;
 
 export const SET_TEAM_MONEY = "hud/SET_TEAM_MONEY";
@@ -29,7 +30,7 @@ export interface TeamMoneyState {
     ct: TeamMoneyInfo;
     t: TeamMoneyInfo;
 }
-const initialState: TeamMoneyState = {
+export const initialState: TeamMoneyState = {
     ct: {
         showTeamMoney: false,
         totalEquipmentValue: 0,
@@ -46,9 +47,12 @@ export const reducer = handleActions<TeamMoneyState, any>({
     [SET_TEAM_MONEY]: (state, action: Action<TeamMoneyState>) => action.payload,
 }, initialState);
 
-export function* runSetTeamMoneyState() {
-    const players: Player[] = yield select((state: State) => state.players.players);
-    const roundPhase: RoundPhase = yield select((state: State) => state.roundPhase.phase);
+export const getPlayers = (state: State) => state.players.players;
+export const getRoundPhase = (state: State) => state.roundPhase.phase;
+
+export function* runSetTeamMoneyState(showTeamMoney: boolean) {
+    const players: Player[] = yield select(getPlayers);
+    const roundPhase: RoundPhase = yield select(getRoundPhase);
     if (!players || players.length === 0) {
         yield put(setTeamMoney(initialState));
     } else {
@@ -69,12 +73,12 @@ export function* runSetTeamMoneyState() {
             ct: {
                 totalEquipmentValue: ctTotalEquipmentValue,
                 totalTeamMoney: ctTotalMoney,
-                showTeamMoney: roundPhase === GameStateIntegration.RoundPhase.freezetime,
+                showTeamMoney: showTeamMoney && roundPhase === GameStateIntegration.RoundPhase.freezetime,
             },
             t: {
                 totalEquipmentValue: tTotalEquipmentValue,
                 totalTeamMoney: tTotalMoney,
-                showTeamMoney: roundPhase === GameStateIntegration.RoundPhase.freezetime,
+                showTeamMoney: showTeamMoney && roundPhase === GameStateIntegration.RoundPhase.freezetime,
             },
         }));
     }
@@ -82,6 +86,6 @@ export function* runSetTeamMoneyState() {
 
 export function* rootSaga(): SagaIterator {
     yield all([
-        takeEvery(SET_PLAYERS, runSetTeamMoneyState),
+        takeEvery(SET_PLAYERS, runSetTeamMoneyState, hudSettings.showTeamMoney),
     ]);
 }

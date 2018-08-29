@@ -44,7 +44,7 @@ export const props = (team: GameStateIntegration.Team, initialObserverSlot: numb
             playerProps(team, ++slot === 10 ? 0 : slot),
         ],
         team,
-        teamMoney: createTeamMoneyProps(team),
+        teamMoney: createTeamMoneyProps(team, true),
     };
 };
 
