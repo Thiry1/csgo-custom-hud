@@ -16,6 +16,11 @@
       background: rgba(0, 0, 0, 0.65);
     }
   }
+  &[data-is-spectating-by-observer=true] {
+    [class*=__wrapper__] {
+      background: rgba(200, 200, 200, 0.65);
+    }
+  }
 }
 .wrapper {
   width: 350px;

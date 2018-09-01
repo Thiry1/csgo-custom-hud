@@ -73,6 +73,7 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     },
                     team: player.team,
                     observerSlot: player.observerSlot,
+                    isSpectatingByObserver: this.props.spectatingPlayer.steamId === player.steamId,
                 };
             }),
             teamMoney: {
