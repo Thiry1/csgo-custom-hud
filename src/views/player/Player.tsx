@@ -100,6 +100,10 @@ export interface PlayerProps {
      * observer slot.
      */
     observerSlot: number;
+    /**
+     * 観戦中か.
+     */
+    isSpectatingByObserver: boolean;
 }
 const createHighExplosiveAmountInfo = (props: PlayerProps): JSX.Element => {
     if (props.weapon.highExplosiveAmount === 0) {
@@ -294,6 +298,7 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
             className={classNames.player}
             data-is-alive={props.health !== 0}
             data-team={props.team}
+            data-is-spectating-by-observer={props.isSpectatingByObserver}
         >
             <div className={classNames.wrapper}>
                 <div className={classNames.mainInfo}>

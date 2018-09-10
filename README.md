@@ -14,6 +14,16 @@ npm i
 npm run build
 npm start
 ```
+## configuration
+## hud settings
+you may edit `/src/config/hudSettings.ts`.  
+For example,
+```js
+export const hudSettings: HudSettings = {
+    showTeamMoney: true, // show team money when round is freeze time.
+};
+```
+
 ### team config
 you may edit `/src/config/teamInfo.ts`.
 For example,

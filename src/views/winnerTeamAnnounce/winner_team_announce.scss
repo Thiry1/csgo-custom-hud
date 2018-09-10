@@ -1,10 +1,20 @@
-@keyframes slideInDown {
+// 2つの keyframe を @function に置き換えられそう
+@keyframes slideInDownForCt {
   from {
-    transform: translate3d(0, -100%, 0);
+    transform: translate(calc(-1 * 1110px / 2), -100%);
     visibility: visible;
   }
   to {
-    transform: translate3d(0, 0, 0);
+    transform: translate(calc(-1 * 1110px / 2), 0);
+  }
+}
+@keyframes slideInDownForT {
+  from {
+    transform: translate(calc(1110px / 2 - 480px), -100%);
+    visibility: visible;
+  }
+  to {
+    transform: translate(calc(1110px / 2 - 480px), 0);
   }
 }
 .winner-team-announce {
@@ -16,14 +26,16 @@
   font-size: 36px;
   font-weight: 600;
   text-align: center;
-  animation: slideInDown 0.5s;
   position: fixed;
   top: 10 + 70px;
+  left: 50%;
   &[data-team="CT"]{
-    left: 405px;
+    transform: translate(calc(-1 * 1110px / 2), 0);
+    animation: slideInDownForCt 0.5s;
   }
   &[data-team="T"]{
-    right: 405px;
+    transform: translate(calc(1110px / 2 - 480px), 0);
+    animation: slideInDownForT 0.5s;
   }
 }
 

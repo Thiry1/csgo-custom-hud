@@ -216,8 +216,14 @@ export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
                     <div className={classNames.healthArmor} data-team={this.props.team}>
                         <img src={MiscIconResolver.resolve("health")} className={classNames.healthIcon} />
                         <span className={classNames.health}>{this.props.health}</span>
-                        <img src={ArmorIconResolver.resolve({ hasHelmet: this.props.hasHelmet, armor: this.props.armor })}
-                            className={classNames.armorIcon} />
+                        <img
+                            src={ArmorIconResolver.resolve({
+                                hasHelmet: this.props.hasHelmet,
+                                armor: this.props.armor,
+                                forceShowArmor: true,
+                            })}
+                            className={classNames.armorIcon}
+                        />
                         <span className={classNames.armor}>{this.props.armor}</span>
                     </div>
                     <div className={classNames.grenadesInfo}>
