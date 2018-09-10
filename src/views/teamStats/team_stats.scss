@@ -1,18 +1,18 @@
 @import "../theme/color.scss";
 .team-stats {
   composes: base from "../theme/common.scss";
-  width: 410px;
-  height: 67 * 5px + 85px;
+  width: 465px;
+  height: 67 * 5px;
   position: fixed;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   &[data-team="T"] {
-    bottom: 0;
-    right: 0;
+    bottom: 290px;
+    right: 10px;
   }
   &[data-team="CT"] {
-    bottom: 0;
-    left: 0;
+    bottom: 290px;
+    left: 10px;
   }
 }

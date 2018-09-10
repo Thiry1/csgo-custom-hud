@@ -1,11 +1,11 @@
 export namespace ArmorIconResolver {
-    export const resolve = (info: { hasHelmet: boolean, armor: number }): string | null => {
+    export const resolve = (info: { hasHelmet: boolean, armor: number, forceShowArmor?: boolean }): string | null => {
         if (info.hasHelmet && info.armor > 0) {
             return require("../resources/armors/helmet.png");
         } else if (info.armor > 0) {
             return require("../resources/armors/armor.png");
         } else {
-            return null;
+            return info.forceShowArmor ? require("../resources/armors/armor.png") : null;
         }
     };
 }

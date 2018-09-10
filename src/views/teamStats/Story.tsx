@@ -4,7 +4,8 @@ import { props as kdaProps } from "../kda/Story";
 import { GameStateIntegration } from "../../dataTypes";
 import { TeamStats, TeamStatsProps } from "./TeamStats";
 import { props as createTeamMoneyProps } from "../teamMoney/Story";
-const playerProps = (team: GameStateIntegration.Team, observerSlot: number) => ({
+import { PlayerProps } from "../player/Player";
+const playerProps = (team: GameStateIntegration.Team, observerSlot: number, isSpectatingByObserver: boolean): PlayerProps => ({
     name: "Foo",
     money: 16000,
     health: 100,
@@ -32,19 +33,20 @@ const playerProps = (team: GameStateIntegration.Team, observerSlot: number) => (
     },
     team,
     observerSlot,
+    isSpectatingByObserver,
 });
 export const props = (team: GameStateIntegration.Team, initialObserverSlot: number): TeamStatsProps => {
     let slot = initialObserverSlot;
     return {
         players: [
-            playerProps(team, slot),
-            playerProps(team, ++slot),
-            playerProps(team, ++slot),
-            playerProps(team, ++slot),
-            playerProps(team, ++slot === 10 ? 0 : slot),
+            playerProps(team, slot, true),
+            playerProps(team, ++slot, false),
+            playerProps(team, ++slot, false),
+            playerProps(team, ++slot, false),
+            playerProps(team, ++slot === 10 ? 0 : slot, false),
         ],
         team,
-        teamMoney: createTeamMoneyProps(team),
+        teamMoney: createTeamMoneyProps(team, true),
     };
 };
 

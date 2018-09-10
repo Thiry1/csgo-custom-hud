@@ -1,46 +1,50 @@
-@keyframes scaling {
+// 2つの keyframe を @function に置き換えられそう
+@keyframes slideInDownForCt {
   from {
-    transform: translate(-50%, 0) scale(0);
+    transform: translate(calc(-1 * 1110px / 2), -100%);
+    visibility: visible;
   }
   to {
-    transform: translate(-50%, 0) scale(1);
+    transform: translate(calc(-1 * 1110px / 2), 0);
+  }
+}
+@keyframes slideInDownForT {
+  from {
+    transform: translate(calc(1110px / 2 - 480px), -100%);
+    visibility: visible;
+  }
+  to {
+    transform: translate(calc(1110px / 2 - 480px), 0);
   }
 }
 .winner-team-announce {
   composes: base from "../theme/common.scss";
-  position: absolute;
-  width: 1050px;
-  top: 100px;
-  left: 50%;
-  height: 57px;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  width: 480px;
+  height: 45px;
+  line-height: 45px;
+  background: rgba(0, 0, 0, 0.55);
   font-size: 36px;
+  font-weight: 600;
   text-align: center;
-  animation: scaling 1s;
-  transform: translate(-50%, 0) scale(1);
-}
-
-.team-name {
-  font-weight: bold;
-  padding-right: 10px;
-  display: inline-block;
-  max-width: 400px;
-  height: 57px;
-  text-align: right;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  word-break: break-all;
-  &[data-team="CT"] {
-    color: #73afd6;
+  position: fixed;
+  top: 10 + 70px;
+  left: 50%;
+  &[data-team="CT"]{
+    transform: translate(calc(-1 * 1110px / 2), 0);
+    animation: slideInDownForCt 0.5s;
   }
-  &[data-team="T"] {
-    color: #f7bf16;
+  &[data-team="T"]{
+    transform: translate(calc(1110px / 2 - 480px), 0);
+    animation: slideInDownForT 0.5s;
   }
 }
 
 .label {
-  width: 228px;
-  height: 57px;
-  display: inline-block;
   overflow: hidden;
+  &[data-team="CT"]{
+    color: #4BA5D4;
+  }
+  &[data-team="T"]{
+    color: #C18B32;
+  }
 }

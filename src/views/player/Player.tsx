@@ -100,6 +100,10 @@ export interface PlayerProps {
      * observer slot.
      */
     observerSlot: number;
+    /**
+     * 観戦中か.
+     */
+    isSpectatingByObserver: boolean;
 }
 const createHighExplosiveAmountInfo = (props: PlayerProps): JSX.Element => {
     if (props.weapon.highExplosiveAmount === 0) {
@@ -275,12 +279,12 @@ const createC4Info = (props: PlayerProps): JSX.Element => {
     );
 };
 const createHealthBar = (props: PlayerProps): JSX.Element => {
-    const direction = props.team === Team.CT ? "-" : "";
+    const direction = props.team === Team.CT ? `0px ${100 - props.health}% 0px 0px` : `0px 0px 0px ${100 - props.health}%`;
     return (
         <span
             className={classNames.healthBar}
             data-team={props.team}
-            style={{ transform: `translate(${direction}${100 - props.health}%, 0)` }} // TODO: animation
+            style={{ clipPath: `inset(${direction})` }} // TODO: animation
         />
     );
 };
@@ -294,6 +298,7 @@ export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps
             className={classNames.player}
             data-is-alive={props.health !== 0}
             data-team={props.team}
+            data-is-spectating-by-observer={props.isSpectatingByObserver}
         >
             <div className={classNames.wrapper}>
                 <div className={classNames.mainInfo}>

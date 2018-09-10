@@ -25,7 +25,7 @@ export class RoundCounter extends BaseComponent<RoundCounterProps, {}> {
     render() {
         return (
             <div className={this.props.className || classNames.roundCounter}>
-                <span className={classNames.prefix}>Round</span>
+                <span className={classNames.prefix}>R</span>
                 <span className={classNames.currentRound}>{this.props.currentRound}</span>
                 <span className={classNames.separator}>/</span>
                 <span className={classNames.maxRound}>{this.props.maxRound}</span>
