@@ -1,10 +1,13 @@
 import * as React from "react";
 import { Kda, KdaProps } from "../kda/Kda";
 import { GameStateIntegration } from "../../dataTypes";
-import Team = GameStateIntegration.Team;
 import { WeaponIconResolver } from "../../util/weaponIconResolver";
 import { ArmorIconResolver } from "../../util/armorIconResolver";
 import { MiscIconResolver } from "../../util/miscIconResolver";
+import { SlotSide, SlotSideResolver } from "../../util/slotSideResolver";
+import { BaseComponent } from "../util/baseComponent";
+import Team = GameStateIntegration.Team;
+
 const classNames = require("./player.scss");
 export interface PlayerProps {
     /**
@@ -105,229 +108,263 @@ export interface PlayerProps {
      */
     isSpectatingByObserver: boolean;
 }
-const createHighExplosiveAmountInfo = (props: PlayerProps): JSX.Element => {
-    if (props.weapon.highExplosiveAmount === 0) {
-        return null;
-    }
-    return (
-        <img
-            src={WeaponIconResolver.resolve("hegrenade")}
-            data-active={"weapon_hegrenade" === props.weapon.activeWeapon}
-        />
-    );
-};
-const createSmokeAmountInfo = (props: PlayerProps): JSX.Element => {
-    if (props.weapon.smokeAmount === 0) {
-        return null;
-    }
-    return (
-        <img
-            src={WeaponIconResolver.resolve("smokegrenade")}
-            data-active={"weapon_smokegrenade" === props.weapon.activeWeapon}
-        />
-    );
-};
-const createIncGrenadeAmountAmountInfo = (props: PlayerProps): JSX.Element => {
-    if (props.weapon.incGrenadeAmount === 0) {
-        return null;
-    }
-    return (
-        <img
-            src={WeaponIconResolver.resolve("incgrenade")}
-            data-active={"weapon_incgrenade" === props.weapon.activeWeapon}
-        />
-    );
-};
-const createMolotovAmountInfo = (props: PlayerProps): JSX.Element => {
-    if (props.weapon.molotovAmount === 0) {
-        return null;
-    }
-    return (
-        <img
-            src={WeaponIconResolver.resolve("molotov")}
-            data-active={"weapon_molotov" === props.weapon.activeWeapon}
-        />
-    );
-};
-const createDecoyAmountInfo = (props: PlayerProps): JSX.Element => {
-    if (props.weapon.decoyAmount === 0) {
-        return null;
-    }
-    return (
-        <img
-            src={WeaponIconResolver.resolve("decoy")}
-            data-active={"weapon_decoy" === props.weapon.activeWeapon}
-        />
-    );
-};
-const createFlashBangAmountInfo = (props: PlayerProps): JSX.Element[] => {
-    if (props.weapon.flashBangAmount === 0) {
-        return null;
-    }
-    return [...Array(props.weapon.flashBangAmount).keys()].map(key => (
-        <img
-            src={WeaponIconResolver.resolve("flashbang")}
-            data-active={"weapon_flashbang" === props.weapon.activeWeapon}
-        />
-    ));
-};
-const createArmorInfo = (props: PlayerProps): JSX.Element => {
-    const src = ArmorIconResolver.resolve({ hasHelmet: props.hasHelmet, armor: props.armor });
-    if (!src) {
-        return <span className={classNames.armor} data-team={props.team} />;
-    }
-    return (
-        <span className={classNames.armor} data-team={props.team}>
+
+export class Player extends BaseComponent<PlayerProps, {}> {
+    createHighExplosiveAmountInfo = (): JSX.Element => {
+        if (this.props.weapon.highExplosiveAmount === 0) {
+            return null;
+        }
+        return (
             <img
-                className={classNames.armorIcon}
+                src={WeaponIconResolver.resolve("hegrenade")}
+                data-active={"weapon_hegrenade" === this.props.weapon.activeWeapon}
+            />
+        );
+    };
+    createSmokeAmountInfo = (): JSX.Element => {
+        if (this.props.weapon.smokeAmount === 0) {
+            return null;
+        }
+        return (
+            <img
+                src={WeaponIconResolver.resolve("smokegrenade")}
+                data-active={"weapon_smokegrenade" === this.props.weapon.activeWeapon}
+            />
+        );
+    };
+    createIncGrenadeAmountAmountInfo = (): JSX.Element => {
+        if (this.props.weapon.incGrenadeAmount === 0) {
+            return null;
+        }
+        return (
+            <img
+                src={WeaponIconResolver.resolve("incgrenade")}
+                data-active={"weapon_incgrenade" === this.props.weapon.activeWeapon}
+            />
+        );
+    };
+    createMolotovAmountInfo = (): JSX.Element => {
+        if (this.props.weapon.molotovAmount === 0) {
+            return null;
+        }
+        return (
+            <img
+                src={WeaponIconResolver.resolve("molotov")}
+                data-active={"weapon_molotov" === this.props.weapon.activeWeapon}
+            />
+        );
+    };
+    createDecoyAmountInfo = (): JSX.Element => {
+        if (this.props.weapon.decoyAmount === 0) {
+            return null;
+        }
+        return (
+            <img
+                src={WeaponIconResolver.resolve("decoy")}
+                data-active={"weapon_decoy" === this.props.weapon.activeWeapon}
+            />
+        );
+    };
+    createFlashBangAmountInfo = (): JSX.Element[] => {
+        if (this.props.weapon.flashBangAmount === 0) {
+            return null;
+        }
+        return [...Array(this.props.weapon.flashBangAmount).keys()].map(key => (
+            <img
+                src={WeaponIconResolver.resolve("flashbang")}
+                data-active={"weapon_flashbang" === this.props.weapon.activeWeapon}
+            />
+        ));
+    };
+    createArmorInfo = (): JSX.Element => {
+        const src = ArmorIconResolver.resolve({ hasHelmet: this.props.hasHelmet, armor: this.props.armor });
+        if (!src) {
+            return (
+                <span
+                    className={classNames.armor}
+                    data-team={this.props.team}
+                    data-slot-side={SlotSideResolver.resolve(this.props.observerSlot)}
+                />
+            );
+        }
+        return (
+            <span
+                className={classNames.armor}
+                data-team={this.props.team}
+                data-slot-side={SlotSideResolver.resolve(this.props.observerSlot)}
+            >
+                <img
+                    className={classNames.armorIcon}
+                    src={src}
+                    data-team={this.props.team}
+                    data-slot-side={SlotSideResolver.resolve(this.props.observerSlot)}
+                />
+            </span>
+        );
+    };
+    createPrimaryWeaponInfo = (): JSX.Element => {
+        if (!this.props.weapon.primary) {
+            return null;
+        }
+        const src = WeaponIconResolver.resolve(this.props.weapon.primary);
+        if (!src) {
+            return null;
+        }
+        return (
+            <span
+                className={classNames.primaryWeapon}
+                data-team={this.props.team}
+            >
+                <img
+                    className={classNames.primaryWeaponIcon}
+                    src={WeaponIconResolver.resolve(this.props.weapon.primary)}
+                    alt={this.props.weapon.primary}
+                    data-active={this.props.weapon.primary === this.props.weapon.activeWeapon}
+                    data-slot-side={SlotSideResolver.resolve(this.props.observerSlot)}
+                    data-team={this.props.team}
+                />
+            </span>
+        );
+    };
+    createSecondaryWeaponInfo = (): JSX.Element => {
+        if (!this.props.weapon.secondary) {
+            return null;
+        }
+        const src = WeaponIconResolver.resolve(this.props.weapon.secondary);
+        if (!src) {
+            return null;
+        }
+        return (
+            <img
+                className={classNames.secondaryWeaponIcon}
                 src={src}
-                data-team={props.team}
+                alt={this.props.weapon.secondary}
+                data-active={this.props.weapon.secondary === this.props.weapon.activeWeapon}
             />
-        </span>
-    );
-};
-const createPrimaryWeaponInfo = (props: PlayerProps): JSX.Element => {
-    if (!props.weapon.primary) {
-        return null;
-    }
-    const src = WeaponIconResolver.resolve(props.weapon.primary);
-    if (!src) {
-        return null;
-    }
-    return (
-        <span
-            className={classNames.primaryWeapon}
-            data-team={props.team}
-        >
+        );
+    };
+    createRoundKillCountInfo = (): JSX.Element[] => {
+        if (!this.props.roundKillCount) {
+            return null;
+        }
+        return [
             <img
-                className={classNames.primaryWeaponIcon}
-                src={WeaponIconResolver.resolve(props.weapon.primary)}
-                alt={props.weapon.primary}
-                data-active={props.weapon.primary === props.weapon.activeWeapon}
-                data-team={props.team}
+                className={classNames.killIcon}
+                src={MiscIconResolver.resolve("death")}
+                data-team={this.props.team}
+                data-slot-side={SlotSideResolver.resolve(this.props.observerSlot)}
+            />,
+            <span
+                className={classNames.killCount}
+                data-team={this.props.team}
+                data-slot-side={SlotSideResolver.resolve(this.props.observerSlot)}
+            >
+                {this.props.roundKillCount}
+            </span>,
+        ];
+    };
+    createItemInfo = (): JSX.Element => {
+        return (
+            <div
+                className={classNames.itemInfo} data-team={this.props.team}
+                data-slot-side={SlotSideResolver.resolve(this.props.observerSlot)}
+            >
+                {this.createSecondaryWeaponInfo()}
+                {this.createRoundKillCountInfo()}
+                {this.createHighExplosiveAmountInfo()}
+                {this.createSmokeAmountInfo()}
+                {this.createFlashBangAmountInfo()}
+                {this.createMolotovAmountInfo()}
+                {this.createIncGrenadeAmountAmountInfo()}
+                {this.createDecoyAmountInfo()}
+            </div>
+        );
+    };
+    createDefuseKitInfo = (): JSX.Element => {
+        if (!this.props.hasDefuseKit) {
+            return null;
+        }
+        return (
+            <span className={classNames.defuseKit}>
+                <img src={MiscIconResolver.resolve("defuseKit")} />
+            </span>
+        );
+    };
+    createC4Info = (): JSX.Element => {
+        if (!this.props.weapon.hasC4) {
+            return null;
+        }
+        return (
+            <span className={classNames.c4}>
+                <img src={MiscIconResolver.resolve("c4")} />
+            </span>
+        );
+    };
+    createHealthBar = (): JSX.Element => {
+        const clip = SlotSideResolver.resolve(this.props.observerSlot) === SlotSide.Left
+            ? `0px ${100 - this.props.health}% 0px 0px`
+            : `0px 0px 0px ${100 - this.props.health}%`;
+        return (
+            <span
+                className={classNames.healthBar}
+                data-team={this.props.team}
+                style={{ clipPath: `inset(${clip})` }} // TODO: animation
             />
-        </span>
-    );
-};
-const createSecondaryWeaponInfo = (props: PlayerProps): JSX.Element => {
-    if (!props.weapon.secondary) {
-        return null;
-    }
-    const src = WeaponIconResolver.resolve(props.weapon.secondary);
-    if (!src) {
-        return null;
-    }
-    return (
-        <img
-            className={classNames.secondaryWeaponIcon}
-            src={src}
-            alt={props.weapon.secondary}
-            data-active={props.weapon.secondary === props.weapon.activeWeapon}
-        />
-    );
-};
-const createRoundKillCountInfo = (props: PlayerProps): JSX.Element[] => {
-    if (!props.roundKillCount) {
-        return null;
-    }
-    return [
-        <img
-            className={classNames.killIcon}
-            src={MiscIconResolver.resolve("death")}
-            data-team={props.team}
-        />,
-        <span
-            className={classNames.killCount}
-            data-team={props.team}
-        >
-            {props.roundKillCount}
-        </span>,
-    ];
-};
-const createItemInfo = (props: PlayerProps): JSX.Element => {
-    return (
-        <div className={classNames.itemInfo} data-team={props.team}>
-            {createSecondaryWeaponInfo(props)}
-            {createRoundKillCountInfo(props)}
-            {createHighExplosiveAmountInfo(props)}
-            {createSmokeAmountInfo(props)}
-            {createFlashBangAmountInfo(props)}
-            {createMolotovAmountInfo(props)}
-            {createIncGrenadeAmountAmountInfo(props)}
-            {createDecoyAmountInfo(props)}
-        </div>
-    );
-};
-const createDefuseKitInfo = (props: PlayerProps): JSX.Element => {
-    if (!props.hasDefuseKit) {
-        return null;
-    }
-    return (
-        <span className={classNames.defuseKit}>
-            <img src={MiscIconResolver.resolve("defuseKit")} />
-        </span>
-    );
-};
-const createC4Info = (props: PlayerProps): JSX.Element => {
-    if (!props.weapon.hasC4) {
-        return null;
-    }
-    return (
-        <span className={classNames.c4}>
-            <img src={MiscIconResolver.resolve("c4")} />
-        </span>
-    );
-};
-const createHealthBar = (props: PlayerProps): JSX.Element => {
-    const direction = props.team === Team.CT ? `0px ${100 - props.health}% 0px 0px` : `0px 0px 0px ${100 - props.health}%`;
-    return (
-        <span
-            className={classNames.healthBar}
-            data-team={props.team}
-            style={{ clipPath: `inset(${direction})` }} // TODO: animation
-        />
-    );
-};
-/**
- * プレイヤーコンポーネント
- * @param  {PlayerProps} props
- */
-export const Player: React.StatelessComponent<PlayerProps> = (props: PlayerProps): JSX.Element => {
-    return (
-        <div
-            className={classNames.player}
-            data-is-alive={props.health !== 0}
-            data-team={props.team}
-            data-is-spectating-by-observer={props.isSpectatingByObserver}
-        >
-            <div className={classNames.wrapper}>
-                <div className={classNames.mainInfo}>
-                    {createHealthBar(props)}
-                    <span className={classNames.health} data-team={props.team}>{props.health}</span>
-                    <span
-                        className={classNames.name}
-                        data-team={props.team}
-                        data-is-alive={props.health !== 0}
-                    >
-                        {props.name}
-                    </span>
-                    {createPrimaryWeaponInfo(props)}
+        );
+    };
+    render() {
+        const slotSide = SlotSideResolver.resolve(this.props.observerSlot);
+        return (
+            <div
+                className={classNames.player}
+                data-is-alive={this.props.health !== 0}
+                data-team={this.props.team}
+                data-slot-side={slotSide}
+                data-is-spectating-by-observer={this.props.isSpectatingByObserver}
+            >
+                <div className={classNames.wrapper}>
+                    <div className={classNames.mainInfo}>
+                        {this.createHealthBar()}
+                        <span
+                            className={classNames.health}
+                            data-team={this.props.team}
+                            data-slot-side={slotSide}
+                        >
+                            {this.props.health}
+                        </span>
+                        <span
+                            className={classNames.name}
+                            data-team={this.props.team}
+                            data-is-alive={this.props.health !== 0}
+                            data-slot-side={slotSide}
+                        >
+                            {this.props.name}
+                        </span>
+                        {this.createPrimaryWeaponInfo()}
+                    </div>
+                    <div className={classNames.subInfo}>
+                        <span
+                            className={classNames.observerSlot}
+                            data-team={this.props.team}
+                            data-slot-side={slotSide}>
+                            {this.props.observerSlot}
+                        </span>
+                        {this.createArmorInfo()}
+                        <span className={classNames.money} data-team={this.props.team} data-slot-side={slotSide}>
+                            ${this.props.money}
+                        </span>
+                        {this.createDefuseKitInfo()}
+                        {this.createC4Info()}
+                        {this.createItemInfo()}
+                    </div>
                 </div>
-                <div className={classNames.subInfo}>
-                    <span className={classNames.observerSlot} data-team={props.team}>{props.observerSlot}</span>
-                    {createArmorInfo(props)}
-                    <span className={classNames.money} data-team={props.team}>${props.money}</span>
-                    {createDefuseKitInfo(props)}
-                    {createC4Info(props)}
-                    {createItemInfo(props)}
+                <div className={classNames.kdaWrapper} data-show-kda={this.props.showKda}>
+                    <Kda {...this.props.kda} className={classNames.kda} />
                 </div>
             </div>
-            <div className={classNames.kdaWrapper} data-show-kda={props.showKda}>
-                <Kda {...props.kda} className={classNames.kda} />
-            </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 export {
     Player as Component,

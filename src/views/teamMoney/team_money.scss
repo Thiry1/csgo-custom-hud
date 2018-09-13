@@ -4,10 +4,10 @@ $width: 465px;
   composes: base from "../theme/common.scss";
   height: 85px;
   width: $width;
-  &[data-team="T"] {
+  &[data-slot-side="right"] {
     background: linear-gradient(to left, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.5) $width, rgba(0, 0, 0, 0.0) $width);
   }
-  &[data-team="CT"] {
+  &[data-slot-side="left"] {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.5) $width, rgba(0, 0, 0, 0.0) $width);
   }
   &[data-show-team-money=true] {
@@ -28,11 +28,11 @@ $width: 465px;
 .team-icon {
   filter: invert(100%);
   max-height: 70%;
-  &[data-team="T"] {
+  &[data-slot-side="right"] {
     float: right;
     margin: 10px 10px 0 0;
   }
-  &[data-team="CT"] {
+  &[data-slot-side="left"] {
     float:left;
     margin: 10px 0 0 10px;
   }
@@ -42,11 +42,11 @@ $width: 465px;
   width: 170px;
   color: #add28b;
   text-shadow: 0 0 8px #000;
-  &[data-team="T"] {
+  &[data-slot-side="right"] {
     float: right;
     text-align: right;
   }
-  &[data-team="CT"] {
+  &[data-slot-side="left"] {
     float:left;
     text-align: left;
   }
@@ -70,10 +70,10 @@ $width: 465px;
   filter: invert(100%);
   max-height: 70%;
   margin: 10px 0 0 0;
-  &[data-team="T"] {
+  &[data-slot-side="right"] {
     float: right;
   }
-  &[data-team="CT"] {
+  &[data-slot-side="left"] {
     float: left;
   }
 }
@@ -82,11 +82,11 @@ $width: 465px;
   width: 130px;
   color: #f7bf16;
   text-shadow: 0 0 8px #000;
-  &[data-team="T"] {
+  &[data-slot-side="right"] {
     float: right;
     text-align: right;
   }
-  &[data-team="CT"] {
+  &[data-slot-side="left"] {
     float: left;
     text-align: left;
   }

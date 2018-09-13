@@ -8,6 +8,7 @@ import { props as createSpectatingPlayerProps } from "../spectatingPlayer/Story"
 import { props as topBarProps } from "../topBar/Story";
 import { props as createWinnerTeamAnnounceProps } from "../winnerTeamAnnounce/Story";
 import CurrentPhase = GameStateIntegration.CurrentPhase;
+import { SlotSide } from "../../util/slotSideResolver";
 const createProps = (showTeamMoney: boolean): TemplateProps => ({
     visible: true,
     players: [
@@ -21,6 +22,10 @@ const createProps = (showTeamMoney: boolean): TemplateProps => ({
     spectatingPlayer: createSpectatingPlayerProps(GameStateIntegration.Team.CT, true),
     topBar: topBarProps(CurrentPhase.live, 91, 4),
     winnerTeamAnnounce: createWinnerTeamAnnounceProps(GameStateIntegration.Team.CT),
+    slotSide: {
+        t: SlotSide.Right,
+        ct: SlotSide.Left,
+    },
 });
 storiesOf("テンプレート", module)
     .add("テンプレートを表示できる", () => {

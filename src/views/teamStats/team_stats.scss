@@ -7,11 +7,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  &[data-team="T"] {
+  &[data-slot-side="right"] {
     bottom: 290px;
     right: 10px;
   }
-  &[data-team="CT"] {
+  &[data-slot-side="left"] {
     bottom: 290px;
     left: 10px;
   }

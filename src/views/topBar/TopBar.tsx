@@ -4,8 +4,10 @@ import { TeamLogoResolver } from "../../util/teamLogoResolver";
 import { RoundCounter, RoundCounterProps } from "../roundCounter/RoundCounter";
 import { Timer, TimerProps } from "../timer/Timer";
 import { GameStateIntegration } from "../../dataTypes";
-import CurrentPhase = GameStateIntegration.CurrentPhase;
 import { PercentageTimer, PercentageTimerProps } from "../percentageTimer/PercentageTimer";
+import { SlotSide } from "../../util/slotSideResolver";
+import CurrentPhase = GameStateIntegration.CurrentPhase;
+
 const classNames = require("./top_bar.scss");
 export interface TeamInfo {
     /**
@@ -49,6 +51,10 @@ export interface TopBarProps {
      * C4の解除カウントダウンタイマー.
      */
     defuseTimer: PercentageTimerProps;
+    slotSide: {
+        ct: SlotSide,
+        t: SlotSide,
+    };
 }
 /**
  * TopBarコンポーネント
@@ -112,30 +118,37 @@ export class TopBar extends BaseComponent<TopBarProps, {}> {
         );
     };
 
+    createTeamInfo = (team: GameStateIntegration.Team, teamInfo: TeamInfo, slotSide: SlotSide): JSX.Element => {
+        return (
+            <div className={classNames.teamInfo} data-team={team} data-slot-side={slotSide}>
+                <p className={classNames.teamScore} data-team={team} data-slot-side={slotSide}>{teamInfo.score}</p>
+                <div className={classNames.teamLogo} data-team={team} data-slot-side={slotSide}>
+                    {teamInfo.logo &&
+                        <img src={TeamLogoResolver.resolve(teamInfo.logo)} />}
+                </div>
+                <p className={classNames.teamName} data-team={team} data-slot-side={slotSide}>{teamInfo.name}</p>
+            </div>
+        );
+    };
+
     render() {
         if (isNaN(this.props.teamInfo.ct.score)) {
             return null;
         }
+        const ctTeamInfo = this.createTeamInfo(GameStateIntegration.Team.CT, this.props.teamInfo.ct, this.props.slotSide.ct);
+        const tTeamInfo = this.createTeamInfo(GameStateIntegration.Team.T, this.props.teamInfo.t, this.props.slotSide.t);
         return (
             <div className={classNames.topBar}>
                 <div className={classNames.matchInfo}>
-                    <div className={classNames.teamInfo} data-team="CT">
-                        <p className={classNames.teamScore} data-team="CT">{this.props.teamInfo.ct.score}</p>
-                        <div className={classNames.teamLogo} data-team="CT">
-                            {this.props.teamInfo.ct.logo &&
-                                <img src={TeamLogoResolver.resolve(this.props.teamInfo.ct.logo)} />}
-                        </div>
-                        <p className={classNames.teamName} data-team="CT">{this.props.teamInfo.ct.name}</p>
-                    </div>
+                    {this.props.slotSide.ct === SlotSide.Left
+                        ? ctTeamInfo
+                        : tTeamInfo
+                    }
                     {this.createRoundInfo()}
-                    <div className={classNames.teamInfo} data-team="T">
-                        <p className={classNames.teamScore} data-team="T">{this.props.teamInfo.t.score}</p>
-                        <div className={classNames.teamLogo} data-team="T">
-                            {this.props.teamInfo.t.logo &&
-                                <img src={TeamLogoResolver.resolve(this.props.teamInfo.t.logo)} />}
-                        </div>
-                        <p className={classNames.teamName} data-team="T">{this.props.teamInfo.t.name}</p>
-                    </div>
+                    {this.props.slotSide.ct === SlotSide.Right
+                        ? ctTeamInfo
+                        : tTeamInfo
+                    }
                 </div>
             </div>
         );
