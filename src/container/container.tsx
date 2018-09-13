@@ -15,6 +15,7 @@ import { BlinkingC4Icon } from "../views/blinkingC4Icon/BlinkingC4Icon";
 import { ProgressBarAxis, ProgressBarDirection } from "../views/percentageTimer/PercentageTimer";
 import { DefuseType } from "../redux/modules/defuseType/defuseType";
 import { RoundWinnerState } from "../redux/modules/roundWinner/roundWinner";
+import { SlotSideState } from "../redux/modules/slotSide/slotSide";
 
 export interface ContainerProps {
 
@@ -29,6 +30,7 @@ interface PropsFromState {
     defuseType: DefuseType;
     roundWinner: RoundWinnerState;
     isHudVisible: boolean;
+    slotSide: SlotSideState;
 }
 interface Dispatcher {
 
@@ -78,10 +80,12 @@ class ContainerPage extends React.Component<Props, ContainerState> {
             }),
             teamMoney: {
                 ct: {
+                    slotSide: this.props.slotSide.ct,
                     team: GameStateIntegration.Team.CT,
                     ...this.props.teamMoney.ct,
                 },
                 t: {
+                    slotSide: this.props.slotSide.t,
                     team: GameStateIntegration.Team.T,
                     ...this.props.teamMoney.t,
                 },
@@ -153,11 +157,16 @@ class ContainerPage extends React.Component<Props, ContainerState> {
                     time: this.props.roundPhase.time,
                 },
                 currentPhase: this.props.roundPhase.phase,
+                slotSide: this.props.slotSide,
             },
             winnerTeamAnnounce: this.props.roundWinner.team !== null ? {
                 team: this.props.roundWinner.team,
                 teamName: this.props.roundWinner.teamName,
+                slotSide: this.props.roundWinner.team === GameStateIntegration.Team.CT
+                    ? this.props.slotSide.ct
+                    : this.props.slotSide.t,
             } : null,
+            slotSide: this.props.slotSide,
         };
     }
     render() {
@@ -179,6 +188,7 @@ const mapStateToProps = (state: State): PropsFromState => {
         defuseType: state.defuseType.defuseType,
         roundWinner: state.roundWinner,
         isHudVisible: state.hudVisibility.visible,
+        slotSide: state.slotSide,
     };
 };
 export const Container = compose(

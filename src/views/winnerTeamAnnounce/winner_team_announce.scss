@@ -1,5 +1,5 @@
 // 2つの keyframe を @function に置き換えられそう
-@keyframes slideInDownForCt {
+@keyframes slideInDownForLeftSlot {
   from {
     transform: translate(calc(-1 * 1110px / 2), -100%);
     visibility: visible;
@@ -8,7 +8,7 @@
     transform: translate(calc(-1 * 1110px / 2), 0);
   }
 }
-@keyframes slideInDownForT {
+@keyframes slideInDownForRightSlot {
   from {
     transform: translate(calc(1110px / 2 - 480px), -100%);
     visibility: visible;
@@ -29,22 +29,22 @@
   position: fixed;
   top: 10 + 70px;
   left: 50%;
-  &[data-team="CT"]{
+  &[data-slot-side="left"] {
     transform: translate(calc(-1 * 1110px / 2), 0);
-    animation: slideInDownForCt 0.5s;
+    animation: slideInDownForLeftSlot 0.5s;
   }
-  &[data-team="T"]{
+  &[data-slot-side="right"] {
     transform: translate(calc(1110px / 2 - 480px), 0);
-    animation: slideInDownForT 0.5s;
+    animation: slideInDownForRightSlot 0.5s;
   }
 }
 
 .label {
   overflow: hidden;
-  &[data-team="CT"]{
+  &[data-team="CT"] {
     color: #4BA5D4;
   }
-  &[data-team="T"]{
+  &[data-team="T"] {
     color: #C18B32;
   }
 }

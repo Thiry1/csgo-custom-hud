@@ -7,6 +7,8 @@ import CurrentPhase = GameStateIntegration.CurrentPhase;
 import { BlinkingC4Icon } from "../blinkingC4Icon/BlinkingC4Icon";
 import { BaseComponent } from "../util/baseComponent";
 import { ProgressBarAxis, ProgressBarDirection } from "../percentageTimer/PercentageTimer";
+import { select, withKnobs } from "@storybook/addon-knobs";
+import { SlotSide } from "../../util/slotSideResolver";
 
 export const props = (currentPhase: CurrentPhase, roundTimer: number, defuseTimer: number): TopBarProps => ({
     teamInfo: {
@@ -48,6 +50,10 @@ export const props = (currentPhase: CurrentPhase, roundTimer: number, defuseTime
         },
     },
     roundCounter: roundCounterProps,
+    slotSide: {
+        ct: select<SlotSide>("ct-slotSide", [SlotSide.Left, SlotSide.Right], SlotSide.Left),
+        t: select<SlotSide>("t-slotSide", [SlotSide.Left, SlotSide.Right], SlotSide.Right),
+    },
 });
 interface Props {
     phase: CurrentPhase;
@@ -75,6 +81,7 @@ class TopBarWrapper extends BaseComponent<Props, State> {
 }
 
 storiesOf("TopBar", module)
+    .addDecorator(withKnobs)
     .add("ラウンドがliveの時のTopBar情報を表示できる", () => {
         return <TopBarWrapper phase={CurrentPhase.live} />;
     })

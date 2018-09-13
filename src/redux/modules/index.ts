@@ -11,6 +11,7 @@ import * as teamInfo from "./teamInfo/teamInfo";
 import * as defuseType from "./defuseType/defuseType";
 import * as roundWinner from "./roundWinner/roundWinner";
 import * as hudVisibility from "./hudVisibility/hudVisibility";
+import * as slotSide from "./slotSide/slotSide";
 
 export interface State {
     gsi: gsi.GsiState;
@@ -23,6 +24,7 @@ export interface State {
     defuseType: defuseType.DefuseTypeState;
     roundWinner: roundWinner.RoundWinnerState;
     hudVisibility: hudVisibility.HudVisibilityState;
+    slotSide: slotSide.SlotSideState;
 }
 
 export const reducer = combineReducers({
@@ -37,6 +39,7 @@ export const reducer = combineReducers({
     defuseType: defuseType.reducer,
     roundWinner: roundWinner.reducer,
     hudVisibility: hudVisibility.reducer,
+    slotSide: slotSide.reducer,
 });
 
 export function* rootSaga(): SagaIterator {
@@ -50,5 +53,6 @@ export function* rootSaga(): SagaIterator {
         fork(defuseType.rootSaga),
         fork(roundWinner.rootSaga),
         fork(hudVisibility.rootSaga),
+        fork(slotSide.rootSaga),
     ]);
 }

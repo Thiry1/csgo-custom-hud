@@ -5,6 +5,8 @@ import { GameStateIntegration } from "../../dataTypes";
 import { TeamStats, TeamStatsProps } from "./TeamStats";
 import { props as createTeamMoneyProps } from "../teamMoney/Story";
 import { PlayerProps } from "../player/Player";
+import { select, withKnobs } from "@storybook/addon-knobs";
+import { SlotSide } from "../../util/slotSideResolver";
 const playerProps = (team: GameStateIntegration.Team, observerSlot: number, isSpectatingByObserver: boolean): PlayerProps => ({
     name: "Foo",
     money: 16000,
@@ -37,6 +39,7 @@ const playerProps = (team: GameStateIntegration.Team, observerSlot: number, isSp
 });
 export const props = (team: GameStateIntegration.Team, initialObserverSlot: number): TeamStatsProps => {
     let slot = initialObserverSlot;
+    const slotSide = select<SlotSide>("slotSide", [SlotSide.Left, SlotSide.Right], SlotSide.Left);
     return {
         players: [
             playerProps(team, slot, true),
@@ -47,10 +50,12 @@ export const props = (team: GameStateIntegration.Team, initialObserverSlot: numb
         ],
         team,
         teamMoney: createTeamMoneyProps(team, true),
+        slotSide,
     };
 };
 
 storiesOf("TeamStats", module)
+    .addDecorator(withKnobs)
     .add("CTのチーム毎のプレイヤー情報を表示できる", () => {
         return <TeamStats {...props(GameStateIntegration.Team.CT, 1)} />;
     })
