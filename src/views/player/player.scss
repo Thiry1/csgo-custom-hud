@@ -5,7 +5,7 @@
   height: 63px;
   margin-bottom: 6px;
   display: flex;
-  &[data-slot-side="left"] {
+  &[data-slot-side="right"] {
     flex-flow: row-reverse nowrap;
   }
   &[data-team="T"] {
@@ -131,7 +131,6 @@
   bottom: 0;
   left: 0;
   &[data-team="T"] {
-    //background: linear-gradient(90deg, #DA8A31, #7B5C2A);
     background: linear-gradient(90deg, #7B5C2A, #DA8A31);
   }
   &[data-team="CT"] {
