@@ -166,7 +166,7 @@ export function* runSetPlayersState() {
         return;
     }
     const players: Player[] = [];
-    for (let steamId of Object.keys(gsiPayload.allplayers)) {
+    for (const steamId of Object.keys(gsiPayload.allplayers)) {
         const player = gsiPayload.allplayers[steamId];
         players.push({
             steamId,
