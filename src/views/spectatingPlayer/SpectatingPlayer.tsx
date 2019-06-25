@@ -1,12 +1,14 @@
 import * as React from "react";
 import { GameStateIntegration } from "../../dataTypes";
-import Team = GameStateIntegration.Team;
 import { BaseComponent } from "../util/baseComponent";
 import { WeaponInfo } from "../../redux/modules/players/players";
 import { MiscIconResolver } from "../../util/miscIconResolver";
 import { ArmorIconResolver } from "../../util/armorIconResolver";
 import { WeaponIconResolver } from "../../util/weaponIconResolver";
 import { PlayerImageResolver } from "../../util/playerImageResolver";
+import Team = GameStateIntegration.Team;
+import WeaponType = GameStateIntegration.WeaponType;
+
 const classNames = require("./spectating_player.scss");
 export interface SpectatingPlayerProps {
     /**
@@ -153,9 +155,9 @@ const createFlashBangAmountInfo = (props: SpectatingPlayerProps): JSX.Element[] 
  */
 export class SpectatingPlayer extends BaseComponent<SpectatingPlayerProps, {}> {
     private createAmmoInfo = (): JSX.Element => {
-        if (this.props.activeWeapon.type === "Knife"
-            || this.props.activeWeapon.type === "C4"
-            || this.props.activeWeapon.type === "Grenade") {
+        if (this.props.activeWeapon.type === WeaponType.Knife
+            || this.props.activeWeapon.type === WeaponType.C4
+            || this.props.activeWeapon.type === WeaponType.Grenade) {
             // TODO: null返す.floatやめたい
             return <div className={classNames.ammo} data-team={this.props.team} />;
         }
