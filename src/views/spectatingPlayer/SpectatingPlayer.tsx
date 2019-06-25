@@ -127,7 +127,7 @@ const createMolotovAmountInfo = (props: SpectatingPlayerProps): JSX.Element => {
     );
 };
 const createDecoyAmountInfo = (props: SpectatingPlayerProps): JSX.Element => {
-    if (props.molotovAmount === 0) {
+    if (props.decoyAmount === 0) {
         return null;
     }
     return (
