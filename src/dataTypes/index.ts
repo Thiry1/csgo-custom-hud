@@ -54,6 +54,19 @@ export namespace GameStateIntegration {
         T = "T",
         CT = "CT",
     }
+
+    export enum WeaponType {
+        Knife = "Knife",
+        Rifle = "Rifle",
+        SniperRifle = "SniperRifle",
+        Grenade = "Grenade",
+        Pistol = "Pistol",
+        Shotgun = "Shotgun",
+        MachineGun = "Machine Gun",
+        SubmachineGun = "Submachine Gun",
+        C4 = "C4",
+    }
+
     export interface WeaponInfo {
         /**
          * 武器名.
@@ -68,7 +81,7 @@ export namespace GameStateIntegration {
         /**
          * 武器の種類.
          */
-        type: "Knife" | "Rifle" | "SniperRifle" | "Grenade" | "Pistol" | "Shotgun" | "Machine Gun" | "Submaachine Gun" | "C4";
+        type: WeaponType;
         /**
          * 現在装填されている弾の数.
          */
@@ -80,7 +93,7 @@ export namespace GameStateIntegration {
         /**
          * 装填されていない弾の数.
          */
-        ammo_reserve: number;
+        ammo_reserve?: number;
         /**
          * 武器の状態.
          * active = アクティブウェポン.

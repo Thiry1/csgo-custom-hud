@@ -5,17 +5,19 @@ import { GameStateIntegration, GameStateIntegrationPayload, SteamId } from "../.
 import { SagaIterator } from "redux-saga";
 import { State } from "../index";
 import { playerInfoList } from "../../../config/playerInfo";
+import WeaponType = GameStateIntegration.WeaponType;
+
 const humps = require("lodash-humps");
 
 export interface WeaponInfo {
     name: string;
-    type: "Knife" | "Rifle" | "SniperRifle" | "Grenade" | "Pistol" | "Shotgun" | "Machine Gun" | "Submachine Gun" | "C4" | string;
+    type: WeaponType;
     ammoClip: number;
     ammoClipMax: number;
     ammoReserve: number;
     state: string;
 }
-export interface Weapon {
+export interface Weapons {
     activeWeapon: WeaponInfo | null;
     primary: WeaponInfo | null;
     secondary: WeaponInfo | null;
@@ -44,7 +46,7 @@ export interface Player {
         equipValue: number;
         defusekit: boolean | null;
     };
-    weapons: Weapon;
+    weapons: Weapons;
     observerSlot: number;
 }
 
@@ -60,17 +62,19 @@ export const reducer = handleActions<PlayersState, any>({
         players: action.payload,
     }),
 }, initialState);
-const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo }): Weapon => {
-    const isPrimary = (weaponType: string): boolean => [
-        "Rifle",
-        "SniperRifle",
-        "Shotgun",
-        "Machine Gun",
-        "Submachine Gun",
-    ].indexOf(weaponType) !== -1;
-    const isSecondary = (weaponType: string): boolean => weaponType === "Pistol";
-    const isGrenade = (weaponType: string): boolean => weaponType === "Grenade";
-    const isC4 = (weaponType: string): boolean => weaponType === "C4";
+
+export const isPrimary = (weaponType: WeaponType): boolean => [
+    WeaponType.Rifle,
+    WeaponType.SniperRifle,
+    WeaponType.Shotgun,
+    WeaponType.MachineGun,
+    WeaponType.SubmachineGun,
+].indexOf(weaponType) !== -1;
+const isSecondary = (weaponType: string): boolean => weaponType === "Pistol";
+const isGrenade = (weaponType: string): boolean => weaponType === "Grenade";
+const isC4 = (weaponType: string): boolean => weaponType === "C4";
+
+export const parseWeapons = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo }): Weapons => {
     let activeWeapon: WeaponInfo = {
         name: null,
         ammoClip: 0,
@@ -102,7 +106,7 @@ const findWeapon = (weapons: { [slotId: string]: GameStateIntegration.WeaponInfo
     let incGrenadeAmount = 0;
     let decoyAmount = 0;
     let hasC4 = false;
-    for (let slot of Object.keys(weapons)) {
+    for (const slot of Object.keys(weapons)) {
         const weapon = weapons[slot];
         if (weapon.state === "active") {
             activeWeapon = humps(weapon);
@@ -172,7 +176,7 @@ export function* runSetPlayersState() {
             steamId,
             name: findPlayerName(steamId) || player.name,
             matchStats: player.match_stats,
-            weapons: findWeapon(player.weapons),
+            weapons: parseWeapons(player.weapons),
             state: humps(player.state),
             team: player.team,
             observerSlot: player.observer_slot,
