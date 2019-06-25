@@ -64,11 +64,11 @@ export namespace GameStateIntegration {
         /**
          * 分からん.
          */
-        paintkit: "default" | string;
+        paintkit: "default";
         /**
          * 武器の種類.
          */
-        type: "Knife" | "Rifle" | "SniperRifle" | "Grenade" | "Pistol" | "Shotgun" | "Machine Gun" | "Submaachine Gun" | "C4" | string;
+        type: "Knife" | "Rifle" | "SniperRifle" | "Grenade" | "Pistol" | "Shotgun" | "Machine Gun" | "Submaachine Gun" | "C4";
         /**
          * 現在装填されている弾の数.
          */
@@ -85,7 +85,7 @@ export namespace GameStateIntegration {
          * 武器の状態.
          * active = アクティブウェポン.
          */
-        state: "active" | "holstered" | string;
+        state: "active" | "holstered";
     }
     export interface TeamState {
         /**
@@ -106,7 +106,7 @@ export namespace GameStateIntegration {
          * ゲームモード.
          * 全部網羅できなかったので一部だけ列挙.
          */
-        mode: "competitive" | "deathmatch" | string;
+        mode: "competitive" | "deathmatch";
         /**
          * マップ名
          * @example de_dust2
@@ -245,7 +245,7 @@ export namespace GameStateIntegration {
         /**
          * アクティビティ.
          */
-        activity: "playing" | string;
+        activity: "playing";
         /**
          * ステート.
          */
