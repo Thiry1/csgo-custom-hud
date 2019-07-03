@@ -2,6 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { GameStateIntegration } from "../../dataTypes";
 import { SpectatingPlayer, SpectatingPlayerProps } from "./SpectatingPlayer";
+import WeaponType = GameStateIntegration.WeaponType;
 
 export const props = (team: GameStateIntegration.Team, hasPlayerImage: boolean, inline: boolean = true): SpectatingPlayerProps => ({
     showSpectatingPlayer: true,
@@ -15,7 +16,7 @@ export const props = (team: GameStateIntegration.Team, hasPlayerImage: boolean, 
         ammoClipMax: 30,
         ammoReserve: 30,
         state: "active",
-        type: "Rifle",
+        type: WeaponType.Rifle,
     },
     flashBangAmount: 1,
     smokeAmount: 1,
