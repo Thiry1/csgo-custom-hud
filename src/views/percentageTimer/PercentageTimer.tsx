@@ -61,7 +61,7 @@ export interface PercentageTimerProps {
  * @param {PercentageTimerProps} props
  */
 export class PercentageTimer extends BaseComponent<PercentageTimerProps, {}> {
-    private createStyle = (): Object => {
+    private createStyle = (): { transform: string } => {
         const percentage = 100 * (this.props.value / this.props.max);
         const step = (() => {
             switch (this.props.progressBarType.direction) {
